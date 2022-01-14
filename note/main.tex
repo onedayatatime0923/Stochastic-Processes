@@ -39,13 +39,14 @@
         \begin{itemize}
             \item Property:
                 \begin{itemize}
-                    \item $\mathbb{E}[e^{tx}] = \int_{-\infty}^\infty e^{tx} f_X(x) dx$
-                    \item $\mathbb{E}[e^{tx}] = \sum_{k=0}^\infty \mathit{E}[X^k] \frac{t^k}{k!}$
+                    \item $\mathbb{E}[e^{tX}] = \int_{-\infty}^\infty e^{tx} f_X(x) dx$
+                    \item $\mathbb{E}[e^{tX}] = \sum_{k=0}^\infty \mathit{E}[X^k] \frac{t^k}{k!}$
                         \begin{itemize}
                             \item $e^{tx} = \sum_{k=0}^\infty \frac{(tx)^k}{k!}$
                             \item $\mathit{E}[e^{tX}] = \mathit{E}[\sum_{k=0}^\infty \frac{(tX)^k}{k!}] = \sum_{k=0}^\infty \mathit{E}[X^k] \frac{t^k}{k!}$
                         \end{itemize}
                     \item $\frac{d\mathbb{E}[e^{tX}]}{dt} = \mathbb{E}[X]$
+                    \item $\mathbb{E}[e^{t(aX+b)}] = e^tb\mathbb{E}[e^{taX}]$
                     \item Not all random variables have Moment generating function
                 \end{itemize}
         \end{itemize}
