@@ -1,0 +1,79 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{subcaption}
+
+\usepackage{tikz}
+\tikzset{
+    vertex/.style={circle,draw,minimum size=1.5em},
+    edge/.style={->,> = latex'}
+}
+
+\title{Stochastic Processes}
+\author{Kevin Chang}
+
+\graphicspath{ {./images/} }
+
+\begin{document}
+\maketitle
+
+\section{Moment Generating Function}
+\begin{itemize}
+    \item Moment Generating Function: $\mathbb{E}[e^{tX}]$
+        \begin{itemize}
+            \item Property:
+                \begin{itemize}
+                    \item $\mathbb{E}[e^{tx}] = \int_{-\infty}^\infty e^{tx} f_X(x) dx$
+                    \item $\mathbb{E}[e^{tx}] = \sum_{k=0}^\infty \mathit{E}[X^k] \frac{t^k}{k!}$
+                        \begin{itemize}
+                            \item $e^{tx} = \sum_{k=0}^\infty \frac{(tx)^k}{k!}$
+                            \item $\mathit{E}[e^{tX}] = \mathit{E}[\sum_{k=0}^\infty \frac{(tX)^k}{k!}] = \sum_{k=0}^\infty \mathit{E}[X^k] \frac{t^k}{k!}$
+                        \end{itemize}
+                    \item $\frac{d\mathbb{E}[e^{tX}]}{dt} = \mathbb{E}[X]$
+                    \item Not all random variables have Moment generating function
+                \end{itemize}
+        \end{itemize}
+    \item Characteristic Function: $\mathbb{E}[e^{itX}]$
+        \begin{itemize}
+            \item Property:
+                \begin{itemize}
+                    \item All random variables have Moment generating function
+                \end{itemize}
+        \end{itemize}
+    \item Joint Moment Generating Function: $G(x, y) = \mathbb{E}[e^{xX}e^{yY}]$
+    \item Property:
+        \begin{itemize}
+            \item (Joint) moment generating funciton uniquely determines the (joint) CDF
+        \end{itemize}
+    \item Example
+        \begin{itemize}
+            \item Trapped miner's random walk
+                \begin{itemize}
+                    \item Miner has probability of $\frac{1}{3}$ to waste 3 hours in vain, $\frac{1}{3}$ to waste 5 hours in vain, and $\frac{1}{3}$ to spend 2 hours to go out of the mine.
+                    \item $X$ is the random variables of the hours to go out of the mine
+                    \item $Y_i$ is the random variables of the hours for the $i$-th action.
+                    \item $\mathbb{E}[e^{tX}] = \mathbb{E}[e^{tX}|Y_1 = 2] + \mathbb{E}[e^{tX}|Y_1 = 3] + \mathbb{E}[e^{tX}|Y_1 = 5]$
+
+                        $= \mathbb{E}[e^{2t}] + \mathbb{E}[e^{t(X+3)}] + \mathbb{E}[e^{t(X+5)}]$
+                    \item Find expectation and variance by joint moment generating function
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\end{document}
