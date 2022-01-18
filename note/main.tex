@@ -77,4 +77,25 @@
         \end{itemize}
 \end{itemize}
 
+\section{Expectation}
+\begin{itemize}
+    \item Suppose $N$ is a integer random variable
+    \item Suppose $X_1, \dots, X_i, \dots, X_N$ are i.i.d random variables with mean $\mu$ and variance $\sigma^2$
+    \item $Y = \sum_{i = 1}^N X_i$
+    \item $\mathbb{E}[Y] = \mathbb{E}[N] \mu$
+        \begin{itemize}
+            \item $\mathbb{E}[Y] = \sum_{n = 1}^\infty \mathbb{E}[\sum_{i = 1}^N X_i|N=n] P[N=n]$
+
+                $= \mu \times \sum_{n=1}^\infty n P[N=n] = \mathbb{E}[N] \mu$
+        \end{itemize}
+    \item $\mathbb{E}[Y^2] = \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+        \begin{itemize}
+            \item $\mathbb{E}[Y^2] = \sum_{n = 1}^\infty \mathbb{E}[(\sum_{i = 1}^N X_i)^2|N=n] P[N=n]$
+                $= \sum_{n = 1}^\infty (n \mathbb{E}[X_i^2] + n(n-1)\mu^2) P[N=n]$
+
+                $= \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+        \end{itemize}
+    \item $\mathit{Var}(Y) = \mathbb{E}[N]\sigma^2 + \mathit{Var}(N)\mu^2$
+\end{itemize}
+
 \end{document}
