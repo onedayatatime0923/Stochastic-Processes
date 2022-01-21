@@ -4,6 +4,16 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Computer Problem	hw1/main.tex	/^\\end{itemize}$/;"	s
 Expectation	note/main.tex	/^\\end{itemize}$/;"	s
 Inequality	note/main.tex	/^\\end{itemize}$/;"	s
 Law of Large Numbers	note/main.tex	/^\\end{itemize}$/;"	s
+num_ball	hw1/src/balls_in_bins.py	/^num_ball = 10000$/;"	v
+num_bin	hw1/src/balls_in_bins.py	/^num_bin = 100$/;"	v
+num_trial	hw1/src/balls_in_bins.py	/^num_trial = 10$/;"	v
+toss	hw1/src/balls_in_bins.py	/^def toss(num_ball, num_bin):$/;"	f
+toss_result	hw1/src/balls_in_bins.py	/^toss_result = []$/;"	v
+toss_result	hw1/src/balls_in_bins.py	/^toss_result = np.sort(toss_result)$/;"	v
+toss_two	hw1/src/balls_in_bins.py	/^def toss_two(num_ball, num_bin):$/;"	f
+toss_two_result	hw1/src/balls_in_bins.py	/^toss_two_result = []$/;"	v
+toss_two_result	hw1/src/balls_in_bins.py	/^toss_two_result = np.sort(toss_two_result)$/;"	v
