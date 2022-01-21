@@ -11,6 +11,7 @@
 %% Useful packages
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{bbm}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
@@ -98,4 +99,115 @@
     \item $\mathit{Var}(Y) = \mathbb{E}[N]\sigma^2 + \mathit{Var}(N)\mu^2$
 \end{itemize}
 
+\section{Inequality}
+\begin{itemize}
+    \item Markov Inequality
+
+        Definition:
+        \begin{itemize}
+            \item Suppose $X \geq 0$, then $P[X \geq \epsilon] \leq \frac{\mathbb{E}[X]}{\epsilon}$
+        \end{itemize}
+
+        Proof:
+        \begin{enumerate}
+            \item $\mathbb{E}[X] = \int_0^\infty x f_X(x) \geq \int_\epsilon^\infty x f_X(x) \geq \epsilon \int_\epsilon^\infty f_X(x) = \epsilon P[X \geq \epsilon]$
+            \item $X(\omega) \geq \epsilon \mathbbm{1}_{X(\omega) \geq \epsilon}, \forall \omega \in S$
+                \begin{itemize}
+                    \item Calculate expectation on both side.
+                    \item $\mathbb{E}[X] \geq \epsilon P[X \geq \epsilon]$
+                \end{itemize}
+        \end{enumerate}
+        Property:
+        \begin{itemize}
+            \item The equality happens when $P[X=k] = 0, \forall k \not \in \{0, \epsilon\}$.
+        \end{itemize}
+    \item Chebyshev Inequality
+
+        Definition:
+        \begin{itemize}
+            \item Suppose $m = \mathbb{E}[X], \sigma^2 = \mathit{Var}(X)$, then $P[|X - m| \geq \epsilon] \leq \frac{\sigma^2}{\epsilon^2}$
+        \end{itemize}
+        Proof:
+        \begin{itemize}
+            \item $P[|X - m| \geq \epsilon] = P[(X - m)^2 \geq \epsilon^2]$
+            \item $P[(X - m)^2 \geq \epsilon^2] \leq \frac{\mathbb{E}[(X-m)^2]}{\epsilon^2}$ (by Markov Inequality)
+        \end{itemize}
+        Property:
+        \begin{itemize}
+            \item The equality happens when $P[X = k] = 0, \forall k \not \in \{m - \epsilon , m , m + \epsilon\}$.
+            \item Might be tighter than Markov Inequality since it requires $m, \sigma$
+        \end{itemize}
+    \item Chernoff Inequality
+
+        Definition:
+        \begin{itemize}
+            \item Suppose $X_1, \dots, X_n$ are independent identically distributed Bernoulli random variable with probability $p$ and $X = \sum_{i=1}^n X_i$
+            \item $P[X \geq \epsilon] \leq \frac{(pe^{t} + 1 - p)^n}{e^{t\epsilon}} \leq \frac{e^{np(e^{t} - 1)}}{e^{t\epsilon}}$
+                \begin{itemize}
+                    \item $P[X \geq \epsilon] = P[e^{tX} \geq e^{t\epsilon}] \leq \frac{E[e^{tX}]}{e^{t\epsilon}} = \frac{(E[e^{tX_i}])^n}{e^{t\epsilon}} = \frac{(pe^{t} + 1 - p)^n}{e^{t\epsilon}} \leq \frac{e^{np(e^{t} - 1)}}{e^{t\epsilon}}$
+                \end{itemize}
+            \item $P[X \geq np(1 + \epsilon)] \leq (\frac{e^{\epsilon}}{(1+\epsilon)^{1 + \epsilon}})^{np} \leq \left\{ \begin{array}{ll} e^{\frac{-\epsilon^2 np}{3}} & \text{ if } 0 \leq \epsilon \leq 1 \\ e^{\frac{-\epsilon^2 np}{(2 + \epsilon)}} & \text{ if } \epsilon \geq 1 \end{array} \right.$
+                \begin{itemize}
+                    \item Substitude $\epsilon$ with $np(1+\epsilon)$
+                    \item Substitude $t$ with $\log(1+\epsilon)$
+                    \item the last inequality is without proof
+                \end{itemize}
+            \item $P[X \leq \epsilon] \leq \frac{(pe^{t} + 1 - p)^n}{e^{t\epsilon}} \leq \frac{e^{np(e^{t} - 1)}}{e^{t\epsilon}}$
+                \begin{itemize}
+                    \item $P[X \leq \epsilon] = P[e^{-tX} \geq e^{-t\epsilon}] \leq \frac{E[e^{-tX}]}{e^{-t\epsilon}} = \frac{(E[e^{-tX_i}])^n}{e^{-t\epsilon}} = \frac{(pe^{-t} + 1 - p)^n}{e^{-t\epsilon}} \leq \frac{e^{np(e^{-t} - 1)}}{e^{-t\epsilon}}$
+                \end{itemize}
+            \item $P[X \leq np(1 - \epsilon)] \leq (\frac{e^{-\epsilon}}{(1-\epsilon)^{1 - \epsilon}})^{np} \leq e^{\frac{-\epsilon^2 np}{2}}$
+                \begin{itemize}
+                    \item Substitude $\epsilon$ with $np(1-\epsilon)$
+                    \item Substitude $t$ with $- \log(1-\epsilon)$
+                    \item the last inequality is without proof
+                \end{itemize}
+        \end{itemize}
+    \item Chernoff/ Hoeffding Lemma
+
+        Definition:
+        \begin{itemize}
+            \item Suppose $X_1, \dots, X_n$ are independent distributed random variable and $a_i \leq X_i \leq b_i$
+            \item Suppose $X = \sum_{i=1}^n X_i$ and $\mu = \mathbb{E}[X]$
+            \item $P[|X-\mu| \geq \epsilon] \leq 2 e^{\frac{-2\epsilon^2}{\sum_{i=1}^n(b_i - a_i)^2}}$ without proof
+        \end{itemize}
+    \item Application:
+        \begin{itemize}
+            \item Balls in Bins
+
+                Definition: Throw $n$ balls into $n$ bins, find bounds for the maximum number of balls in all bins
+                \begin{itemize}
+                    \item $P[\text{ maximum number of balls in all bins } \geq \epsilon]$
+
+                        $= P[\cup_{i=1}^n \text{ number of balls in $i$-th bin } \geq \epsilon]$
+
+                        $\leq n \times P[\text{ number of balls in one bin } \geq \epsilon]$
+                    \item By Markov inequality:
+                        \begin{itemize}
+                            \item $P[\text{ number of balls in one bin } \geq \epsilon] \leq \frac{1}{\epsilon} \rightarrow$ useless
+                        \end{itemize}
+                    \item By Chebyshev inequality:
+                        \begin{itemize}
+                            \item $P[\text{ number of balls in one bin } \geq \epsilon] \leq \frac{(1-\frac{1}{n})}{\epsilon^2}$
+                            \item $P[\text{ maximum number of balls in all bins } \geq n^{\frac{1}{2} + \epsilon}] \leq \frac{(1-\frac{1}{n})}{n^{2\epsilon}}$
+                            \item when $n \rightarrow \infty$, the maximum number of balls should less than $n^{\frac{1}{2} + \epsilon}$
+                        \end{itemize}
+                    \item By Chernoff inequality:
+                        \begin{itemize}
+                            \item $P[\text{ number of balls in one bin } \geq 2 \log n] \leq \frac{e^{np(e^{t} - 1)}}{n^{2t}}$
+                            \item $P[\text{ maximum number of balls in all bins } \geq 2 \log n] \leq \frac{e^{np(e^{t} - 1)}}{n^{2t - 1}}$
+                            \item when $t$ is a constant $\geq 0.5$ and $n \rightarrow \infty$, the maximum number of balls should less than $2 \log n$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\section{Law of Large Numbers}
+    \begin{itemize}
+        \item $\{X_i\}_{i = 1}^\infty$ is a sequence of pairwise uncorrelated random variable with
+
+            $\mathbb{E}[X_i] = m, \mathit{Var}(X_i) = \sigma_i^2$.
+        \item $M_n = \frac{1}{n}\sum_{i = 1}^n X_i$
+        \item $M_n \rightarrow m$ almost surely, in mean square and in probability.
+    \end{itemize}
 \end{document}
