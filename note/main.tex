@@ -80,23 +80,37 @@
 
 \section{Expectation}
 \begin{itemize}
-    \item Suppose $N$ is a integer random variable
-    \item Suppose $X_1, \dots, X_i, \dots, X_N$ are i.i.d random variables with mean $\mu$ and variance $\sigma^2$
-    \item $Y = \sum_{i = 1}^N X_i$
-    \item $\mathbb{E}[Y] = \mathbb{E}[N] \mu$
+    \item $N$ i.i.d. events, when $N$ is a random variable
         \begin{itemize}
-            \item $\mathbb{E}[Y] = \sum_{n = 1}^\infty \mathbb{E}[\sum_{i = 1}^N X_i|N=n] P[N=n]$
+            \item Suppose $N$ is a integer random variable
+            \item Suppose $X_1, \dots, X_i, \dots, X_N$ are i.i.d random variables with mean $\mu$ and variance $\sigma^2$
+            \item $Y = \sum_{i = 1}^N X_i$
+            \item $\mathbb{E}[Y] = \mathbb{E}[N] \mu$
+                \begin{itemize}
+                    \item $\mathbb{E}[Y] = \sum_{n = 1}^\infty \mathbb{E}[\sum_{i = 1}^N X_i|N=n] P[N=n]$
 
-                $= \mu \times \sum_{n=1}^\infty n P[N=n] = \mathbb{E}[N] \mu$
+                        $= \mu \times \sum_{n=1}^\infty n P[N=n] = \mathbb{E}[N] \mu$
+                \end{itemize}
+            \item $\mathbb{E}[Y^2] = \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+                \begin{itemize}
+                    \item $\mathbb{E}[Y^2] = \sum_{n = 1}^\infty \mathbb{E}[(\sum_{i = 1}^N X_i)^2|N=n] P[N=n]$
+                        $= \sum_{n = 1}^\infty (n \mathbb{E}[X_i^2] + n(n-1)\mu^2) P[N=n]$
+
+                        $= \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+                \end{itemize}
+            \item $\mathit{Var}(Y) = \mathbb{E}[N]\sigma^2 + \mathit{Var}(N)\mu^2$
         \end{itemize}
-    \item $\mathbb{E}[Y^2] = \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+    \item Expectation by $P[X>x]$
         \begin{itemize}
-            \item $\mathbb{E}[Y^2] = \sum_{n = 1}^\infty \mathbb{E}[(\sum_{i = 1}^N X_i)^2|N=n] P[N=n]$
-                $= \sum_{n = 1}^\infty (n \mathbb{E}[X_i^2] + n(n-1)\mu^2) P[N=n]$
-
-                $= \mathbb{E}[N] \mathbb{E}[X^2] + \mathbb{E}[N^2] \mu^2 - \mathbb{E}[N] \mu^2$
+            \item $\mathbb{E}[X] = \sum_x P[X > x]$, when $X$ is a non-negative discrete random variable
+                \begin{itemize}
+                    \item $\mathbb{E}[X] = \sum_{x=0}^\infty x P[X = x] = \sum_{x=0}^\infty \sum_{y=0}^{x-1} P[X = x] = \sum_{y=0}^\infty \sum_{x=y + 1}^\infty P[X = x] = \sum_{y = 0}^\infty P[X > y]$
+                \end{itemize}
+            \item $\mathbb{E}[X] = \int_0^\infty P[X > x] dx$, when $X$ is a non-negative continuous random variable
+                \begin{itemize}
+                    \item $\mathbb{E}[X] = \int_0^\infty x f_X(x) dx = \int_0^\infty \int_0^x f_X(x) dy dx = \int_0^\infty \int_y^\infty f_X(x) dx dy = \int_0^\infty P[X > y] dy$
+                \end{itemize}
         \end{itemize}
-    \item $\mathit{Var}(Y) = \mathbb{E}[N]\sigma^2 + \mathit{Var}(N)\mu^2$
 \end{itemize}
 
 \section{Inequality}
@@ -210,4 +224,14 @@
         \item $M_n = \frac{1}{n}\sum_{i = 1}^n X_i$
         \item $M_n \rightarrow m$ almost surely, in mean square and in probability.
     \end{itemize}
+
+\section{Memoryless}
+\begin{itemize}
+    \item Definition: $P[X > x_1 + x_2 | X > x_1] = P[X > x_2]$
+    \item Property:
+        \begin{itemize}
+            \item Exponential random variable is the only continuous memoryless random variable
+            \item Bernoulli random variable is the only discrete memoryless random variable
+        \end{itemize}
+\end{itemize}
 \end{document}

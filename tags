@@ -8,6 +8,7 @@ Computer Problem	hw1/main.tex	/^\\end{itemize}$/;"	s
 Expectation	note/main.tex	/^\\end{itemize}$/;"	s
 Inequality	note/main.tex	/^\\end{itemize}$/;"	s
 Law of Large Numbers	note/main.tex	/^\\end{itemize}$/;"	s
+Memoryless	note/main.tex	/^    \\end{itemize}$/;"	s
 num_ball	hw1/src/balls_in_bins.py	/^num_ball = 10000$/;"	v
 num_bin	hw1/src/balls_in_bins.py	/^num_bin = 100$/;"	v
 num_trial	hw1/src/balls_in_bins.py	/^num_trial = 10$/;"	v
