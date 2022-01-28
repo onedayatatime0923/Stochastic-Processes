@@ -217,13 +217,13 @@
 \end{itemize}
 
 \section{Law of Large Numbers}
-    \begin{itemize}
-        \item $\{X_i\}_{i = 1}^\infty$ is a sequence of pairwise uncorrelated random variable with
+\begin{itemize}
+    \item $\{X_i\}_{i = 1}^\infty$ is a sequence of pairwise uncorrelated random variable with
 
-            $\mathbb{E}[X_i] = m, \mathit{Var}(X_i) = \sigma_i^2$.
-        \item $M_n = \frac{1}{n}\sum_{i = 1}^n X_i$
-        \item $M_n \rightarrow m$ almost surely, in mean square and in probability.
-    \end{itemize}
+        $\mathbb{E}[X_i] = m, \mathit{Var}(X_i) = \sigma_i^2$.
+    \item $M_n = \frac{1}{n}\sum_{i = 1}^n X_i$
+    \item $M_n \rightarrow m$ almost surely, in mean square and in probability.
+\end{itemize}
 
 \section{Memoryless}
 \begin{itemize}
@@ -234,4 +234,87 @@
             \item Bernoulli random variable is the only discrete memoryless random variable
         \end{itemize}
 \end{itemize}
+
+\section{Famous Random Variable}
+\begin{itemize}
+    \item Poisson:
+
+        $P[X=k] = \frac{\lambda^k}{k!}\exp(-\lambda)$
+
+        $\mathbb{E}[X] = \sum_{k=0}^\infty k\frac{\lambda^k}{k!}\exp(-\lambda)$
+        $= \sum_{k=0}^\infty \lambda \frac{\lambda^{k-1}}{(k-1)!}\exp(-\lambda) = \lambda$
+
+        Interpretation:
+        \begin{itemize}
+            \item Cut total time into infinite period in Binomial random variable, $n \rightarrow \infty, p \rightarrow \frac{\lambda}{n}$
+
+            \item $\rightarrow P[X=k] = \lim_{n\rightarrow \infty} \binom{n}{k}(\frac{\lambda}{n})^k(\frac{n-\lambda}{n})^{n-k} = \frac{\lambda^k}{k!}(1-\frac{\lambda}{n})^{n} = \frac{\lambda^k}{k!}\exp(-\lambda)$
+        \end{itemize}
+        Property
+        \begin{itemize}
+            \item Sum of independent Poisson random variable is still Poisson random variable
+        \end{itemize}
+    \item Erlang:
+
+        $f_X(x) = \frac{\lambda^n x^{n-1} e^{-\lambda x}}{(n-1)!}, \forall x \in \mathbb{R}$
+
+        $\mathbb{E}[X] = \frac{n}{\lambda}$
+
+        Interpretation:
+        \begin{itemize}
+            \item Suppose $X_1, X_2, ..., X_n$ are i.i.d exponential random variable with $\lambda$.
+            \item $X = \sum_{i = 1}^n X_i$
+            \item Proof by induction:
+
+                Suppose $n = 2$, 
+                $f_X(x) = \int_0^x \lambda e^{-\lambda t} \lambda e^{-\lambda(x - t)} dt$
+                $= \lambda^2 x e^{-\lambda x}$
+        \end{itemize}
+\end{itemize}
+
+\section{Stochastic Processes}
+\begin{itemize}
+    \item Stochastic Process: a collection of random variable
+        \begin{itemize}
+            \item Arrival Process: a sequence of arriving event in continuous time
+                \begin{itemize}
+                    \item $X_i$: the time between the $i$-th event and the $i-1$-th event
+                    \item $S_i$: the time from start to $i$-th event
+                    \item $N(t)$: the number of the arrived event at time $t$
+                    \item $X$ and $S$ Relation:
+                        \begin{itemize}
+                            \item $X_1 = S_1, X_i = S_i - S_{i-1}$
+                        \end{itemize}
+                    \item $N$ and $S$ Relation:
+                        \begin{itemize}
+                            \item $N(t) < n \leftrightarrow S_{n+1} > t$
+                            \item $N(t) \geq n \leftrightarrow S_n \leq t$
+                            \item $N(t) = n \leftrightarrow S_n \leq t < S_{n+1}$
+                            \item $N(t) = \max \{n: S_n \leq t\}$
+                        \end{itemize}
+                    \item Renewal Process: an arrival process with i.i.d $X_i$
+                    \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
+
+                        $S_i$ Property
+                        \begin{itemize}
+                            \item $S_i$ is an Erlang random variable
+
+                                Erlang is the sum of the Exponential random variables
+                            \item Joint Distribution $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = \lambda^n e^{-\lambda s_n}$
+
+                                Prove by induction. Induce by $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = f_{S_1, \dots, S_{n-1}}(s_1, \dots, s_{n-1}) \times f_{S_n | S_1, \dots, S_{n-1}}(s_n, s_1, \dots, s_{n-1})$
+                        \end{itemize}
+                        $N(t)$ Property
+                        \begin{itemize}
+                            \item $N(t) \sim \text{Poisson}(\lambda t), P[N(t) = n] = \frac{(\lambda t)^n}{n!}e^{-\lambda t}$ 
+
+                                Prove by $P[N(t) = n] = P[S_n \leq t \text{ and } S_{n+1} > t]$
+                            \item Conditioned on $N(t) = n$, the set of arrival times $\{s_1, \dots, s_n\}$ have the same distribution with a set of $n$ sorted i.i.d. Uniform$(0, t)$ random variables
+
+                                Prove by $f_{S_1, \dots, S_n | N(t)}(s_1, \dots, s_n, n) = \frac{f_{S_1, \dots, S_n}(s_1, \dots, s_n) P[X_{n+1} > t - s_n]}{P[N(t) = n]} = \frac{n!}{t^n}$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
 \end{document}
