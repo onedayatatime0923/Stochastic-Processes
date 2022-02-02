@@ -6,7 +6,7 @@
 \usepackage[T1]{fontenc}
 
 %% Sets page size and margins
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=2cm]{geometry}
 
 %% Useful packages
 \usepackage{amsmath}
@@ -17,6 +17,7 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{float}
 \usepackage{enumerate}
+\usepackage[export]{adjustbox}
 \usepackage{mathrsfs}
 \usepackage{subcaption}
 
@@ -250,10 +251,6 @@
 
             \item $\rightarrow P[X=k] = \lim_{n\rightarrow \infty} \binom{n}{k}(\frac{\lambda}{n})^k(\frac{n-\lambda}{n})^{n-k} = \frac{\lambda^k}{k!}(1-\frac{\lambda}{n})^{n} = \frac{\lambda^k}{k!}\exp(-\lambda)$
         \end{itemize}
-        Property
-        \begin{itemize}
-            \item Sum of independent Poisson random variable is still Poisson random variable
-        \end{itemize}
     \item Erlang:
 
         $f_X(x) = \frac{\lambda^n x^{n-1} e^{-\lambda x}}{(n-1)!}, \forall x \in \mathbb{R}$
@@ -275,43 +272,124 @@
 \section{Stochastic Processes}
 \begin{itemize}
     \item Stochastic Process: a collection of random variable
+
+        Arrival Process: a sequence of arriving event in continuous time
+\begin{figure} [H]
+    \includegraphics[width=0.5\linewidth, center]{image/arrival_process.png}
+\end{figure}
         \begin{itemize}
-            \item Arrival Process: a sequence of arriving event in continuous time
+            \item $X_i$: the time between the $i$-th event and the $i-1$-th event
+            \item $S_i$: the time from start to $i$-th event
+            \item $N(t)$: the number of the arrived event at time $t$
+            \item $X$ and $S$ Relation:
                 \begin{itemize}
-                    \item $X_i$: the time between the $i$-th event and the $i-1$-th event
-                    \item $S_i$: the time from start to $i$-th event
-                    \item $N(t)$: the number of the arrived event at time $t$
-                    \item $X$ and $S$ Relation:
+                    \item $X_1 = S_1, X_i = S_i - S_{i-1}$
+                \end{itemize}
+            \item $N$ and $S$ Relation:
+                \begin{itemize}
+                    \item $N(t) < n \leftrightarrow S_{n+1} > t$
+                    \item $N(t) \geq n \leftrightarrow S_n \leq t$
+                    \item $N(t) = n \leftrightarrow S_n \leq t < S_{n+1}$
+                    \item $N(t) = \max \{n: S_n \leq t\}$
+                \end{itemize}
+            \item Renewal Process: an arrival process with i.i.d $X_i$
+            \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
+
+                $S_i$ Property
+                \begin{itemize}
+                    \item $S_i$ is an Erlang random variable
+
+                        Erlang is the sum of the Exponential random variables
+                    \item Joint Distribution $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = \lambda^n e^{-\lambda s_n}$
+
+                        Prove by induction.
+
+                        Induce by $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = f_{S_1, \dots, S_{n-1}}(s_1, \dots, s_{n-1}) \times f_{S_n | S_1, \dots, S_{n-1}}(s_n, s_1, \dots, s_{n-1})$
+                \end{itemize}
+                $N(t)$ Property
+                \begin{itemize}
+                    \item $N(t) \sim \text{Poisson}(\lambda t), P[N(t) = n] = \frac{(\lambda t)^n}{n!}e^{-\lambda t}$ 
+
+                        Prove by $P[N(t) = n] = P[S_n \leq t \text{ and } S_{n+1} > t]$
+                    \item Conditioned on $N(t) = n$, the set of arrival times $\{s_1, \dots, s_n\}$ have the same distribution with a set of $n$ sorted i.i.d. Uniform$(0, t)$ random variables
+
+                        Prove by $f_{S_1, \dots, S_n | N(t)}(s_1, \dots, s_n, n) = \frac{f_{S_1, \dots, S_n}(s_1, \dots, s_n) P[X_{n+1} > t - s_n]}{P[N(t) = n]} = \frac{n!}{t^n}$
+                \end{itemize}
+                Property
+                \begin{itemize}
+                    \item $Z$ is the interval from $t$ to the first arrival $\rightarrow Z$ is exponential random variable with same $\lambda$ and independent of $N(t)$ and the arrival time before $t$
+
+                        Proof:
+
+                        $P[Z > z] = \sum_{n = 0}^\infty \int_0^\infty \dots \int_0^\infty P[Z>z|N(t) = n, S_1 = s_1, \dots, S_n = s_n] ds_1 \dots ds_n$
+
+                        $= \sum_{n = 0}^\infty \int_0^\infty \dots \int_0^\infty P[X_{n+1}>z+t-s_n|N(t) = n, S_1 = s_1, \dots, S_n = s_n] ds_1 \dots ds_n$
+
+                        $= \sum_{n = 0}^\infty \int_0^\infty \dots \int_0^\infty P[X_{n+1}>z+t-s_n|X_{n+1} > t-s_n] ds_1 \dots ds_n = e^{-\lambda z}$
+                    \item Stationary Increments: $N(t_1 + t_2) - N(t_1)$ and $N(t_2)$ share the same distribution
+
+                        Without Proof
+                    \item Independent Increments: $\forall 0 < t_1 < t_2 < \dots, t_k, N(t_1), N(t_2) - N(t_1), \dots$ are independent
+
+                        Without Proof
+                    \item Any arrival process with stationary and independent increments must be a Poisson process
+
+                        Without Proof
+                \end{itemize}
+                Exercise
+                \begin{itemize}
+                    \item $\mathbb{E}[S_i|N(t) = n] = \frac{t \times i}{n+1}$
                         \begin{itemize}
-                            \item $X_1 = S_1, X_i = S_i - S_{i-1}$
+                            \item $\mathbb{E}[S_i|N(t) = n] = i \times \mathbb{E}[X_1|N(t) = n] = i \int_0^t \int_0^{s_n} \dots \int_0^{s_2} s_1 \times \frac{n!}{t^n} ds_1 \dots ds_{n-1} ds_n = \frac{t \times i}{n+1}$
                         \end{itemize}
-                    \item $N$ and $S$ Relation:
+                    \item $\mathbb{E}[\sum_{i=0}^{N(t)} S_i] = \frac{\lambda t^2}{2}$
                         \begin{itemize}
-                            \item $N(t) < n \leftrightarrow S_{n+1} > t$
-                            \item $N(t) \geq n \leftrightarrow S_n \leq t$
-                            \item $N(t) = n \leftrightarrow S_n \leq t < S_{n+1}$
-                            \item $N(t) = \max \{n: S_n \leq t\}$
+                            \item $\mathbb{E}[\sum_{i=0}^{N(t)} S_i] = \sum_{n = 0}^\infty \mathbb{E}[\sum_{i=0}^n S_i|N(t) = n]P[N(t) = n]$
+
+                                $= \sum_{n = 0}^\infty \frac{nt}{2}P[N(t) = n] = \frac{\lambda t^2}{2}$
                         \end{itemize}
-                    \item Renewal Process: an arrival process with i.i.d $X_i$
-                    \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
-
-                        $S_i$ Property
+                \end{itemize}
+                2D Poisson Process
+                \begin{itemize}
+                    \item Definition:
                         \begin{itemize}
-                            \item $S_i$ is an Erlang random variable
-
-                                Erlang is the sum of the Exponential random variables
-                            \item Joint Distribution $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = \lambda^n e^{-\lambda s_n}$
-
-                                Prove by induction. Induce by $f_{S_1, \dots, S_n}(s_1, \dots, s_n) = f_{S_1, \dots, S_{n-1}}(s_1, \dots, s_{n-1}) \times f_{S_n | S_1, \dots, S_{n-1}}(s_n, s_1, \dots, s_{n-1})$
+                            \item For any region $R$: number of points in $R$ is a Poisson random variable
+                            \item number of points in the non-overlapping region is independent
                         \end{itemize}
-                        $N(t)$ Property
+                \end{itemize}
+                Combining Poisson Process
+                \begin{itemize}
+                    \item $N^1(t), N^2(t)$ are two independent Poisson process with $\lambda_1, \lambda_2$
+                    \item $X_i$ is the first arrival of $X_i^1, X_i^2$
+                    \item Property
                         \begin{itemize}
-                            \item $N(t) \sim \text{Poisson}(\lambda t), P[N(t) = n] = \frac{(\lambda t)^n}{n!}e^{-\lambda t}$ 
+                            \item $X_i$ is independent of $\{X_i^1 < X_i^2\}$ and $\{X_i^1 > X_i^2\}$ 
 
-                                Prove by $P[N(t) = n] = P[S_n \leq t \text{ and } S_{n+1} > t]$
-                            \item Conditioned on $N(t) = n$, the set of arrival times $\{s_1, \dots, s_n\}$ have the same distribution with a set of $n$ sorted i.i.d. Uniform$(0, t)$ random variables
+                                Proof: $P[X_1^1 < X_1^2] = \frac{\lambda_1}{\lambda_1 + \lambda_2}$
 
-                                Prove by $f_{S_1, \dots, S_n | N(t)}(s_1, \dots, s_n, n) = \frac{f_{S_1, \dots, S_n}(s_1, \dots, s_n) P[X_{n+1} > t - s_n]}{P[N(t) = n]} = \frac{n!}{t^n}$
+                                $P[X_1 > x] = P[X_1^1 > x, X_1^2 > x] = e^{-(\lambda_1 + \lambda_2)x}$
+
+                                $P[X_1 > x, X_1^1 < X_1^2] = P[X_1 > x]P[X_1^1 < X_1^2]$
+                            \item $X_i$ is a Poisson Process with $\lambda = \lambda_1 + \lambda_2$
+                        \end{itemize}
+                \end{itemize}
+                Splitting Poisson Process
+                \begin{itemize}
+                    \item $N^1(t), N^2(t)$ are two independent Poisson process with $\lambda_1, \lambda_2$
+                    \item $N(t)$ is a random process with $\lambda = \lambda_1 + \lambda_2$
+                        \begin{itemize}
+                            \item $N^{1*}(t)$ is the process of the first event
+
+                                when $N(t)$ arrives consider it as first event with probability $\frac{\lambda_1}{\lambda_1 + \lambda_2}$
+                            \item $N^{2*}(t)$ is the process of the second event
+
+                                when $N(t)$ arrives consider it as second event with probability $\frac{\lambda_2}{\lambda_1 + \lambda_2}$
+                        \end{itemize}
+                    \item $N^i(t)$ and $N^{i*}(t)$ share the same distribution
+                    \item Proof:
+                        \begin{itemize}
+                            \item $B_n(k)$ is a Binomial random variable with $p = \frac{\lambda_1}{\lambda_1 + \lambda_2}$
+                            \item $P[N^{1*}(t) = m, N^{2*}(t) = n] = P[N(t) = m + n, B_{m+n}(m)] = P[N^1(t) = m, N^2(t) = n]$
                         \end{itemize}
                 \end{itemize}
         \end{itemize}
