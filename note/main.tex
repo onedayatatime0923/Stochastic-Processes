@@ -293,6 +293,19 @@
                     \item $N(t) = \max \{n: S_n \leq t\}$
                 \end{itemize}
             \item Renewal Process: an arrival process with i.i.d $X_i$
+                \begin{itemize}
+                    \item Delayed Renewal Process: the process becomes a renewal process after $k$ arrivals
+                    \item $X_i$ is dependent on the interval states, then $X_i$ might be dependent on $X_{i-1} \rightarrow$ not renewal process
+                    \item $\mathbb{E}[X_{N(t) + 1}] \geq \mathbb{E}[X_i]$: inspection paradox
+                        \begin{itemize}
+                            \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
+                        \end{itemize}
+                    \item $\mathbb{E}[X_{N(t) + 1}] = \frac{\mathbb{E}[X_i^2]}{\mathbb{E}[X_i]}$
+                        \begin{itemize}
+                            \item $f_{X_{N(t)+1}}(x) = \lambda x f_{X_i}(x)$
+                            \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
+                        \end{itemize}
+                \end{itemize}
             \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
 
                 $S_i$ Property
@@ -391,6 +404,12 @@
                             \item $B_n(k)$ is a Binomial random variable with $p = \frac{\lambda_1}{\lambda_1 + \lambda_2}$
                             \item $P[N^{1*}(t) = m, N^{2*}(t) = n] = P[N(t) = m + n, B_{m+n}(m)] = P[N^1(t) = m, N^2(t) = n]$
                         \end{itemize}
+                \end{itemize}
+                Compound Poisson Process
+                \begin{itemize}
+                    \item $N(t)$ is a Poisson Process
+                    \item $A_n$ is a sequence of cost
+                    \item $A(t) = \sum_{n=0}^{N(t)} A_n$ is the summation of cost over Poisson Process
                 \end{itemize}
         \end{itemize}
 \end{itemize}
