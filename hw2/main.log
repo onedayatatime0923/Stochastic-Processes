@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.9.2)  4 FEB 2022 13:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.9.2)  4 FEB 2022 15:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -654,58 +654,58 @@ File: question/3.png Graphic file (type png)
 <use question/3.png>
 Package pdftex.def Info: question/3.png  used on input line 85.
 (pdftex.def)             Requested size: 426.79135pt x 88.54291pt.
-<question/4.png, id=67, 817.0525pt x 82.3075pt>
-File: question/4.png Graphic file (type png)
-<use question/4.png>
-Package pdftex.def Info: question/4.png  used on input line 93.
-(pdftex.def)             Requested size: 426.79135pt x 42.99355pt.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./question/1.png> <./question/2.png> <./question/3.png>]
+<question/4.png, id=96, 817.0525pt x 82.3075pt>
+File: question/4.png Graphic file (type png)
+<use question/4.png>
+Package pdftex.def Info: question/4.png  used on input line 120.
+(pdftex.def)             Requested size: 426.79135pt x 42.99355pt.
 <question/5.png, id=97, 832.10875pt x 84.315pt>
 File: question/5.png Graphic file (type png)
 <use question/5.png>
-Package pdftex.def Info: question/5.png  used on input line 103.
+Package pdftex.def Info: question/5.png  used on input line 130.
 (pdftex.def)             Requested size: 426.79135pt x 43.24579pt.
 <question/6.png, id=98, 590.205pt x 150.5625pt>
 File: question/6.png Graphic file (type png)
 <use question/6.png>
-Package pdftex.def Info: question/6.png  used on input line 120.
+Package pdftex.def Info: question/6.png  used on input line 147.
 (pdftex.def)             Requested size: 298.75264pt x 76.21379pt.
-<question/7.png, id=99, 737.75626pt x 304.13625pt>
+ [2 <./question/4.png> <./question/5.png>]
+<question/7.png, id=107, 737.75626pt x 304.13625pt>
 File: question/7.png Graphic file (type png)
 <use question/7.png>
-Package pdftex.def Info: question/7.png  used on input line 137.
+Package pdftex.def Info: question/7.png  used on input line 164.
 (pdftex.def)             Requested size: 426.79135pt x 175.93971pt.
- [2 <./question/4.png> <./question/5.png> <./question/6.png>]
-<question/8.png, id=111, 641.39626pt x 116.435pt>
+<question/8.png, id=108, 641.39626pt x 116.435pt>
 File: question/8.png Graphic file (type png)
 <use question/8.png>
-Package pdftex.def Info: question/8.png  used on input line 164.
+Package pdftex.def Info: question/8.png  used on input line 191.
 (pdftex.def)             Requested size: 256.07741pt x 46.48788pt.
- [3 <./question/7.png> <./question/8.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 172.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 172.
+ [3 <./question/6.png> <./question/7.png>] [4 <./question/8.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 199.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 199.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 172.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 172.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 199.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 199.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 11946EAF4084C4F8F9AF8030357AEC78;280.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 172.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 199.
  ) 
 Here is how much of TeX's memory you used:
- 19610 strings out of 481239
- 366080 string characters out of 5920378
- 634657 words of memory out of 5000000
+ 19611 strings out of 481239
+ 366086 string characters out of 5920378
+ 639657 words of memory out of 5000000
  34417 multiletter control sequences out of 15000+600000
  545664 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,6n,100p,468b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,6n,100p,468b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on main.pdf (3 pages, 707671 bytes).
+Output written on main.pdf (4 pages, 712026 bytes).
 PDF statistics:
- 187 PDF objects out of 1000 (max. 8388607)
- 130 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
+ 191 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
+ 21 named destinations out of 1000 (max. 500000)
  213 words of extra memory for PDF output out of 10000 (max. 10000000)
 

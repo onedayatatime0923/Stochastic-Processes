@@ -84,7 +84,34 @@
 \begin{figure} [H]
     \includegraphics[width=1\linewidth]{question/3.png}
 \end{figure}
-    \item 
+    \item (i)
+        \begin{itemize}
+            \item Suppose the number of the boys is $B$
+            \item $P[B = k] = \sum_{n=k}^\infty \alpha p^n 2^{-n} \binom{n}{k}$
+                $= \alpha[ (\frac{p}{2})^k + \sum_{n=k + 1}^\infty (\frac{p}{2})^n \binom{n}{k}]$
+
+                $= \alpha[ (\frac{p}{2})^k(1-\frac{p}{2}) + (\frac{p}{2})^{k+1} + \sum_{n=k + 1}^\infty (\frac{p}{2})^n \binom{n}{k}]$
+
+                $= \alpha[ \binom{k+1}{k+1}(\frac{p}{2})^k(1-\frac{p}{2}) + \binom{k+2}{k+1}(\frac{p}{2})^{k+1}(1 - \frac{p}{2}) + \binom{k+2}{k+1}(\frac{p}{2})^{k+2} + \sum_{n=k + 2}^\infty (\frac{p}{2})^n \binom{n}{k}]$
+
+                $\dots$
+
+                $= P[B=k+1] (1-\frac{p}{2}) \frac{2}{p}$
+            \item $P[B=k+1] = P[B=k] \frac{p}{2-p}$
+            \item $P[B=1] = \sum_{n=1}^\infty \alpha (\frac{p}{2})^n \binom{n}{1}$
+
+                $= \sum_{n=1}^\infty \alpha (\frac{p}{2})^n \binom{n}{1}$
+                $= \alpha \frac{\frac{p}{2}}{(1-\frac{p}{2})^2}$
+            \item $P[B=k] = P[B=1] (\frac{p}{2-p})^{k-1}$
+                $= \alpha \frac{\frac{p}{2}}{(1-\frac{p}{2})^2} (\frac{p}{2-p})^{k-1} = 2\alpha \frac{p^k}{(2-p)^{k+1}}$
+        \end{itemize}
+    \item (ii)
+        \begin{itemize}
+            \item $P[B \geq 2|B\geq 1] = \frac{1 - P[0 \leq B \leq 1]}{1 - P[B = 0]}$
+                $= \frac{1 - 2\alpha(\frac{1}{2-p} + \frac{p}{(2-p)^2})}{1 - 2\alpha(\frac{1}{2-p})}$
+
+                $= \frac{(2-p)^2 - 4\alpha}{(2-p)^2 - 4\alpha + 2\alpha p}$
+        \end{itemize}
 \end{itemize}
 
 \section{}
