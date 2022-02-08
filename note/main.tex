@@ -305,6 +305,15 @@
                             \item $f_{X_{N(t)+1}}(x) = \lambda x f_{X_i}(x)$
                             \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
                         \end{itemize}
+                    \item Property
+                        \begin{itemize}
+                            \item for any $t, P[N(t) < \infty] = 1$ and $P[\lim_{n \rightarrow \infty} S_n = \infty] = 1$
+
+                                Proof: $\lim_{n \rightarrow \infty} P[S_n = \infty] = \lim_{n \rightarrow \infty} P[\sum_{i = 1}^n X_n = n \times \mathbb{E}[X_i]] = 1$
+                            \item $\lim_{t \rightarrow \infty} N(t) \rightarrow \infty$
+
+                                Proof: if $\lim_{t \rightarrow \infty} N(t) = k \rightarrow X_{k+1} = \infty$ and $P[X_{k+1}] = \infty] = 0$
+                        \end{itemize}
                 \end{itemize}
             \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
 
@@ -411,7 +420,30 @@
                     \item $A_n$ is a sequence of cost
                     \item $A(t) = \sum_{n=0}^{N(t)} A_n$ is the summation of cost over Poisson Process
                 \end{itemize}
+                Non-Homogeneous Poisson Process
+                \begin{itemize}
+                    \item $N(t) - N(s) \sim$ Poisson$(\int_s^t \lambda(x) dx$
+                \end{itemize}
         \end{itemize}
+    Queuing Theory
+    \begin{itemize}
+        \item Definition: $\mathit{Arrival\_Process}/ \mathit{Service\_Process}/ \mathit{number\_of\_services}$
+            \begin{itemize}
+                \item $M$: memoryless (Poisson) process
+                \item $D$: deterministic process
+                \item $G$: general renewal process
+            \end{itemize}
+        \item $T$: the random variable of the processing time for each customer
+        \item $Y(t)$: number of cutomers in the service
+            \begin{itemize}
+                \item $Y(t) \sim$ Poisson$(\lambda \int_0^t P[T>x] dx)$
+                \item Consider $Y(t)$ is a splitting Poisson Process with probability $(\frac{1}{t}\int_0^t P[T > x] dx)$ to still in the service
+                    \begin{itemize}
+                        \item the distribution for the arrival given $N(t)$ is universal
+                        \item the probability the arrival is still in service $\frac{1}{t} \int_0^t P[T > t-x] dx = \frac{1}{t}\int_0^t P[T > x] dx$
+                    \end{itemize}
+            \end{itemize}
+    \end{itemize}
 \end{itemize}
 
 \end{document}
