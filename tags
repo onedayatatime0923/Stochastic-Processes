@@ -11,12 +11,18 @@ Inequality	note/main.tex	/^\\end{itemize}$/;"	s
 Law of Large Numbers	note/main.tex	/^\\end{itemize}$/;"	s
 Memoryless	note/main.tex	/^\\end{itemize}$/;"	s
 Stochastic Processes	note/main.tex	/^\\end{itemize}$/;"	s
+alpha	hw3/src/problem5.py	/^alpha = 2 * np.pi * np.random.random(numpoints)$/;"	v
+colors	hw3/src/problem5.py	/^colors = np.linspace(0,1, num = numpoints, endpoint = True)$/;"	v
 num_ball	hw1/src/balls_in_bins.py	/^num_ball = 10000$/;"	v
 num_bin	hw1/src/balls_in_bins.py	/^num_bin = 100$/;"	v
 num_trial	hw1/src/balls_in_bins.py	/^num_trial = 10$/;"	v
+numpoints	hw3/src/problem5.py	/^numpoints = np.random.poisson(100)$/;"	v
+r	hw3/src/problem5.py	/^r = np.sqrt(np.random.random(numpoints))$/;"	v
 toss	hw1/src/balls_in_bins.py	/^def toss(num_ball, num_bin):$/;"	f
 toss_result	hw1/src/balls_in_bins.py	/^toss_result = []$/;"	v
 toss_result	hw1/src/balls_in_bins.py	/^toss_result = np.sort(toss_result)$/;"	v
 toss_two	hw1/src/balls_in_bins.py	/^def toss_two(num_ball, num_bin):$/;"	f
 toss_two_result	hw1/src/balls_in_bins.py	/^toss_two_result = []$/;"	v
 toss_two_result	hw1/src/balls_in_bins.py	/^toss_two_result = np.sort(toss_two_result)$/;"	v
+xcoods	hw3/src/problem5.py	/^xcoods = r * np.cos(alpha)$/;"	v
+ycoods	hw3/src/problem5.py	/^ycoods = r * np.sin(alpha)$/;"	v
