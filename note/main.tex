@@ -293,27 +293,94 @@
                     \item $N(t) = \max \{n: S_n \leq t\}$
                 \end{itemize}
             \item Renewal Process: an arrival process with i.i.d $X_i$
+
+                Delayed Renewal Process: the process becomes a renewal process after several arrivals
+
+                $X_i$ Property
                 \begin{itemize}
-                    \item Delayed Renewal Process: the process becomes a renewal process after $k$ arrivals
-                    \item $X_i$ is dependent on the interval states, then $X_i$ might be dependent on $X_{i-1} \rightarrow$ not renewal process
+                    \item if $X_i$ is dependent on the interval states, then $X_i$ might be dependent on $X_{i-1} \rightarrow$ not renewal process
+                \end{itemize}
+                $S_i$ Property
+                \begin{itemize}
+                    \item $P[\lim_{n \rightarrow \infty} S_n = \infty] = 1$
+
+                        Proof: $\lim_{n \rightarrow \infty} P[S_n = \infty] = \lim_{n \rightarrow \infty} P[\sum_{i = 1}^n X_n = n \times \mathbb{E}[X_i]] = 1$
+
+                        Interpretation: infinite events do not take finite time
+                \end{itemize}
+                $N(t)$ Property
+                \begin{itemize}
+                    \item for any $t, P[N(t) < \infty] = 1$
+
+                        Proof: $P[\lim_{n \rightarrow \infty} S_n = \infty] = 1 \rightarrow$ for any $t, P[\lim_{n \rightarrow \infty} S_{n+1} > t] = 1$
+
+                        Interpretation: infinite events do not take finite time
+                    \item $P[\lim_{t \rightarrow \infty} N(t) \rightarrow \infty] = 1$
+
+                        Proof: if $P[\lim_{t \rightarrow \infty} N(t) = k] > 0 \rightarrow P[X_{k+1} = \infty] > 0$
+
+                        Interpretation: finite events do not take infinite time
+                    \item $P[\lim_{t \rightarrow \infty} \frac{N(t)}{t} = \frac{1}{\mathbb{E}[X_i]}] = 1$
+
+                        Proof: $P[\lim_{t \rightarrow \infty} \frac{N(t)}{S_{N(t) + 1}} \leq \lim_{t \rightarrow \infty} \frac{N(t)}{t}] = 1$ and $P[\lim_{t \rightarrow \infty} \frac{N(t)}{S_{N(t) + 1}} = \frac{1}{\mathbb{E}[X_i]}] = 1$
+
+                        $P[\lim_{t \rightarrow \infty} \frac{N(t)}{t} \leq \lim_{t \rightarrow \infty} \frac{N(t)}{S_{N(t)}}] = 1$ and $P[\lim_{t \rightarrow \infty} \frac{N(t)}{S_{N(t)}} = \frac{1}{\mathbb{E}[X_i]}] = 1$
+                \end{itemize}
+                Inspection Paradox
+                \begin{itemize}
                     \item $\mathbb{E}[X_{N(t) + 1}] \geq \mathbb{E}[X_i]$: inspection paradox
-                        \begin{itemize}
-                            \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
-                        \end{itemize}
+
+                        Interpretation: when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
+                    \item $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (S_{N(t) + 1} - s) ds = \frac{\mathbb{E}[X_i^2]}{2\mathbb{E}[X_i]}] = 1$
+
+                        Proof:
+
+                        $P[\lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i = i}^{N(t)} \frac{\mathbb{E}[X_i^2]}{2} \leq \lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (S_{N(t) + 1} - s) ds] = 1$ and $P[\lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i = i}^{N(t)} \frac{\mathbb{E}[X_i^2]}{2} = \frac{\mathbb{E}[X_i^2]}{2\mathbb{E}[X_i]}] = 1$
+
+                        $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (S_{N(t) + 1} - s) ds \leq \lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i = i}^{N(t) + 1} \frac{\mathbb{E}[X_i^2]}{2}] = 1$ and $P[\lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i = i}^{N(t) + 1} \frac{\mathbb{E}[X_i^2]}{2} = \frac{\mathbb{E}[X_i^2]}{2\mathbb{E}[X_i]}] = 1$
+                    \item $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (s - S_{N(t)}) ds = \frac{\mathbb{E}[X_i^2]}{2\mathbb{E}[X_i]}] = 1$
+
+                        Proof: similar to above
+                    \item $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t X_{N(t)} ds = \frac{\mathbb{E}[X_i^2]}{\mathbb{E}[X_i]}] = 1$
+
+                        Proof: $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t X_{N(t)} ds = \lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (S_{N(t) + 1} - S_{N(t)}) ds] = 1$
                     \item $\mathbb{E}[X_{N(t) + 1}] = \frac{\mathbb{E}[X_i^2]}{\mathbb{E}[X_i]}$
-                        \begin{itemize}
-                            \item $f_{X_{N(t)+1}}(x) = \lambda x f_{X_i}(x)$
-                            \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
-                        \end{itemize}
-                    \item Property
-                        \begin{itemize}
-                            \item for any $t, P[N(t) < \infty] = 1$ and $P[\lim_{n \rightarrow \infty} S_n = \infty] = 1$
 
-                                Proof: $\lim_{n \rightarrow \infty} P[S_n = \infty] = \lim_{n \rightarrow \infty} P[\sum_{i = 1}^n X_n = n \times \mathbb{E}[X_i]] = 1$
-                            \item $\lim_{t \rightarrow \infty} N(t) \rightarrow \infty$
+                        Proof: $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t X_{N(t)} ds = \frac{\mathbb{E}[X_i^2]}{\mathbb{E}[X_i]}] = P[\mathbb{E}[X_{N(t) + 1}] = \frac{\mathbb{E}[X_i^2]}{\mathbb{E}[X_i]}] = 1$
+                \end{itemize}
+                Central Limit Theorem
+                \begin{itemize}
+                    \item $\mu = \mathbb{E}[X_i]$
+                    \item $\sigma = \sqrt{\mathit{Var}(X_i)}$
+                    \item $Z \sim$ Normal(0,1)
+                    \item $\lim_{t \rightarrow \infty} P[N(t) \leq \frac{t}{\mu} + k \frac{\sigma \sqrt{t}}{\sqrt{\mu}^3}] = P[Z \leq k]$
 
-                                Proof: if $\lim_{t \rightarrow \infty} N(t) = k \rightarrow X_{k+1} = \infty$ and $P[X_{k+1}] = \infty] = 0$
+                        Proof:
+                        \begin{enumerate}
+                            \item Suppose $n(t) = \frac{t}{\mu} + k \frac{\sigma \sqrt{t}}{\sqrt{\mu}^3}$
+                            \item $P[N(t) \geq n(t)] = P[S_{n(t)} \leq t] = P[\frac{S_{n(t)} - n\mu}{\sigma \sqrt{n}} \leq \frac{t - n\mu}{\sigma \sqrt{n}}]$.
+                            \item When $t \rightarrow \infty$, $\frac{t - n\mu}{\sigma \sqrt{n}} \rightarrow k$
+                            \item By law of large number, $\lim_{t \rightarrow \infty} P[\frac{S_{n(t)} - n\mu}{\sigma \sqrt{n}} \leq k] = P[Z \leq k]$
+                        \end{enumerate}
+                        Interpretation:
+                        \begin{itemize}
+                            \item $\frac{t}{\mu}$ is approximately the mean of $N(t)$
+                            \item $k \frac{\sigma \sqrt{t}}{\sqrt{\mu}^3}$ is $k\sigma \sqrt{n}$ after dividing by $\mu$, the ratio between $t$ and $N(t)$ and changing $n$ with $\frac{t}{\mu}$
                         \end{itemize}
+                \end{itemize}
+            \item Renewal-Reward Process:
+
+                Definition
+                \begin{itemize}
+                    \item A renewal process $N(t)$ and $\{R_i\}_{i = 1}^\infty$ such that $(X_i, R_i)$ are i.i.d.
+
+                        ($X_i, R_j, i \not = j$ are independent, but $X_i, R_i$ might be dependent)
+                \end{itemize}
+                Property
+                \begin{itemize}
+                    \item $P[\lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i=1}^{N(t)} R_i = \frac{\mathbb{E}[R_i]}{\mathbb{E}[X_i]}] = 1$
+
+                        Proof: $P[\lim_{t \rightarrow \infty} \frac{1}{t} \sum_{i=1}^{N(t)} R_i = \lim_{t \rightarrow \infty} \sum_{i=1}^{N(t)} \frac{R_i}{N(t)} \times \lim_{t \rightarrow \infty} \frac{N(t)}{t}] = 1$
                 \end{itemize}
             \item Poisson Process: a renewal process with $X_i \sim \text{Exponential}(\lambda)$
 
@@ -424,26 +491,24 @@
                 \begin{itemize}
                     \item $N(t) - N(s) \sim$ Poisson$(\int_s^t \lambda(x) dx$
                 \end{itemize}
+                Queuing Theory
+                \begin{itemize}
+                    \item Definition: $\mathit{Arrival\_Process}/ \mathit{Service\_Process}/ \mathit{number\_of\_services}$
+                        \begin{itemize}
+                            \item $M$: memoryless (Poisson) process
+                            \item $D$: deterministic process
+                            \item $G$: general renewal process
+                        \end{itemize}
+                    \item $T$: the random variable of the processing time for each customer
+                    \item $Y(t)$: number of cutomers in the service
+                        \begin{itemize}
+                            \item $Y(t) \sim$ Poisson$(\lambda \int_0^t P[T>x] dx)$
+                            \item Proof:
+
+                                Consider $Y(t)$ is a splitting Poisson Process. Since the distribution for the arrival given $N(t)$ is universal, the probability the arrival is still in service: $\frac{1}{t} \int_0^t P[T > t-x] dx = \frac{1}{t}\int_0^t P[T > x] dx$
+                        \end{itemize}
+                \end{itemize}
         \end{itemize}
-    Queuing Theory
-    \begin{itemize}
-        \item Definition: $\mathit{Arrival\_Process}/ \mathit{Service\_Process}/ \mathit{number\_of\_services}$
-            \begin{itemize}
-                \item $M$: memoryless (Poisson) process
-                \item $D$: deterministic process
-                \item $G$: general renewal process
-            \end{itemize}
-        \item $T$: the random variable of the processing time for each customer
-        \item $Y(t)$: number of cutomers in the service
-            \begin{itemize}
-                \item $Y(t) \sim$ Poisson$(\lambda \int_0^t P[T>x] dx)$
-                \item Consider $Y(t)$ is a splitting Poisson Process with probability $(\frac{1}{t}\int_0^t P[T > x] dx)$ to still in the service
-                    \begin{itemize}
-                        \item the distribution for the arrival given $N(t)$ is universal
-                        \item the probability the arrival is still in service $\frac{1}{t} \int_0^t P[T > t-x] dx = \frac{1}{t}\int_0^t P[T > x] dx$
-                    \end{itemize}
-            \end{itemize}
-    \end{itemize}
 \end{itemize}
 
 \end{document}
