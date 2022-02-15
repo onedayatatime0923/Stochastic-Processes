@@ -368,6 +368,31 @@
                             \item $k \frac{\sigma \sqrt{t}}{\sqrt{\mu}^3}$ is $k\sigma \sqrt{n}$ after dividing by $\mu$, the ratio between $t$ and $N(t)$ and changing $n$ with $\frac{t}{\mu}$
                         \end{itemize}
                 \end{itemize}
+                Wald's Identity
+                \begin{itemize}
+                    \item Stopping Times: a random variable $\tau$ s.t. $\{\tau = n\}$ is independent of $\{X_i\}_{i=n+1}^\infty$
+                    \item Stopping Condition: a condition to stop if we can consider $\tau = \min\{n: \text{ condition}(n) = \top \}$
+                    \item Example: $N(t) + 1$ is a stopping times and can be consider $N(t) + 1 = \min\{n: S_n > t\}$
+                    \item $\mathbb{E}[\sum_{i=1}^\tau X_i] = \mathbb{E}[\tau] \mathbb{E}[X_i]$
+
+                        Proof:
+                        \begin{enumerate}
+                            \item $\mathbb{E}[\sum_{i=1}^\tau X_i] = \sum_{i=1}^\infty \mathbb{E}[X_i \times \mathbbm{1}_{i\leq \tau}]$ (by Fubin's Theorem without proof)
+                            \item $\sum_{i=1}^\infty \mathbb{E}[X_i \times \mathbbm{1}_{i\leq \tau}] = \mathbb{E}[X_i] \sum_{i=1}^\infty \mathbb{E}[\mathbbm{1}_{i\leq \tau}]$ (by $P[\tau \geq i] = 1 - P[\tau < i]$ is independent of $X_i$)
+                            \item $\mathbb{E}[X_i] \sum_{i=1}^\infty \mathbb{E}[\mathbbm{1}_{i\leq \tau}] = \mathbb{E}[\tau] \mathbb{E}[X_i]$
+                        \end{enumerate}
+                    \item $\lim_{t \rightarrow \infty} \frac{\mathbb{E}[N(t)]}{t} = \frac{1}{\mathbb{E}[X_i]}$
+
+                        Proof:
+                        \begin{itemize}
+                            \item Suppose $\mu = \mathbb{E}[X_i]$
+                            \item $\frac{\mathbb{E}[N(t)]}{t} = \frac{\mathbb{E}[S_{N(t) + 1}]}{t \times \mu} - \frac{1}{t}$ (by considering $N(t) + 1$ as the stopping time)
+                            \item $\lim_{t \rightarrow \infty} \frac{\mathbb{E}[N(t)]}{t} \geq \frac{1}{\mu}$ (by $\mathbb{E}[S_{N(t) + 1}] > t$)
+                            \item Suppose $\hat{X}_n = \min\{X_n, T\}$, where $T$ is a constant
+                            \item $\frac{\mathbb{E}[N(t)]}{t} \leq \frac{\mathbb{E}[\hat{N}(t)]}{t} = \frac{\mathbb{E}[S_{\hat{N}(t) + 1}]}{t \times \hat{\mu}} - \frac{1}{t} \leq \frac{t+T}{t \times \hat{\mu}} - \frac{1}{t}$
+                            \item $\lim_{n = \sqrt{t}, t \rightarrow \infty} \frac{\mathbb{E}[N(t)]}{t} \leq \frac{1}{\mu}$
+                        \end{itemize}
+                \end{itemize}
             \item Renewal-Reward Process:
 
                 Definition
