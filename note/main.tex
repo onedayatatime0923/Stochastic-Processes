@@ -35,6 +35,20 @@
 \begin{document}
 \maketitle
 
+\section{Laplace Transform}
+\begin{itemize}
+    \item $\mathcal{L}\{f\}(s) = \int_0^\infty f(t) e^{-st} dt$
+    \item Property
+        \begin{itemize}
+            \item $tf(t) \leftrightarrow -F'(s)$
+            \item $\frac{f(t)}{t} \leftrightarrow \int_s^\infty F(\sigma) d \sigma$
+            \item $f'(t) \leftrightarrow sF(s) - f(0^-)$
+            \item $\int_0^t f(\tau) d\tau \leftrightarrow \frac{F(s)}{s}$
+            \item $e^{at}f(t) \leftrightarrow F(s-a)$
+            \item $f(t-a)u(t-a) \leftrightarrow e^{-at}F(s)$
+        \end{itemize}
+\end{itemize}
+
 \section{Moment Generating Function}
 \begin{itemize}
     \item Moment Generating Function: $\mathbb{E}[e^{tX}]$
@@ -373,11 +387,13 @@
                     \item Stopping Times: a random variable $\tau$ s.t. $\{\tau = n\}$ is independent of $\{X_i\}_{i=n+1}^\infty$
                     \item Stopping Condition: a condition to stop if we can consider $\tau = \min\{n: \text{ condition}(n) = \top \}$
                     \item Example: $N(t) + 1$ is a stopping times and can be consider $N(t) + 1 = \min\{n: S_n > t\}$
-                    \item $\mathbb{E}[\sum_{i=1}^\tau X_i] = \mathbb{E}[\tau] \mathbb{E}[X_i]$
+                    \item $\mathbb{E}[\sum_{i=1}^\tau X_i] = \mathbb{E}[\tau] \mathbb{E}[X_i]$ if $\mathbb{E}[X_i] < \infty$ and $\mathbb{E}[N] < \infty$
 
                         Proof:
                         \begin{enumerate}
                             \item $\mathbb{E}[\sum_{i=1}^\tau X_i] = \sum_{i=1}^\infty \mathbb{E}[X_i \times \mathbbm{1}_{i\leq \tau}]$ (by Fubin's Theorem without proof)
+
+                               (if $\mathbb{E}[X_i] < \infty$ and $\mathbb{E}[N] < \infty$)
                             \item $\sum_{i=1}^\infty \mathbb{E}[X_i \times \mathbbm{1}_{i\leq \tau}] = \mathbb{E}[X_i] \sum_{i=1}^\infty \mathbb{E}[\mathbbm{1}_{i\leq \tau}]$ (by $P[\tau \geq i] = 1 - P[\tau < i]$ is independent of $X_i$)
                             \item $\mathbb{E}[X_i] \sum_{i=1}^\infty \mathbb{E}[\mathbbm{1}_{i\leq \tau}] = \mathbb{E}[\tau] \mathbb{E}[X_i]$
                         \end{enumerate}
@@ -392,6 +408,30 @@
                             \item $\frac{\mathbb{E}[N(t)]}{t} \leq \frac{\mathbb{E}[\hat{N}(t)]}{t} = \frac{\mathbb{E}[S_{\hat{N}(t) + 1}]}{t \times \hat{\mu}} - \frac{1}{t} \leq \frac{t+T}{t \times \hat{\mu}} - \frac{1}{t}$
                             \item $\lim_{n = \sqrt{t}, t \rightarrow \infty} \frac{\mathbb{E}[N(t)]}{t} \leq \frac{1}{\mu}$
                         \end{itemize}
+                \end{itemize}
+                Blackwell's Theorem
+                \begin{itemize}
+                    \item $\mathbb{E}[N(t)] = F_{X_i}(t) + \int_0^t \mathbb{E}[N(t-x)] f_{X_i}(t) dt$
+
+                        Proof:
+                        $\mathbb{E}[N(t)] = \int_0^t \mathbb{E}[N(t)|X_1 = x] f_{X_1}(x) dx$
+
+                        $= \int_0^t \mathbb{E}[N(t-x) + 1] f_{X_1}(x) dx$
+                        $= F_{X_i}(t) + \int_0^t \mathbb{E}[N(t-x)] f_{X_i}(t) dt$
+                    \item $\mathcal{L}\{\mathbb{E}[N(t)]\}(s) = \frac{\mathcal{L}\{f_{X_i}\}(s)}{s(1 - \mathcal{L}\{f_{X_i}\}(s))}$
+
+                        Proof: Laplace transform both sides
+                    \item Lattice/ Non-Lattice: $N(t)$ is lattice iff $X_i$ only takes on values that are $nd, n \in \mathbb{N}, d \in \mathbb{R}$
+                    \item For a non-lattice process: $\lim_{t \rightarrow \infty} \mathbb{E}[N(t + \delta) - N(t)] = \frac{\delta}{\mathbb{E}[X_i]}$, for any $\delta$
+
+                        Proof: Without Proof
+
+                        Interpretation: $\mathbb{E}[N(t)]$ will converge to be linear
+                    \item For a lattice process and period $d$: $\lim_{n \rightarrow \infty} \mathbb{E}[\text{\# events at $t = nd$}] = \frac{d}{\mathbb{E}[X_i]}$
+
+                        Proof: Without Proof
+
+                        Interpretation: $\mathbb{E}[N(t)]$ will converge to be stairs with width $d$ and height $\frac{d}{\mathbb{E}[X_i]}$
                 \end{itemize}
             \item Renewal-Reward Process:
 
