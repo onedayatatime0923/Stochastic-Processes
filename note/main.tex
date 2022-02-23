@@ -576,4 +576,68 @@
         \end{itemize}
 \end{itemize}
 
+\section{Markov Chain}
+\begin{itemize}
+    \item Definition
+        \begin{itemize}
+            \item Model with states and transition probability matrix
+            \item States: $\{X_i\}_{i=0}^\infty$
+            \item Transition Probability Matrix: $[P]_{ij} = P[X_{n+1} = j|X_n = i]$
+        \end{itemize}
+    \item Terminology
+        \begin{itemize}
+            \item $p^n$: distribution at step $n$
+            \item $T_i = \min\{n \geq 1: X_n = i\}$
+            \item $f_{ij} = P[T_j < \infty | X_0 = i]$: the probability of starting at $i$ and ever reaching $j$
+            \item $\mu_{ij} = \mathbb{E}[T_j | X_0 = i]$
+            \item $i \rightarrow j$ iff $f_{ij} > 0$: $j$ is reachable from $i$ with probability greater than 0
+            \item $N_i(n)$: number of visits to $i$ by time $n$
+            \item Irreducible: $i \leftrightarrow j, \forall$ states $i, j$
+            \item aperiodic: period of $X_n = i$ is 1, $\forall$ states $i$
+        \end{itemize}
+    \item Property
+        \begin{itemize}
+            \item Updating distribution
+                \begin{itemize}
+                    \item $p^n = p^0 P$
+                \end{itemize}
+            \item Markovian: transition probability depend only on current state
+                \begin{itemize}
+                    \item $P[X_{n+1} = j|X_n = i, \dots, X_0 = x_0] = [P]_{ij}$
+                \end{itemize}
+            \item Stationary Distribution: $p$
+
+                Property from renewal process
+                \begin{itemize}
+                    \item consider $X_n = j$ as a event $\rightarrow$ Markov Chain becomes a delayed renewal process
+                    \item If $i \leftrightarrow j$ and the model starts from $i$, then following holds
+                    \item $P[\lim_{n \rightarrow \infty} \frac{N_j(n)}{n} = \frac{1}{\mu_{jj}}] = 1$
+                    \item $\lim_{n \rightarrow \infty} \frac{\mathbb{E}[N_j(n)]}{n} = \frac{1}{\mu_{jj}}$
+                    \item if the period of $X_n = j$ is $d \rightarrow \lim_{n \rightarrow \infty} p_j^{nd} = \frac{d}{\mu_{jj}}$
+                \end{itemize}
+                Theorem of an irreducible, aperiodic Markov Chain
+                \begin{itemize}
+                    \item Either
+                        \begin{itemize}
+                            \item All states have $\mu_{ii} = \infty$
+                            \item All states have $\mu_{ii} < \infty$ and $p_i = \frac{1}{\mu_{ii}}$ is the unique stationary distribution
+                        \end{itemize}
+                    \item Proof
+                        \begin{itemize}
+                            \item From if the period of $X_n = j$ is $d \rightarrow \lim_{n \rightarrow \infty} p_j^{nd} = \frac{d}{\mu_{jj}}$
+                        \end{itemize}
+                \end{itemize}
+                Theorem of an irreducible, aperiodic Markov Chain
+                \begin{itemize}
+                    \item All states have $\mu_{ii} < \infty$ and $p_i = \frac{1}{\mu_{ii}}$ is the unique stationary distribution
+                \end{itemize}
+                $p$ can be calculated as the eigenvector corresponds to eigenvalue $1$ of $P^T$
+        \end{itemize}
+    \item Hidden Markov Chain
+        \begin{itemize}
+            \item Definition: output is a function of the state
+            \item Interpretation: if the model is not markovian, then reformulate the model as a hidden markov chain by complicating the states and rendering the output as a function of the state
+        \end{itemize}
+\end{itemize}
+
 \end{document}
