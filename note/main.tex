@@ -344,7 +344,11 @@
                 \begin{itemize}
                     \item $\mathbb{E}[X_{N(t) + 1}] \geq \mathbb{E}[X_i]$: inspection paradox
 
-                        Interpretation: when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
+                        Interpretation:
+                        \begin{itemize}
+                            \item $f_{X_{N(t)+1}}(x) = \lambda x f_{X_i}(x)$
+                            \item when selecting $t$ with equal probability, we tend to choose $X_i$ with longer period
+                        \end{itemize}
                     \item $P[\lim_{t \rightarrow \infty} \frac{1}{t} \int_0^t (S_{N(t) + 1} - s) ds = \frac{\mathbb{E}[X_i^2]}{2\mathbb{E}[X_i]}] = 1$
 
                         Proof:
