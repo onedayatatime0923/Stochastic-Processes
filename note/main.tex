@@ -529,6 +529,7 @@
 
                                 $P[X_1 > x, X_1^1 < X_1^2] = P[X_1 > x]P[X_1^1 < X_1^2]$
                             \item $X_i$ is a Poisson Process with $\lambda = \lambda_1 + \lambda_2$
+                            \item $\min(X_1, X_2)$ is an exponential random variable with $\lambda = \lambda_1 + \lambda_2$
                         \end{itemize}
                 \end{itemize}
                 Splitting Poisson Process
@@ -585,13 +586,13 @@
     \item Definition
         \begin{itemize}
             \item Model with states and transition probability matrix
-            \item States: $\{X_i\}_{i=0}^\infty$
+            \item States: $\{X_n\}_{n=0}^\infty$
             \item Transition Probability Matrix: $[P]_{ij} = P[X_{n+1} = j|X_n = i]$
         \end{itemize}
     \item Terminology
         \begin{itemize}
-            \item $p^n$: distribution at step $n$
-            \item $T_i = \min\{n \geq 1: X_n = i\}$
+            \item $p^n = [P[X_n = 0], P[X_n = 1], \dots]^T$: distribution at step $n$
+            \item $T_i = \min\{n \geq 1: X_n = i\}$: a random variable of the minimum time step to go to state $i$
             \item $f_{ij} = P[T_j < \infty | X_0 = i]$: the probability of starting at $i$ and ever reaching $j$
             \item $\mu_{ij} = \mathbb{E}[T_j | X_0 = i]$
             \item $i \rightarrow j$ iff $f_{ij} > 0$: $j$ is reachable from $i$ with probability greater than 0
@@ -601,6 +602,7 @@
         \end{itemize}
     \item Property
         \begin{itemize}
+            \item Consider a given distribution as an event $\tau: [P[X_n = 0| \tau], P[X_n = 1| \tau], \dots]^T$
             \item Updating distribution
                 \begin{itemize}
                     \item $p^n = p^0 P^n$
@@ -609,7 +611,7 @@
                 \begin{itemize}
                     \item $P[X_{n+1} = j|X_n = i, \dots, X_0 = x_0] = [P]_{ij}$
                 \end{itemize}
-            \item Stationary Distribution: $p$
+            \item Stationary Distribution: $p$ s.t. if $p^n = p \rightarrow p^{n+1} = p$
 
                 Property from renewal process
                 \begin{itemize}
@@ -629,6 +631,8 @@
                     \item Proof
                         \begin{itemize}
                             \item From if the period of $X_n = j$ is $d \rightarrow \lim_{n \rightarrow \infty} p_j^{nd} = \frac{d}{\mu_{jj}}$
+
+                            Proof: $\lim_{n \rightarrow \infty} p_j^{nd} = \lim_{n \rightarrow \infty} \mathbb{E}[\text{\# events at $nd$}]$
                         \end{itemize}
                 \end{itemize}
                 Theorem of an irreducible, aperiodic Markov Chain
@@ -646,6 +650,7 @@
                 Property: 
                 \begin{itemize}
                     \item distribution $\pi$ satisfying Detailed Balance is the stationary distribution $p$
+                    \item symmetric transition probability matrix $\rightarrow$ uniform stationary distribution
                 \end{itemize}
             \item Reversible
 
@@ -678,6 +683,13 @@
                 \begin{itemize}
                     \item Total Variation Distance between $P_1$ and $P_2$ is: $d_{\mathit{TV}}(P_1, P_2) = \frac{1}{2} \sum_{\omega} |P_1[\omega] - P_2[\omega]|$
                 \end{itemize}
+                Interpretation:
+                \begin{itemize}
+                    \item consider the distributions as events $\tau_1, \tau_2$
+                    \item $P_i[\omega] = P[\omega|\tau_i]$
+                    \item $d_{\mathit{TV}}(P_1, P_2) = \frac{1}{2} \sum_{\omega} |P[\omega | \tau_1] - P[\omega | \tau_2]|$
+                        $= \sum_{\omega} |P[\omega \wedge \tau_1] - P[\omega \wedge \tau_2]|$
+                \end{itemize}
             \item Mixing Time
 
                 Definition
@@ -687,6 +699,8 @@
                 Interpretation
                 \begin{itemize}
                     \item the factor $\frac{1}{2e}$ is set such that $d_\mathit{TV}(p, p^0P^t) \leq \epsilon$ if $t \geq \tau \times \log(\frac{1}{\epsilon})$
+
+                        Without proof
                 \end{itemize}
             \item Example
 
@@ -696,11 +710,77 @@
                     \item Distribution $\pi$, $\pi_i = \frac{\text{degree}(x)}{2 |E|}$ satisfies detailed balance
                     \item If we want stationary distribution to be uniform $\rightarrow P'_{ij} = \left\{ \begin{array}{cc} \frac{1}{\text{degree}(i)} & \text{ if degree$(i) \geq$ degree$(j)$ } \\ \frac{1}{\text{degree}(j)} & \text{ if degree$(i) < $ degree$(j)$ } \end{array} \right.$
                 \end{itemize}
+                Random graph coloring
+                \begin{itemize}
+                    \item Given a graph with $V$ vertices, maximum degree $\Delta$ and $q$ colors, to color each vertex one color such that adjacent vertex do not share the same color
+                    \item Assume $q > 4 \Delta$
+                    \item Markov Chain Transition:
+                        \begin{itemize}
+                            \item Pick random vertex and random color, if the color is changeable then change
+                        \end{itemize}
+                    \item Property
+                        \begin{itemize}
+                            \item Aperiodic: there exist self loops
+                            \item Symmetric: symmetric transition
+                            \item Irreducible
+                        \end{itemize}
+                    \item Mixing time is $O(V \log V)$
+
+                        Proof:
+                        \begin{itemize}
+                            \item Assume $X$ is a event s.t. Markov Chain starts with any valid coloring and $Y$ is a event s.t. Markov Chain starts with uniform distribution
+
+                            \item Apply same transition on both $X$ and $Y$
+                            \item $D_n$ is a random variable for the number of vertices in different colors in $X$ and $Y$ at time $n$
+
+                            \item Good moves: number of vertices in different colors decrease $\geq D_n \times (q-2\Delta) \geq (2\Delta + 1)D_n$
+
+                                (vertices with different colors $\times$ color that is different with any adjacent color in $X$ and $Y$)
+                            \item Bad moves: number of vertices in different colors increase $\leq (D_n \Delta) \times 2$
+
+                                (vertices adjacent to different colors vertices $\times$ color of the differen colors vertices)
+                            \item $\mathbb{E}[D_{n+1} - D_n] \leq V(1-\frac{1}{qV})^n$ 
+                            \item $\mathbb{E}[D_n] \leq V(1-\frac{1}{qV})^n$ 
+                            \item $P[D_n \geq 1] \leq V(1-\frac{1}{qV})^n$ 
+                        \end{itemize}
+                \end{itemize}
         \end{itemize}
     \item Hidden Markov Chain
         \begin{itemize}
             \item Definition: output is a function of the state
             \item Interpretation: if the model is not markovian, then reformulate the model as a hidden markov chain by complicating the states and rendering the output as a function of the state
+        \end{itemize}
+\end{itemize}
+
+\section{Continuous Markov Chain}
+\begin{itemize}
+    \item Definition
+        \begin{itemize}
+            \item Model with states and transition rate matrix
+            \item States: $X(t), \forall 0 \leq t < \infty$
+            \item Transition Probability Matrix $R$
+
+                Interpretation:
+                \begin{itemize}
+                    \item Time in state $i$ before next step is $\sim$ Exponential($v_i$)
+                    \item $R_{ij} = \frac{d P[X(t) = j | X(0) = i]}{d t} |_{t = 0}$
+                    \item $R_{ij} = \left\{ \begin{array}{cc} -v_i & \text{ if $i == j$} \\ v_i P_{ij} & \text{ if $i == j$} \\ \end{array} \right.$
+                \end{itemize}
+                Property:
+                \begin{itemize}
+                    \item $\sum_j R_{ij} = 0$: sum of element is a row of $R$ is 0
+                    \item $R$ specifies a unique Continuous Markov Chain
+                \end{itemize}
+        \end{itemize}
+    \item Property
+        \begin{itemize}
+            \item Poisson process is a special case with $v_i = \lambda, \forall i$
+            \item Exploding process: traverse infinite states in finite time, only if $v_i \rightarrow \infty$
+            \item Transition from state $i$
+                \begin{itemize}
+                    \item simulate the transition by multiple exponential variables with $\lambda = v_i \times P_{ij}, \forall j$
+                    \item transition to state $j$ if $j$-th random variable hits first
+                \end{itemize}
         \end{itemize}
 \end{itemize}
 
