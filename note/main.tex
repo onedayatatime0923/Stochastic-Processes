@@ -754,32 +754,84 @@
 
 \section{Continuous Markov Chain}
 \begin{itemize}
+    \item Interpretation
+        \begin{itemize}
+            \item $v_i$: coefficient of exponential distribution, where time in state $i$ before next step is $\sim$ Exponential($v_i$)
+        \end{itemize}
     \item Definition
         \begin{itemize}
             \item Model with states and transition rate matrix
             \item States: $X(t), \forall 0 \leq t < \infty$
             \item Transition Probability Matrix $R$
 
-                Interpretation:
+                Definition:
                 \begin{itemize}
-                    \item Time in state $i$ before next step is $\sim$ Exponential($v_i$)
-                    \item $R_{ij} = \frac{d P[X(t) = j | X(0) = i]}{d t} |_{t = 0}$
-                    \item $R_{ij} = \left\{ \begin{array}{cc} -v_i & \text{ if $i == j$} \\ v_i P_{ij} & \text{ if $i == j$} \\ \end{array} \right.$
+                    \item $R_{ij} = \frac{d P_{ij}(t)}{d t} |_{t = 0}$
+                    \item $R_{ij} = \left\{ \begin{array}{cc} -v_i & \text{ if $i = j$} \\ v_i P_{ij} & \text{ if $i \not = j$} \\ \end{array} \right.$ (if there is no self-transition)
                 \end{itemize}
                 Property:
                 \begin{itemize}
                     \item $\sum_j R_{ij} = 0$: sum of element is a row of $R$ is 0
-                    \item $R$ specifies a unique Continuous Markov Chain
+                    \item Continuous Markov Chain with same $R$ are of the same functionality
+
+                        Because if we simulate the transition by multiple exponential variables with $\lambda = v_i \times P_{ij}, \forall j$, then $R$ defines the simulation
                 \end{itemize}
         \end{itemize}
     \item Property
         \begin{itemize}
-            \item Poisson process is a special case with $v_i = \lambda, \forall i$
-            \item Exploding process: traverse infinite states in finite time, only if $v_i \rightarrow \infty$
-            \item Transition from state $i$
+            \item $P_{ij}(t) = P[X(t) = j | X(0) = i]$
+            \item Chapman-Kolmogorov Equation
                 \begin{itemize}
-                    \item simulate the transition by multiple exponential variables with $\lambda = v_i \times P_{ij}, \forall j$
-                    \item transition to state $j$ if $j$-th random variable hits first
+                    \item Definition: $P(s+t) = P(s) \times P(t)$
+                    \item Proof
+                        \begin{itemize}
+                            \item $P_{ij}(s+t) = P[X(s+t) = j| X(0) = i]$
+
+                                $= \sum_k P[X(s+t) = j| X(s) = k, X(0) = i] P[X(s)=k| X(0) = i]$
+
+                                $= \sum_k P[X(s+t) = j| X(s) = k] P[X(s)=k| X(0) = i]$
+                                $= \sum_k P_{kj}(t) P_{ik}(s)$
+                        \end{itemize}
+                \end{itemize}
+            \item Kolmogorov's Differential Equation
+                \begin{itemize}
+                    \item Forward: $\frac{d P(t)}{dt} = P(t) R$
+
+                        Proof:
+                        \begin{itemize}
+                            \item $\frac{d P(t)}{dt} = \lim_{\delta \rightarrow 0} \frac{P(t+\delta) - P(t)}{\delta} = P(t) \lim_{\delta \rightarrow 0} \frac{P(\delta) - P(0)}{\delta} = P(t) R$
+                        \end{itemize}
+                    \item Backward: $\frac{d P(t)}{dt} = R P(t)$
+
+                        Proof:
+                        \begin{itemize}
+                            \item $\frac{d P(t)}{dt} = \lim_{\delta \rightarrow 0} \frac{P(t+\delta) - P(t)}{\delta} = \lim_{\delta \rightarrow 0} \frac{P(\delta) - P(0)}{\delta} P(t) = R P(t)$
+                        \end{itemize}
+                    \item Solution: $P(t) = e^{Rt}$
+                \end{itemize}
+            \item Self Transition:
+                \begin{itemize}
+                    \item Since $R$ defines the Markov Chain, we can modify $v_i$ to conduct self transition without changing $R$
+                \end{itemize}
+            \item Uniformization:
+                \begin{itemize}
+                    \item Since $R$ defines the Markov Chain, we can modify $v_i$ such that $v_i$ are the same for all states without changing $R$
+                \end{itemize}
+            \item Stationary Distribution: $p$ s.t. $pR = 0$
+
+                Interpretation:
+                \begin{itemize}
+                    \item $\frac{d p P(t)}{dt} = p \frac{d P(t)}{dt} = pR P(t) = 0$
+                    \item the distribution would not change, if start with $p$
+                \end{itemize}
+            \item Poisson process is a special case of Continuous Markov Chain
+                \begin{itemize}
+                    \item $v_i = \lambda, \forall i$
+                    \item $i$-th state transition to $i+1$-th state
+                \end{itemize}
+            \item Exploding process: only if $v_i \rightarrow \infty$
+                \begin{itemize}
+                    \item exploding process: traverse infinite states in finite time
                 \end{itemize}
         \end{itemize}
 \end{itemize}
