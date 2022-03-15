@@ -763,23 +763,10 @@
             \item Model with states and transition rate matrix
             \item States: $X(t), \forall 0 \leq t < \infty$
             \item Transition Probability Matrix $R$
-
-                Definition:
-                \begin{itemize}
-                    \item $R_{ij} = \frac{d P_{ij}(t)}{d t} |_{t = 0}$
-                    \item $R_{ij} = \left\{ \begin{array}{cc} -v_i & \text{ if $i = j$} \\ v_i P_{ij} & \text{ if $i \not = j$} \\ \end{array} \right.$ (if there is no self-transition)
-                \end{itemize}
-                Property:
-                \begin{itemize}
-                    \item $\sum_j R_{ij} = 0$: sum of element is a row of $R$ is 0
-                    \item Continuous Markov Chain with same $R$ are of the same functionality
-
-                        Because if we simulate the transition by multiple exponential variables with $\lambda = v_i \times P_{ij}, \forall j$, then $R$ defines the simulation
-                \end{itemize}
         \end{itemize}
-    \item Property
+    \item $P_{ij}(t)$
         \begin{itemize}
-            \item $P_{ij}(t) = P[X(t) = j | X(0) = i]$
+            \item Definition: $P_{ij}(t) = P[X(t) = j | X(0) = i]$
             \item Chapman-Kolmogorov Equation
                 \begin{itemize}
                     \item Definition: $P(s+t) = P(s) \times P(t)$
@@ -797,18 +784,56 @@
                 \begin{itemize}
                     \item Forward: $\frac{d P(t)}{dt} = P(t) R$
 
+                        Interpretation:
+                        \begin{itemize}
+                            \item Change of distribution at $t$ equals the distribution at $t \times R$
+                        \end{itemize}
                         Proof:
                         \begin{itemize}
                             \item $\frac{d P(t)}{dt} = \lim_{\delta \rightarrow 0} \frac{P(t+\delta) - P(t)}{\delta} = P(t) \lim_{\delta \rightarrow 0} \frac{P(\delta) - P(0)}{\delta} = P(t) R$
                         \end{itemize}
                     \item Backward: $\frac{d P(t)}{dt} = R P(t)$
 
+                        Interpretation:
+                        \begin{itemize}
+                            \item Change of distribution at $t$ equals the distribution at $t = 0 \times P(t)$
+                        \end{itemize}
                         Proof:
                         \begin{itemize}
                             \item $\frac{d P(t)}{dt} = \lim_{\delta \rightarrow 0} \frac{P(t+\delta) - P(t)}{\delta} = \lim_{\delta \rightarrow 0} \frac{P(\delta) - P(0)}{\delta} P(t) = R P(t)$
                         \end{itemize}
                     \item Solution: $P(t) = e^{Rt}$
                 \end{itemize}
+        \end{itemize}
+    \item $R$
+        \begin{itemize}
+            \item Definition:
+                \begin{itemize}
+                    \item $R_{ij} = \frac{d P_{ij}(t)}{d t} |_{t = 0}$
+                    \item $R_{ij} = \left\{ \begin{array}{cc} -v_i & \text{ if $i = j$} \\ v_i P_{ij} & \text{ if $i \not = j$} \\ \end{array} \right.$ (if there is no self-transition)
+                \end{itemize}
+            \item Interpretation
+                \begin{itemize}
+                    \item $\pi R$ is the change of distribution of $\pi$ (by Kolmogorov's Differential Equation)
+                    \item simulation by transition from state $i$ to $j$ when $e^{-R_{ij}t}$ event arrives
+
+                        Proof
+                        \begin{itemize}
+                            \item $\frac{d P_{ii}(t)}{dt} = R_{ii} P_{ii}(t) \rightarrow P_{ii}(t) = e^{-R_{ii}t}$
+                            \item simulate the transition out of state $i$ by $e^{-R_{ii}t}$ and transition to $j$ state by probability $\frac{R_{ij}}{R_{ii}}$ is the same as transition from state $i$ to $j$ when $e^{-R_{ij}t}$ event arrives
+                        \end{itemize}
+                        Property
+                        \begin{itemize}
+                            \item Continuous Markov Chain with same $R$ are of the same functionality
+                        \end{itemize}
+                \end{itemize}
+            \item Property:
+                \begin{itemize}
+                    \item $\sum_j R_{ij} = 0$: sum of element is a row of $R$ is 0
+                \end{itemize}
+        \end{itemize}
+    \item Property
+        \begin{itemize}
             \item Self Transition:
                 \begin{itemize}
                     \item Since $R$ defines the Markov Chain, we can modify $v_i$ to conduct self transition without changing $R$
@@ -817,12 +842,17 @@
                 \begin{itemize}
                     \item Since $R$ defines the Markov Chain, we can modify $v_i$ such that $v_i$ are the same for all states without changing $R$
                 \end{itemize}
-            \item Stationary Distribution: $p$ s.t. $pR = 0$
+            \item Stationary Distribution: $p$ s.t. $pR = 0, pe^{Rt} = p$
 
                 Interpretation:
                 \begin{itemize}
                     \item $\frac{d p P(t)}{dt} = p \frac{d P(t)}{dt} = pR P(t) = 0$
-                    \item the distribution would not change, if start with $p$
+                    \item $p$ is the eigenvector of eigenvalue 0 of $R$, then $p$ is the eigenvector of eigenvalue 1 of $e^{Rt} \rightarrow$ the distribution would not change, if start with $p$
+                \end{itemize}
+                Trick:
+                \begin{itemize}
+                    \item cluster states such that every state in the cluster share the same $R_{ij}$ to calculate the stationary distribution of the cluster
+                    \item assume distribution is independent of the cluster and check $p R = 0$ after the calculation
                 \end{itemize}
             \item Poisson process is a special case of Continuous Markov Chain
                 \begin{itemize}
@@ -833,6 +863,28 @@
                 \begin{itemize}
                     \item exploding process: traverse infinite states in finite time
                 \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\section{Martingales}
+\begin{itemize}
+    \item Definition
+        \begin{itemize}
+            \item $\{Z_i\}_{i=0}^\infty$ such that
+                \begin{enumerate}
+                    \item $\mathbb{E}[|Z_n|] < \infty$
+                    \item $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] = 0$
+                \end{enumerate}
+                \begin{itemize}
+                    \item sub-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \geq 0$
+                    \item super-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \leq 0$
+                \end{itemize}
+        \end{itemize}
+    \item Property
+        \begin{itemize}
+            \item $\mathbb{E}[Z_n] = \mathbb{E}[Z_1]$
+
+                Proof: $\mathbb{E}[Z_{n+1} - Z_n] = \mathbb{E}[\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n]] = 0$
         \end{itemize}
 \end{itemize}
 
