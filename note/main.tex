@@ -870,14 +870,29 @@
 \begin{itemize}
     \item Definition
         \begin{itemize}
-            \item $\{Z_i\}_{i=0}^\infty$ such that
-                \begin{enumerate}
-                    \item $\mathbb{E}[|Z_n|] < \infty$
-                    \item $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] = 0$
-                \end{enumerate}
+            \item Discrete:
                 \begin{itemize}
-                    \item sub-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \geq 0$
-                    \item super-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \leq 0$
+                    \item $\{Z_i\}_{i=0}^\infty$ such that
+                        \begin{enumerate}
+                            \item $\mathbb{E}[|Z_n|] < \infty$
+                            \item $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n] = Z_n$
+                        \end{enumerate}
+                        \begin{itemize}
+                            \item sub-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \geq 0$
+                            \item super-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \leq 0$
+                        \end{itemize}
+                \end{itemize}
+            \item Continuous with respect to $N(t)$
+                \begin{itemize}
+                    \item $Y(t)$ such that
+                        \begin{enumerate}
+                            \item $\mathbb{E}[|Y(t)|] < \infty$
+                            \item $\mathbb{E}[Y(t)| \{N(s) | 0 \leq s \leq \tau\}] = Y(\tau), \forall \tau \leq t$
+                        \end{enumerate}
+                        \begin{itemize}
+                            \item sub-martingales: $\mathbb{E}[Y(t)| \{N(s) | 0 \leq s \leq \tau\}] \geq Y(\tau), \forall \tau \leq t$
+                            \item super-martingales: $\mathbb{E}[Y(t)| \{N(s) | 0 \leq s \leq \tau\}] \leq Y(\tau), \forall \tau \leq t$
+                        \end{itemize}
                 \end{itemize}
         \end{itemize}
     \item Property
@@ -885,6 +900,63 @@
             \item $\mathbb{E}[Z_n] = \mathbb{E}[Z_1]$
 
                 Proof: $\mathbb{E}[Z_{n+1} - Z_n] = \mathbb{E}[\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n]] = 0$
+            \item Azuma's Inequality
+                \begin{itemize}
+                    \item $\mu = \mathbb{E}[Z_0]$
+                    \item $-a_i \leq Z_i - Z_{i-1} \leq b_i$
+                    \item $P[|Z_n - \mu| \geq \delta] \leq 2 e^{- \frac{2\delta^2}{\sum_{i=1}^n(b_i + a_i)^2}}$
+                \end{itemize}
+            \item Kolmogorov's sub-martingales inequality
+                \begin{itemize}
+                    \item $P[\sup_{n \geq 1}Z_n \geq a] \leq \frac{\mathbb{E}[Z_1]}{a}$
+                \end{itemize}
+        \end{itemize}
+    \item Example
+        \begin{itemize}
+            \item Sum of iid. random variables
+                \begin{itemize}
+                    \item $\{X_i\}_{i=1}^\infty$ are iid. random variables
+                    \item $Z_n = \sum_{i=1}^n X_i - n \mathbb{E}[X_i]$ is a martingales.
+                    \item Proof: $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n]$
+                        $= \mathbb{E}[Z_n + X_{n+1} - \mathbb{E}[X_i]| Z_0, \dots, Z_n] = Z_n$
+                \end{itemize}
+            \item Squre of sum of iid. random variables
+                \begin{itemize}
+                    \item $\{X_i\}_{i=1}^\infty$ are iid. random variables and $\mathbb{E}[X_i] = 0$
+                    \item $Z_n = (\sum_{i=1}^n X_i)^2 - n \mathbb{E}[X_i^2]$ is a martingales.
+                    \item Proof: $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n]$
+                        $= \mathbb{E}[Z_n + X_{n+1}^2 + 2X_{n+1}(\sum_{i=1}^n X_i) - \mathbb{E}[X_i^2]| Z_0, \dots, Z_n] = Z_n$
+                \end{itemize}
+            \item Product of iid. random variables
+                \begin{itemize}
+                    \item $\{X_i\}_{i=1}^\infty$ are iid. random variables
+                    \item $Z_n = \frac{\prod_{i=1}^n X_i}{\mathbb{E}[X_i]^n}$ is a martingales.
+                    \item Proof: $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n]$
+                        $= \mathbb{E}[Z_n(\frac{X_{n+1}}{\mathbb{E}[X_i]})| Z_0, \dots, Z_n] = Z_n$
+                \end{itemize}
+            \item Poisson Process
+                \begin{itemize}
+                    \item $N(t)$ is a poisson process
+                    \item $Y(t) = N(t) - \lambda t$ is a martingales.
+                    \item Proof: $\mathbb{E}[Y(t)| \{N(s) | 0 \leq s \leq \tau\}]$
+                        $= \mathbb{E}[Y(\tau) + Y(t) - Y(\tau)| \{N(s) | 0 \leq s \leq \tau\}]$
+
+                        $= Y(\tau) + \mathbb{E}[N(t) - N(\tau) + \lambda(t - \tau)| \{N(s) | 0 \leq s \leq \tau\}] = Y(\tau)$
+                \end{itemize}
+            \item Doob-type Martingales
+                \begin{itemize}
+                    \item $X, \{Y_i\}_{i=1}^\infty$ are random variables
+                    \item $Z_n = \mathbb{E}[X|Y_1, Y_2, \dots, Y_n]$ is a martingales
+                    \item Proof: $\mathbb{E}[Z_{n+1}| Z_1, \dots, Z_n]$
+                        $= \mathbb{E}[\mathbb{E}[Z_{n+1}| Y_1, Y_2, \dots, Y_n, Z_1, \dots, Z_n] | Z_1, \dots, Z_n]$
+
+                        $= \mathbb{E}[\mathbb{E}[Z_{n+1}| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$ (Since $Z_n$ is a function of $\{Y_i\}_{i=1}^n$)
+
+                        $= \mathbb{E}[\mathbb{E}[\mathbb{E}[X|Y_1, Y_2, \dots, Y_n, Y_{n+1}]| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$
+
+                        $= \mathbb{E}[\mathbb{E}[X| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$
+                        $= \mathbb{E}[Z_n| Z_1, \dots, Z_n] = Z_n$
+                \end{itemize}
         \end{itemize}
 \end{itemize}
 
