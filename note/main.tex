@@ -870,7 +870,9 @@
 \begin{itemize}
     \item Definition
         \begin{itemize}
-            \item Discrete:
+            \item Discrete
+
+                General Discrete Martingales
                 \begin{itemize}
                     \item $\{Z_i\}_{i=0}^\infty$ such that
                         \begin{enumerate}
@@ -878,11 +880,32 @@
                             \item $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n] = Z_n$
                         \end{enumerate}
                         \begin{itemize}
-                            \item sub-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \geq 0$
-                            \item super-martingales: $\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n] \leq 0$
+                            \item sub-martingales: $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n] \geq Z_n$
+                            \item super-martingales: $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n] \leq Z_n$
                         \end{itemize}
                 \end{itemize}
-            \item Continuous with respect to $N(t)$
+                Discrete Martingales with respect to $X_i$
+                \begin{itemize}
+                    \item $\{Z_i\}_{i=0}^\infty$ such that
+                        \begin{enumerate}
+                            \item $\mathbb{E}[|Z_n|] < \infty$
+                            \item $\mathbb{E}[Z_{n+1}| X_0, \dots, X_n] = Z_n$
+                        \end{enumerate}
+                        \begin{itemize}
+                            \item sub-martingales: $\mathbb{E}[Z_{n+1}| X_0, \dots, X_n] \geq Z_n$
+                            \item super-martingales: $\mathbb{E}[Z_{n+1}| X_0, \dots, X_n] \leq Z_n$
+                        \end{itemize}
+                    \item $\mathbb{E}[Z_{n+1}| X_0, \dots, X_n] = Z_n$ implies $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n] = Z_n$
+                        \begin{itemize}
+                            \item $Z_n$ is a function of $X_0, \dots, X_n$
+                            \item $\mathbb{E}[Z_{n+1}| Z_0, \dots, Z_n]$
+                                $= \mathbb{E}[\mathbb{E}[Z_{n+1}| X_0, \dots, X_n, Z_0, \dots, Z_n]| Z_0, \dots, Z_n]$
+
+                                $= \mathbb{E}[\mathbb{E}[Z_{n+1}| X_0, \dots, X_n]| Z_0, \dots, Z_n]$
+                                $= \mathbb{E}[Z_n| Z_0, \dots, Z_n] = Z_n$
+                        \end{itemize}
+                \end{itemize}
+            \item Continuous Martingales with respect to $N(t)$
                 \begin{itemize}
                     \item $Y(t)$ such that
                         \begin{enumerate}
@@ -900,6 +923,9 @@
             \item $\mathbb{E}[Z_n] = \mathbb{E}[Z_1]$
 
                 Proof: $\mathbb{E}[Z_{n+1} - Z_n] = \mathbb{E}[\mathbb{E}[Z_{n+1} - Z_n| Z_0, \dots, Z_n]] = 0$
+            \item $\mathbb{E}[Z_n | \{Z_i | i \in S\}] = Z_{\max_{i \in S} i}$, where $\forall i \in S, i < n$
+
+                Proof: $\mathbb{E}[Z_n| Z_i] = \mathbb{E}[\mathbb{E}[Z_n| Z_0, \dots, Z_{n-1}]|Z_i] = \mathbb{E}[Z_{n-1}| Z_i]$
             \item Azuma's Inequality
                 \begin{itemize}
                     \item $\mu = \mathbb{E}[Z_0]$
@@ -910,8 +936,19 @@
                 \begin{itemize}
                     \item $P[\sup_{n \geq 1}Z_n \geq a] \leq \frac{\mathbb{E}[Z_1]}{a}$
                 \end{itemize}
+            \item Martingales Stopping Theorem
+                \begin{itemize}
+                    \item Stopping Times: a random variable $\tau$ s.t. $\{\tau = n\}$ is independent of $\{X_i\}_{i=n+1}^\infty$
+                    \item Stopping Condition: a condition to stop if we can consider $\tau = \min\{n: \text{ condition}(n) = \top \}$
+                    \item $\mathbb{E}[Z_\tau] = \mathbb{E}[Z_0]$ if the either of the following holds
+                        \begin{enumerate}
+                            \item $P[\tau \leq k] = 1$
+                            \item $P[\max_{i \leq \tau} |Z_\tau| \leq k] = 1$ 
+                            \item $\mathbb{E}[\tau] < k$ and $\mathbb{E}[|Z_{n+1} - Z_n|| Z_0, \dots, Z_n] < k$
+                        \end{enumerate}
+                \end{itemize}
         \end{itemize}
-    \item Example
+    \item Application for generating Martingales
         \begin{itemize}
             \item Sum of iid. random variables
                 \begin{itemize}
@@ -947,15 +984,37 @@
                 \begin{itemize}
                     \item $X, \{Y_i\}_{i=1}^\infty$ are random variables
                     \item $Z_n = \mathbb{E}[X|Y_1, Y_2, \dots, Y_n]$ is a martingales
-                    \item Proof: $\mathbb{E}[Z_{n+1}| Z_1, \dots, Z_n]$
-                        $= \mathbb{E}[\mathbb{E}[Z_{n+1}| Y_1, Y_2, \dots, Y_n, Z_1, \dots, Z_n] | Z_1, \dots, Z_n]$
+                    \item Proof: $\mathbb{E}[Z_{n+1}| Y_1, \dots, Y_n]$
+                        $= \mathbb{E}[\mathbb{E}[X|Y_1, Y_2, \dots, Y_n, Y_{n+1}]| Y_1, Y_2, \dots, Y_n]$
 
-                        $= \mathbb{E}[\mathbb{E}[Z_{n+1}| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$ (Since $Z_n$ is a function of $\{Y_i\}_{i=1}^n$)
+                        $= \mathbb{E}[X| Y_1, Y_2, \dots, Y_n] = Z_n$
+                \end{itemize}
+        \end{itemize}
+    \item Example
 
-                        $= \mathbb{E}[\mathbb{E}[\mathbb{E}[X|Y_1, Y_2, \dots, Y_n, Y_{n+1}]| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$
+        Random Walk
+        \begin{itemize}
+            \item $X_i = \left\{ \begin{array}{ll}
+                        1 & \text{with probability } p \\ 
+                        -1 & \text{with probability } 1-p \\ 
+                    \end{array} \right.$
+            \item Symmetric Random Walk
+                \begin{itemize}
+                    \item $p = 0.5$
+                    \item $\tau = \min\{i|\sum_{i=0}^n X_i \in \{-a, b\}\}$
+                    \item $Z_n = \sum_{i=0}^n X_i$, by second rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
 
-                        $= \mathbb{E}[\mathbb{E}[X| Y_1, Y_2, \dots, Y_n] | Z_1, \dots, Z_n]$
-                        $= \mathbb{E}[Z_n| Z_1, \dots, Z_n] = Z_n$
+                        $\rightarrow P[Z_\tau \text{ at }a ] = \frac{b}{a+b}, P[Z_\tau \text{ at }b ] = \frac{a}{a+b}$
+                \end{itemize}
+            \item Unbiased Random Walk
+                \begin{itemize}
+                    \item $\tau = \min\{i|\sum_{i=0}^n X_i \in \{-a, b\}\}$
+                    \item $Z_n = (\frac{1-p}{p})^{\sum_{i=0}^n X_i}$, by second rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
+
+                        $P[Z_\tau \text{ at }a ] = \frac{(\frac{1-p}{p})^{b}-1}{(\frac{1-p}{p})^b - (\frac{1-p}{p})^{-a}}, P[Z_\tau \text{ at }b ] = \frac{1-(\frac{1-p}{p})^{-a}}{(\frac{1-p}{p})^b - (\frac{1-p}{p})^{-a}}$
+                    \item $Z_n = \sum_{i=0}^n X_i - n \mathbb{E}[X_0]$, by third rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
+
+                        $\rightarrow \mathbb{E}[\tau] = \frac{\mathbb{E}[\sum_{i=0}^\tau X_i]}{\mathbb{E}[X_0]}$
                 \end{itemize}
         \end{itemize}
 \end{itemize}
