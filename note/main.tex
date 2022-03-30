@@ -991,13 +991,7 @@
                 \end{itemize}
         \end{itemize}
     \item Example
-
-        Random Walk
         \begin{itemize}
-            \item $X_i = \left\{ \begin{array}{ll}
-                        1 & \text{with probability } p \\ 
-                        -1 & \text{with probability } 1-p \\ 
-                    \end{array} \right.$
             \item Symmetric Random Walk
                 \begin{itemize}
                     \item $p = 0.5$
@@ -1005,6 +999,9 @@
                     \item $Z_n = \sum_{i=0}^n X_i$, by second rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
 
                         $\rightarrow P[Z_\tau \text{ at }a ] = \frac{b}{a+b}, P[Z_\tau \text{ at }b ] = \frac{a}{a+b}$
+                    \item $Z_n = (\sum_{i=0}^n X_i)^2 - n$, by third rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
+
+                        $\rightarrow \mathbb{E}[\tau] = ab$
                 \end{itemize}
             \item Unbiased Random Walk
                 \begin{itemize}
@@ -1015,6 +1012,135 @@
                     \item $Z_n = \sum_{i=0}^n X_i - n \mathbb{E}[X_0]$, by third rule of Martingales Stopping Theorem: $\mathbb{E}[Z_\tau] = 0$
 
                         $\rightarrow \mathbb{E}[\tau] = \frac{\mathbb{E}[\sum_{i=0}^\tau X_i]}{\mathbb{E}[X_0]}$
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\section{Random Walk}
+\begin{itemize}
+    \item Definition
+        \begin{itemize}
+            \item $X_i = \left\{ \begin{array}{ll}
+                        1 & \text{with probability } p \\ 
+                        -1 & \text{with probability } 1-p \\ 
+                    \end{array} \right.$
+            \item $S_n = \sum_{i = 0}^n X_i$
+        \end{itemize}
+    \item The monkey at the cliff
+        \begin{itemize}
+            \item $P_k = P[ \exists n \text{ such that } S_n = k] = \left\{ \begin{array}{cc}
+                1 & \text{if } p \geq \frac{1}{2} \\
+                (\frac{p}{1-p})^k & \text{if } p < \frac{1}{2} \\
+                \end{array} \right.$ where $k \in \mathbb{N}$
+
+                Proof
+                \begin{itemize}
+                    \item $P_k = P_1^k$ by memoryless property
+                    \item $P_1 = p + q \times P_2 \rightarrow P_1 = 1$ or $\frac{p}{1-p}$
+                    \item if $p \geq 0.5 \rightarrow P_1 = 1$ ($P_1 \leq 1$)
+                    \item if $p < 0.5 \rightarrow P_1 = \frac{p}{1-p}$
+
+                        Since $P_1 \leq \frac{p}{1-p}$ by induction on $n$ to $\infty$ for $P_1(n) = P[S_n = k]$
+                \end{itemize}
+            \item $\mathbb{E}_k = \mathbb{E}[\min\{n:S_n =k\}] = \left\{ \begin{array}{cc}
+                \infty & \text{if } p \leq \frac{1}{2} \\
+                \frac{k}{2p-1} & \text{if } p > \frac{1}{2} \\
+                \end{array} \right.$ where $k \in \mathbb{N}$
+
+                Proof
+                \begin{itemize}
+                    \item $\mathbb{E}_k = \mathbb{E}_1 \times k$ by memoryless property
+                    \item $\mathbb{E}_1 = 1 + 0 \times p + \mathbb{E}_2 \times (1-p)$
+                    \item if $p < 0.5 \rightarrow P_1 = \frac{p}{1-p} \rightarrow \mathbb{E}_1 = \infty$
+                    \item if $p = 0.5 \rightarrow \mathbb{E}_1 = 1 + \mathbb{E}_1$ (no solution) $\rightarrow \mathbb{E}_1 = \infty$
+                    \item if $p > 0.5 \rightarrow \mathbb{E}_1 = \frac{1}{2p-1}$
+                \end{itemize}
+            \item $P_0 = P[ \exists n \text{ such that } S_n = 0] = 1 - |2p-1|$ where $k \in \mathbb{N}$
+                \begin{itemize}
+                    \item $P_0 = p \times P_{-1} + (1-p) \times P_1$
+                \end{itemize}
+            \item $\mathbb{E}_0 = \mathbb{E}[\min\{n:S_n =0\}] = \infty$
+                \begin{itemize}
+                    \item if $p \not = \frac{1}{2} \rightarrow P_0 \not = 1 \rightarrow \mathbb{E}_0 = \infty$
+                    \item if $p = \frac{1}{2} \rightarrow \mathbb{E}_0 = 1 + \frac{1}{2} \mathbb{E}_{-1} + \frac{1}{2} \mathbb{E}_1 = \infty$
+                \end{itemize}
+        \end{itemize}
+    \item The Gambler's Ruin
+        \begin{itemize}
+            \item Definition: $\tau = \min\{i| S_n \in \{-a, b\}\}$
+            \item $A_k = P[S_\tau = b | X_0 = k]$
+                \begin{itemize}
+                    \item $A_k = p A_{k+1} + (1-p) A_{k-1}$
+                \end{itemize}
+            \item $A_0 = \left\{ \begin{array}{cc}
+                        \frac{a}{a+b} & \text{if } p = \frac{1}{2} \\
+                        \frac{(\frac{1-p}{p})^a - 1}{(\frac{1-p}{p})^{a+b} - 1} & \text{if } p \not = \frac{1}{2} \\
+                \end{array} \right.$
+
+                Solved by previous recursive equation
+            \item $E_k = \mathbb{E}[\tau|X_0 = k]$
+                \begin{itemize}
+                    \item $E_k = 1 + p E_{k+1} + (1-p) E_{k-1}$
+                \end{itemize}
+            \item $E_0 = \left\{ \begin{array}{cc}
+                        ab & \text{if } p = \frac{1}{2} \\
+                        \frac{a}{1-2p} - \frac{a+b}{1-2p} \times \frac{(\frac{1-p}{p})^a - 1}{(\frac{1-p}{p})^{a+b} - 1} & \text{if } p \not = \frac{1}{2} \\
+                \end{array} \right.$
+
+                Solved by previous recursive equation
+        \end{itemize}
+    \item Observation
+        \begin{itemize}
+            \item $S_n = O(n)$
+
+                Upperbound: $\lim_{n \rightarrow \infty} P[S_n \leq k\sqrt{n}] = \int_{-\infty}^k \frac{1}{2 \pi} e^{-\frac{x^2}{2}} dx$
+
+                Lowerbound: $P[|S_n| \geq k\sqrt{n}] \leq 2 e^{-\frac{k^2}{2}}$
+        \end{itemize}
+\end{itemize}
+
+\section{Brownian Motion}
+\begin{itemize}
+    \item Interpretation: generalize discrete time and space to continuous time and space
+        \begin{itemize}
+            \item $S_t = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
+            \item let $\delta_x = \sqrt{\delta_t}$ and $\delta_x \rightarrow 0$
+            \item $\mathbb{E}[S_t] = 0$
+            \item $\mathit{Var}(S_t) = \delta_x^2 \frac{t}{\delta_t} = t$
+        \end{itemize}
+    \item Definition:
+        \begin{itemize}
+            \item $X(0) = 0$
+            \item $X(t) \sim N(0, \sigma^2 = t)$
+            \item $X(t)$ has independent, stationary increment
+                \begin{itemize}
+                    \item independent: $X(t_{i_2}) - X(t_{i_1})$ and $X(t_{i_1}) - X(t_{i_0})$ are independent
+                    \item stationary: $X(s + t) - X(t) = X(s)$
+                \end{itemize}
+        \end{itemize}
+    \item Property
+        \begin{itemize}
+            \item $\forall \{t_i\}_{i=0}^n, [X(t_1), \dots, X(t_n)]^T$ is a joint gaussian distribution
+                \begin{itemize}
+                    \item $\mathit{Cov}(X(s), X(t)) = \min(s, t)$ (by $X(t) = X(s) + X(t-s)$ if $t > s$)
+                \end{itemize}
+            \item Distribution self-similarity
+                \begin{itemize}
+                    \item $X(t) \sim N(0, t)$
+                    \item $\sqrt{k}X(\frac{t}{k}) \sim N(0, t)$
+                \end{itemize}
+            \item Nowhere Differentiable
+                \begin{itemize}
+                    \item With probability 1, $X(t)$ is nowhere differentiable
+                    \item $\lim_{\delta_t \rightarrow 0} \frac{X(t+\delta_t) - X(t)}{\delta_t} = \lim_{\delta_t \rightarrow 0} \frac{N(0, \delta_t}{\delta_t} = \lim_{\delta_t \rightarrow 0} N(0, \frac{1}{\delta_t})$
+                \end{itemize}
+            \item Unbounded Variation
+                \begin{itemize}
+                    \item Length of distance $\rightarrow \infty$ in finite time $t$
+                    \item $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})| = \infty$
+
+                        Proof: $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})|$
+                        $= lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{t}{n})| = n \times \sqrt{\frac{2}{\pi} \frac{t}{n}} = \infty$
                 \end{itemize}
         \end{itemize}
 \end{itemize}
