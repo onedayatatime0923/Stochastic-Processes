@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.9.2)  30 MAR 2022 13:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.9.2)  31 MAR 2022 19:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -692,17 +692,17 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 35.
  (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-<image/1.png, id=51, 1264.725pt x 338.26375pt>
+<image/1.png, id=79, 1264.725pt x 338.26375pt>
 File: image/1.png Graphic file (type png)
 <use image/1.png>
 Package pdftex.def Info: image/1.png  used on input line 39.
 (pdftex.def)             Requested size: 426.79135pt x 114.14618pt.
-<image/2.png, id=53, 835.12pt x 163.61125pt>
+<image/2.png, id=81, 835.12pt x 163.61125pt>
 File: image/2.png Graphic file (type png)
 <use image/2.png>
 Package pdftex.def Info: image/2.png  used on input line 49.
 (pdftex.def)             Requested size: 426.79135pt x 83.61537pt.
-<image/3.png, id=54, 822.07124pt x 213.79875pt>
+<image/3.png, id=82, 822.07124pt x 213.79875pt>
 File: image/3.png Graphic file (type png)
 <use image/3.png>
 Package pdftex.def Info: image/3.png  used on input line 66.
@@ -710,39 +710,88 @@ Package pdftex.def Info: image/3.png  used on input line 66.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./image/1.png> <./image/2.png>]
-<image/4.png, id=75, 864.22874pt x 410.53375pt>
+<image/4.png, id=103, 864.22874pt x 410.53375pt>
 File: image/4.png Graphic file (type png)
 <use image/4.png>
 Package pdftex.def Info: image/4.png  used on input line 92.
 (pdftex.def)             Requested size: 426.79135pt x 202.73561pt.
-<image/5.png, id=76, 769.87625pt x 375.4025pt>
+<image/5.png, id=104, 769.87625pt x 375.4025pt>
 File: image/5.png Graphic file (type png)
 <use image/5.png>
 Package pdftex.def Info: image/5.png  used on input line 110.
 (pdftex.def)             Requested size: 426.79135pt x 208.116pt.
- [2 <./image/3.png> <./image/4.png>] [3 <./image/5.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
+ [2 <./image/3.png> <./image/4.png>]
+<image/6.png, id=115, 1143.27126pt x 272.01625pt>
+File: image/6.png Graphic file (type png)
+<use image/6.png>
+Package pdftex.def Info: image/6.png  used on input line 126.
+(pdftex.def)             Requested size: 426.79135pt x 101.54512pt.
+<image/7.png, id=116, 1132.23pt x 133.49875pt>
+File: image/7.png Graphic file (type png)
+<use image/7.png>
+Package pdftex.def Info: image/7.png  used on input line 147.
+(pdftex.def)             Requested size: 426.79135pt x 50.32059pt.
+ [3 <./image/5.png> <./image/6.png>]
+<image/8.png, id=128, 1149.29375pt x 175.65625pt>
+File: image/8.png Graphic file (type png)
+<use image/8.png>
+Package pdftex.def Info: image/8.png  used on input line 161.
+(pdftex.def)             Requested size: 426.79135pt x 65.23033pt.
+<image/9.png, id=129, 1099.10625pt x 303.1325pt>
+File: image/9.png Graphic file (type png)
+<use image/9.png>
+Package pdftex.def Info: image/9.png  used on input line 178.
+(pdftex.def)             Requested size: 426.79135pt x 117.70778pt.
+ [4 <./image/7.png> <./image/8.png> <./image/9.png>]
+<image/10.png, id=140, 1105.12875pt x 191.71625pt>
+File: image/10.png Graphic file (type png)
+<use image/10.png>
+Package pdftex.def Info: image/10.png  used on input line 201.
+(pdftex.def)             Requested size: 426.79135pt x 74.03769pt.
+<image/11.png, id=141, 1211.52625pt x 569.12625pt>
+File: image/11.png Graphic file (type png)
+<use image/11.png>
+Package pdftex.def Info: image/11.png  used on input line 218.
+(pdftex.def)             Requested size: 426.79135pt x 200.4911pt.
+ [5 <./image/10.png> <./image/11.png>]
+<image/12.png, id=151, 1252.68pt x 316.18124pt>
+File: image/12.png Graphic file (type png)
+<use image/12.png>
+Package pdftex.def Info: image/12.png  used on input line 246.
+(pdftex.def)             Requested size: 426.79135pt x 107.72212pt.
+<image/code.png, id=152, 475.7775pt x 545.03625pt>
+File: image/code.png Graphic file (type png)
+<use image/code.png>
+Package pdftex.def Info: image/code.png  used on input line 260.
+(pdftex.def)             Requested size: 213.39568pt x 244.45734pt.
+<image/result.png, id=153, 306.14375pt x 51.19125pt>
+File: image/result.png Graphic file (type png)
+<use image/result.png>
+Package pdftex.def Info: image/result.png  used on input line 264.
+(pdftex.def)             Requested size: 213.39568pt x 35.68208pt.
+ [6 <./image/12.png> <./image/code.png>] [7 <./image/result.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 0C445C11D55D2836D41884682AE0087C;175.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
+(rerunfilecheck)             Checksum: 29205F1113FC00E9190B920C594A9EFC;426.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 268.
  ) 
 Here is how much of TeX's memory you used:
- 29935 strings out of 481239
- 715757 string characters out of 5920378
- 1123275 words of memory out of 5000000
- 44610 multiletter control sequences out of 15000+600000
- 544620 words of font info for 63 fonts, out of 8000000 for 9000
+ 30021 strings out of 481239
+ 716916 string characters out of 5920378
+ 1124275 words of memory out of 5000000
+ 44665 multiletter control sequences out of 15000+600000
+ 546154 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,7n,127p,725b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on main.pdf (3 pages, 1134513 bytes).
+ 73i,13n,127p,725b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
+Output written on main.pdf (7 pages, 1944707 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
- 174 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 241 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 275 words of extra memory for PDF output out of 10000 (max. 10000000)
 
