@@ -265,6 +265,11 @@
 
             \item $\rightarrow P[X=k] = \lim_{n\rightarrow \infty} \binom{n}{k}(\frac{\lambda}{n})^k(\frac{n-\lambda}{n})^{n-k} = \frac{\lambda^k}{k!}(1-\frac{\lambda}{n})^{n} = \frac{\lambda^k}{k!}\exp(-\lambda)$
         \end{itemize}
+    \item Gaussian: $N(m, \sigma^2)$
+        \begin{itemize}
+            \item $f_X[x] = \frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(x-m)^2}{2\sigma^2}}, \forall x \in \mathbb{R}$
+            \item $\mathbb{E}[e^{cX}] = e^{cm + \frac{c^2\sigma^2}{2}}$
+        \end{itemize}
     \item Erlang:
 
         $f_X(x) = \frac{\lambda^n x^{n-1} e^{-\lambda x}}{(n-1)!}, \forall x \in \mathbb{R}$
@@ -1101,73 +1106,204 @@
 
 \section{Brownian Motion}
 \begin{itemize}
-    \item Interpretation: generalize discrete time and space to continuous time and space
+    \item Standard Brownian Motion
         \begin{itemize}
-            \item $S_t = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
-            \item let $\delta_x = \sqrt{\delta_t}$ and $\delta_x \rightarrow 0$
-            \item $\mathbb{E}[S_t] = 0$
-            \item $\mathit{Var}(S_t) = \delta_x^2 \frac{t}{\delta_t} = t$
-        \end{itemize}
-    \item Definition:
-        \begin{itemize}
-            \item $X(0) = 0$
-            \item $X(t) \sim N(0, \sigma^2 = t)$
-            \item $X(t)$ has independent, stationary increment
+            \item Interpretation: generalize discrete time and space of random walk to be in continuous time and space
                 \begin{itemize}
-                    \item independent: $X(t_{i_2}) - X(t_{i_1})$ and $X(t_{i_1}) - X(t_{i_0})$ are independent
-                    \item stationary: $X(s + t) - X(t) = X(s)$
-                \end{itemize}
-        \end{itemize}
-    \item Property
-        \begin{itemize}
-            \item Distribution self-similarity
-                \begin{itemize}
-                    \item $X(t) \sim N(0, t)$
-                    \item $\sqrt{k}X(\frac{t}{k}) \sim N(0, t)$
-                \end{itemize}
-            \item Nowhere Differentiable
-                \begin{itemize}
-                    \item With probability 1, $X(t)$ is nowhere differentiable
-                    \item $\lim_{\delta_t \rightarrow 0} \frac{X(t+\delta_t) - X(t)}{\delta_t} = \lim_{\delta_t \rightarrow 0} \frac{N(0, \delta_t}{\delta_t} = \lim_{\delta_t \rightarrow 0} N(0, \frac{1}{\delta_t})$
-                \end{itemize}
-            \item Unbounded Variation
-                \begin{itemize}
-                    \item Length of distance $\rightarrow \infty$ in finite time $t$
-                    \item $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})| = \infty$
-
-                        Proof: $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})|$
-                        $= lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{t}{n})| = n \times \sqrt{\frac{2}{\pi} \frac{t}{n}} = \infty$
-                \end{itemize}
-            \item Hitting Time
-                \begin{itemize}
-                    \item The monkey at the cliff
+                    \item $S_t = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
+                    \item let $\delta_x = \sqrt{\delta_t}$ and $\delta_x \rightarrow 0$
+                    \item $\mathbb{E}[S_t] = 0$
+                    \item $\mathit{Var}(S_t) = t$
                         \begin{itemize}
-                            \item $\tau = \min\{t \geq 0: X(t) = B\}$
-                            \item $P[\tau < \infty] = 1$
-
-                                Prove by discretization $X(t) = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
-                            \item $\mathbb{E}[\tau] = \infty$
-
-                                Prove by discretization $X(t) = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
-                        \end{itemize}
-                    \item The Gambler's Ruin
-                        \begin{itemize}
-                            \item $\tau = \min\{t \geq 0: X(t) \in \{-A, B\}\}$
-                            \item $P[X(\tau) = B] = \frac{A}{A+B}$
-                                Prove By discretization $X(t) = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i) \rightarrow$
-                                $P[X(\tau) = B] = \frac{\frac{A}{\delta_x}}{\frac{A}{\delta_x} + \frac{B}{\delta_x}}$
-                            \item $\mathbb{E}[\tau] = AB$
-
-                                Prove By discretization $X(t) = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i) \rightarrow$
-                                $\mathbb{E}[\tau] = \delta_t \frac{A}{\delta_x} \frac{B}{\delta_x}$
+                            \item $\mathit{Var}(S_t) = \delta_x^2 \frac{t}{\delta_t} = t$
                         \end{itemize}
                 \end{itemize}
-            \item Diffusion Equation
+            \item Definition:
                 \begin{itemize}
-                    \item Forward Diffusion Equation: $\frac{\partial f}{\partial t} = \frac{1}{2} \frac{\partial^2 f}{\partial x^2}$
-                    \item Backward Diffusion Equation: $\frac{\partial f}{\partial t} = \frac{-1}{2} \frac{\partial^2 f}{\partial x^2}$
-                    \item $f(X(t_2) = x| X(t_1) = k)$ satisfies Forward Diffusion equation
-                    \item $f(X(t_2) = k| X(t_1) = x)$ satisfies Backward Diffusion equation
+                    \item $X(0) = 0$
+                    \item $X(t) \sim N(0, \sigma^2 = t)$
+                    \item $X(t)$ has independent, stationary increment
+                        \begin{itemize}
+                            \item independent: $X(t_{i_2}) - X(t_{i_1})$ and $X(t_{i_1}) - X(t_{i_0})$ are independent
+                            \item stationary: $X(s + t) - X(t) = X(s)$
+                        \end{itemize}
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item Distribution self-similarity
+                        \begin{itemize}
+                            \item $X(t) \sim N(0, t)$
+                            \item $\sqrt{k}X(\frac{t}{k}) \sim N(0, t)$
+                        \end{itemize}
+                    \item Nowhere Differentiable
+                        \begin{itemize}
+                            \item With probability 1, $X(t)$ is nowhere differentiable
+                            \item $\lim_{\delta_t \rightarrow 0} \frac{X(t+\delta_t) - X(t)}{\delta_t} = \lim_{\delta_t \rightarrow 0} \frac{N(0, \delta_t}{\delta_t} = \lim_{\delta_t \rightarrow 0} N(0, \frac{1}{\delta_t})$
+                        \end{itemize}
+                    \item Unbounded Variation
+                        \begin{itemize}
+                            \item Length of distance $\rightarrow \infty$ in finite time $t$
+                            \item $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})| = \infty$
+
+                                Proof: $\lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{jt}{n}) - X(\frac{(j-1)t}{n})|$
+                                $= lim_{n \rightarrow \infty} \sum_{j=1}^n |X(\frac{t}{n})| = n \times \sqrt{\frac{2}{\pi} \frac{t}{n}} = \infty$
+                        \end{itemize}
+                    \item Hitting Time
+
+                            The Gambler's Ruin
+                            \begin{itemize}
+                                \item $\tau = \min\{t \geq 0: X(t) \in \{-A, B\}\}$
+                                \item $P[X(\tau) = A] = \frac{B}{A+B}, P[X(\tau) = B] = \frac{A}{A+B}$
+
+                                    Prove by Martingales Stopping Theorem on $X(t)$:
+
+                                    $\rightarrow \mathbb{E}[X(t)] = P[X(\tau) = A]A + P[X(\tau) = B]B = 0$
+                                \item $\mathbb{E}[\tau] = AB$
+
+                                    Prove by Martingales Stopping Theorem on $X(t)^2 - t$:
+
+                                    $\rightarrow \mathbb{E}[X(t)^2 - t] = P[X(\tau) = A]A^2 + P[X(\tau) = B]B^2 - \mathbb{E}[\tau] = 0$
+                            \end{itemize}
+                            The monkey at the cliff
+                            \begin{itemize}
+                                \item $\tau = \min\{t \geq 0: X(t) = B\}$
+                                \item $P[\tau < \infty] = 1$
+
+                                    Prove by let $A = -\infty$ in The Gambler's Ruin
+                                \item $P[\tau \leq t] = 2 P[X(\tau) \geq B]$
+
+                                    $P[\tau \leq t] = P[\tau \leq t \text{ and } X(t) \geq B] + P[\tau \leq t \text{ and } X(t) < B]$
+
+                                    $= 2 P[\tau \leq t \text{ and } X(t) \geq B]$
+                                    $= 2 P[X(t) \geq B]$
+                                \item $\mathbb{E}[\tau] = \infty$
+
+                                    Prove by let $A = -\infty$ in The Gambler's Ruin
+                            \end{itemize}
+                    \item Diffusion Equation
+                        \begin{itemize}
+                            \item Forward Diffusion Equation: $\frac{\partial f}{\partial t} = \frac{1}{2} \frac{\partial^2 f}{\partial x^2}$
+                            \item Backward Diffusion Equation: $\frac{\partial f}{\partial t} = \frac{-1}{2} \frac{\partial^2 f}{\partial x^2}$
+                            \item $f(X(t_2) = x| X(t_1) = k)$ satisfies Forward Diffusion equation
+                            \item $f(X(t_2) = k| X(t_1) = x)$ satisfies Backward Diffusion equation
+                        \end{itemize}
+                    \item Martingales
+                        \begin{itemize}
+                            \item $X(t)$ is a martingale
+                            \item $X(t)^2 - t$ is a martingale
+                            \item $e^{cX(t) - \frac{c^2}{2}t}$ is a martingale
+                        \end{itemize}
+                    \item Zeros
+
+                        Definition: $P[X(t) = 0, t_0 < t < t_1] = \frac{2}{\pi} \cos^{-1}(\sqrt{\frac{t_0}{t_1}})$
+                        \begin{itemize}
+                            \item Prove by $P[X(t) = 0, t_0 < t < t_1] = \int_{-\infty}^{\infty} f_{X(t_0}(x_1) P[T_{-x} \leq t_1 - t_0] dx_1$
+                        \end{itemize}
+                        Property
+                        \begin{itemize}
+                            \item $P[X(t) = 0, 0 < t < t_1] = 1, \forall t_1 > 0$
+                            \item $P[\mathit{inf}\{t > 0: X(t)=0\} = 0] = 1$
+                            \item $P[\text{ there are infinitely many zeros in }[0, t]] = 1$
+                        \end{itemize}
+                \end{itemize}
+            \item Brownian Bridge
+                \begin{itemize}
+                    \item Definition: the distribution of $t_1$ given the result of the future $X(t_2)$
+                    \item Property
+
+
+                        $f_{X(t_1)|X(t_2)}(x_1, x_2) = \frac{f_{X(t_1), X(t_2)}(x_1, x_2)}{f_{X(t_2)}(x_2)} \sim N(\frac{t_1}{t_2}x_2, \frac{t_1(t_2 - t_1)}{t_2})$
+                        \begin{itemize}
+                            \item let $s = t_2 - t_1$
+                            \item $f_{X(t_1)|X(t_2)}(x_1, x_2) = \frac{f_{X(t_1), X(t_2)}(x_1, x_2)}{f_{X(t_2)}(x_2)}$
+
+                                $= \frac{f_{X(t_1), X(s)}(x_1, x_2 - x_1)}{f_{X(t_2)}(x_2)}$ (By transformation of 2-D random variables)
+
+                                $= \frac{f_{X(t_1)}(x_1) f_{X(s)}(x_2 - x_1)}{f_{X(t_2)}(x_2)}$
+                                $= \frac{\frac{1}{\sqrt{2\pi t_1}}e^{\frac{-x_1^2}{2t_1}} \frac{1}{\sqrt{2\pi(t_2 - t_1)}}e^{\frac{-(x_2-x_1)^2}{2(t_2 - t_1)}}}{\frac{1}{\sqrt{2\pi t_2}}e^{\frac{-x_2^2}{2t_2}}}$
+
+                                $= \frac{1}{\sqrt{2\pi \frac{t_1(t_2 - t_1)}{t_2}}}e^{\frac{-(x_1 - \frac{t_1}{t_2}x_2)^2}{2\frac{t_1(t_2 - t_1)}{t_2}}} \rightarrow X(t_1) - \frac{t_1}{t_2}X(t_2) \sim N(0, \frac{t_1(t_2 - t_1)}{t_2})$
+                            \item $\mathbb{E}[X(t_1)|X(t_2)] = \frac{t_1}{t_2}X(t_2)$
+                            \item $\mathit{Var}(X(t_1)|X(t_2)) = \frac{t_1(t_2 - t_1)}{t_2}$
+                            \item $Y(t_1) = X(t_1) - \frac{t_1}{t_2} X(t_2)$ share the same distribution as $X(t_1) |X(t_2) = 0$
+                        \end{itemize}
+                        $\mathit{Cov}(X(t_1), X(t_2)|X(t_3)) = \frac{t_1(t_3-t_2)}{t_3}$
+                        \begin{itemize}
+                            \item $\mathit{Cov}(X(t_1), X(t_2)|X(t_3))$
+
+                                $= \mathbb{E}[X(t_1)X(t_2)|X(t_3)] - \mathbb{E}[X(t_1)|X(t_3)] \times \mathbb{E}[X(t_2)|X(t_3)]$
+
+                                $= \mathbb{E}[X(t_1)^2 + X(t_1)(X(t_2)-X(t_1))|X(t_3)] - \frac{t_1 t_2}{t_3^2} X(t_3)^2$
+                                % $= \frac{t_1^2}{t_3^2}X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3} + \mathbb{E}[X(t_1)(X(t_2)-X(t_1))|X(t_3)] - \frac{t_1 t_2}{t_3^2} X(t_3)^2$
+
+                                $= \mathbb{E}[X(t_1)(X(t_2)-X(t_1))|X(t_3)] + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
+
+                                {\tiny
+                                $= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi \frac{t_1(t_3 - t_1)}{t_3}}}e^{\frac{-(x_1 - \frac{t_1}{t_3}X(3))^2}{2\frac{t_1(t_3 - t_1)}{t_3}}} \mathbb{E}[x_1(X(t_2)-x_1)|X(t_3), X(t_1) = x_1] dx_1 + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
+                                }
+
+                                $= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi \frac{t_1(t_3 - t_1)}{t_3}}}e^{\frac{-(x_1 - \frac{t_1}{t_3}X(3))^2}{2\frac{t_1(t_3 - t_1)}{t_3}}} x_1(-x_1 + X(3))\frac{t_2-t_1}{t_3-t_1} dx_1 + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
+
+                                $= \frac{t_1(t_2 - t_1)}{t_3^2}X(t_3)^2 - \frac{t_1(t_2-t_1)}{t_3} + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
+
+
+                                $= \frac{t_1(t_3-t_2)}{t_3}$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+    \item Brownian Motion with drift
+        \begin{itemize}
+            \item Interpretation: generalize discrete time and space of biased random walk to be in continuous time and space
+                \begin{itemize}
+                    \item $X_i = \left\{ \begin{array}{ll}
+                                1 & \text{with probability } p \\ 
+                                -1 & \text{with probability } 1-p \\ 
+                            \end{array} \right.$
+                    \item $S_t = \delta_x (\sum_{i=0}^{\frac{t}{\delta_t}} X_i)$
+                    \item let $\delta_x = \sqrt{\delta_t}$, $p = \frac{1 + \mu \sqrt{\delta_t}}{2}$, and $\delta_x \rightarrow 0$
+                    \item $\mathbb{E}[S_t] = \mu t$
+                        \begin{itemize}
+                            \item $\mathbb{E}[S_t] = \delta_x \frac{t}{\delta_t} (2p-1) = \mu t$
+                        \end{itemize}
+                    \item $\mathit{Var}(S_t) = t$
+                        \begin{itemize}
+                            \item $\mathit{Var}(S_t) = \delta_x^2 \frac{t}{\delta_t} (1-(2p-1)^2) = t$
+                        \end{itemize}
+                \end{itemize}
+            \item Definition:
+                \begin{itemize}
+                    \item $X(t)$ is Standard Brownian Motion
+                    \item $Y(t) = X(t) + \mu t$
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item Hitting Time
+
+                            The Gambler's Ruin
+                            \begin{itemize}
+                                \item $\tau = \min\{t \geq 0: Y(t) \in \{-A, B\}\}$
+                                \item $P[Y(t) = A ] = \frac{e^{-2\mu B} - 1}{e^{-2\mu B} - e^{2\mu A}}, P[Y(t) = B ] = \frac{1-e^{2\mu A}}{e^{-2\mu B} - e^{2\mu A}}$
+
+                                    Prove by Martingales Stopping Theorem on $e^{cX(t) - \frac{c^2}{2}t}$ and $c = -2\mu$:
+
+                                    $\rightarrow \mathbb{E}[e^{c X(t) - \frac{c^2}{2}t}] = \mathbb{E}[e^{-2\mu Y(t)}] = 1$
+
+                                \item $\mathbb{E}[\tau] = \frac{1}{\mu}(P[Y(t) = B] \times (A + B) - A)$
+
+                                    Prove by Martingales Stopping Theorem on $X(t)$:
+
+                                    $\rightarrow \mathbb{E}[X(t)] = P[Y(t) = B] \mathbb{E}[B- \mu t|Y(t) = B] + P[Y(t) = A] \mathbb{E}[- A - \mu t|Y(t) = A] = 0$
+                            \end{itemize}
+                            The monkey at the cliff
+                            \begin{itemize}
+                                \item $\tau = \min\{t \geq 0: X(t) = B\}$
+                                \item $P[\tau < \infty] = \left\{ \begin{array}{cc}
+                                            e^{2\mu B} & \text{if } \mu < 0 \\ 
+                                            1 & \text{if } \mu \geq 0 \\ 
+                                \end{array}\right.$
+
+                                    Prove by let $A = -\infty$ in The Gambler's Ruin
+                            \end{itemize}
                 \end{itemize}
         \end{itemize}
     \item Gaussian Process
@@ -1182,54 +1318,60 @@
                 \end{itemize}
             \item Property
                 \begin{itemize}
-                    \item Brownian Motion is a Gaussian Process with $\mathbb{E}[X(t)] = 0, \mathit{Cov}(X(s), X(t)) = \min\{s, t\}$
+                    \item Standard Brownian Motion is a Gaussian Process with $\mathbb{E}[X(t)] = 0, \mathit{Cov}(X(s), X(t)) = \min\{s, t\}$
                         \begin{itemize}
                             \item $\mathit{Cov}(X(s), X(t)) = \min(s, t)$ (by $X(t) = X(s) + X(t-s)$ if $t > s$)
                         \end{itemize}
                 \end{itemize}
         \end{itemize}
-    \item Brownian Bridge
+    \item Geometric Brownian Motion
         \begin{itemize}
-            \item Definition: the distribution of $t_1$ given the result of the future $X(t_2)$
-            \item Property
-
-
-                $f_{X(t_1)|X(t_2)}(x_1, x_2) = \frac{f_{X(t_1), X(t_2)}(x_1, x_2)}{f_{X(t_2)}(x_2)} \sim N(\frac{t_1}{t_2}x_2, \frac{t_1(t_2 - t_1)}{t_2})$
+            \item Definition:
                 \begin{itemize}
-                    \item let $s = t_2 - t_1$
-                    \item $f_{X(t_1)|X(t_2)}(x_1, x_2) = \frac{f_{X(t_1), X(t_2)}(x_1, x_2)}{f_{X(t_2)}(x_2)}$
-
-                        $= \frac{f_{X(t_1), X(s)}(x_1, x_2 - x_1)}{f_{X(t_2)}(x_2)}$ (By transformation of 2-D random variables)
-
-                        $= \frac{f_{X(t_1)}(x_1) f_{X(s)}(x_2 - x_1)}{f_{X(t_2)}(x_2)}$
-                        $= \frac{\frac{1}{\sqrt{2\pi t_1}}e^{\frac{-x_1^2}{2t_1}} \frac{1}{\sqrt{2\pi(t_2 - t_1)}}e^{\frac{-(x_2-x_1)^2}{2(t_2 - t_1)}}}{\frac{1}{\sqrt{2\pi t_2}}e^{\frac{-x_2^2}{2t_2}}}$
-
-                        $= \frac{1}{\sqrt{2\pi \frac{t_1(t_2 - t_1)}{t_2}}}e^{\frac{-(x_1 - \frac{t_1}{t_2}x_2)^2}{2\frac{t_1(t_2 - t_1)}{t_2}}} \rightarrow X(t_1) - \frac{t_1}{t_2}X(t_2) \sim N(0, \frac{t_1(t_2 - t_1)}{t_2})$
-                    \item $\mathbb{E}[X(t_1)|X(t_2)] = \frac{t_1}{t_2}X(t_2)$
-                    \item $\mathit{Var}(X(t_1)|X(t_2)) = \frac{t_1(t_2 - t_1)}{t_2}$
-                    \item $Y(t_1) = X(t_1) - \frac{t_1}{t_2} X(t_2)$ share the same distribution as $X(t_1) |X(t_2) = 0$
+                    \item $Y(t) = e^{\sigma X(t)}$
                 \end{itemize}
-                $\mathit{Cov}(X(t_1), X(t_2)|X(t_3)) = \frac{t_1(t_3-t_2)}{t_3}$
+            \item Property:
                 \begin{itemize}
-                    \item  {\small
-                        $\mathit{Cov}(X(t_1), X(t_2)|X(t_3))$
-
-                        $= \mathbb{E}[X(t_1)X(t_2)|X(t_3)] - \mathbb{E}[X(t_1)|X(t_3)] \times \mathbb{E}[X(t_2)|X(t_3)]$
-
-                        $= \mathbb{E}[X(t_1)^2 + X(t_1)(X(t_2)-X(t_1))|X(t_3)] - \frac{t_1 t_2}{t_3^2} X(t_3)^2$
-                        % $= \frac{t_1^2}{t_3^2}X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3} + \mathbb{E}[X(t_1)(X(t_2)-X(t_1))|X(t_3)] - \frac{t_1 t_2}{t_3^2} X(t_3)^2$
-
-                        $= \mathbb{E}[X(t_1)(X(t_2)-X(t_1))|X(t_3)] + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
-
-                        $= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi \frac{t_1(t_3 - t_1)}{t_3}}}e^{\frac{-(x_1 - \frac{t_1}{t_3}X(3))^2}{2\frac{t_1(t_3 - t_1)}{t_3}}} \mathbb{E}[x_1(X(t_2)-x_1)|X(t_3), X(t_1) = x_1] dx_1 + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
-
-                        $= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi \frac{t_1(t_3 - t_1)}{t_3}}}e^{\frac{-(x_1 - \frac{t_1}{t_3}X(3))^2}{2\frac{t_1(t_3 - t_1)}{t_3}}} x_1(-x_1 + X(3))\frac{t_2-t_1}{t_3-t_1} dx_1 + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
-
-                        $= \frac{t_1(t_2 - t_1)}{t_3^2}X(t_3)^2 - \frac{t_1(t_2-t_1)}{t_3} + \frac{t_1 (t_1 - t_2)}{t_3^2} X(t_3)^2 + \frac{t_1(t_3- t_1)}{t_3}$
-
-
-                        $= \frac{t_1(t_3-t_2)}{t_3}$
-                    }
+                    \item $\mathbb{E}[Y(t)] = e^{\frac{\sigma^2 t}{2}}$
+                    \item $\mathit{Var}[Y(t)] = e^{\sigma^2 t}$
+                \end{itemize}
+        \end{itemize}
+    \item Brownian Motion reflected at the origin
+        \begin{itemize}
+            \item Definition:
+                \begin{itemize}
+                    \item $Z(t) = |X(t)|$
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item $P[Z(t) \geq x] = \frac{2}{\sqrt{2 \pi t}} e^{\frac{-x^2}{2t}}$
+                        \begin{itemize}
+                            \item same distribution as Maximum Brownian Motion
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+    \item Maximum Brownian Motion
+        \begin{itemize}
+            \item Definition:
+                \begin{itemize}
+                    \item $Z(t) = \max_{0 \leq s \leq t} X(t)$
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item $P[Z(t) \geq x] = \frac{2}{\sqrt{2 \pi t}} e^{\frac{-x^2}{2t}}$
+                        \begin{itemize}
+                            \item $P[Z(t) \geq x] = P[T_x \leq t] = \frac{2}{\sqrt{2 \pi t}} e^{\frac{-x^2}{2t}}$
+                            \item same distribution as Brownian Motion reflected at the origin
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+    \item Tricks
+        \begin{itemize}
+            \item Creat $Y_1, Y_2 \sim N(0, 1)$ and $\mathit{Cov}(Y_1, Y_2) = \cos \theta$
+                \begin{itemize}
+                    \item $X_1, X_2 \sim N(0, 1)$ and independent
+                    \item $Y_1 = X_1$
+                    \item $Y_2 = \cos \theta \times X_1 + \sin \theta \times X_2$
                 \end{itemize}
         \end{itemize}
 \end{itemize}
