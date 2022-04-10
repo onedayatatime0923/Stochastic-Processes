@@ -640,11 +640,15 @@
                             Proof: $\lim_{n \rightarrow \infty} p_j^{nd} = \lim_{n \rightarrow \infty} \mathbb{E}[\text{\# events at $nd$}]$
                         \end{itemize}
                 \end{itemize}
-                Theorem of an irreducible, aperiodic Markov Chain
+                Theorem of an finite irreducible, aperiodic Markov Chain
                 \begin{itemize}
                     \item All states have $\mu_{ii} < \infty$ and $p_i = \frac{1}{\mu_{ii}}$ is the unique stationary distribution
                 \end{itemize}
-                $p$ can be calculated as the eigenvector corresponds to eigenvalue $1$ of $P^T$
+                Property
+                \begin{itemize}
+                    \item $p$ can be calculated as the eigenvector corresponds to eigenvalue $1$ of $P^T$
+                    \item $p$ satisfy $p_i \sum_{j \not = i} R_{ij} = \sum_{j \not = i} p_j R_{ji}$: sum of out-distribution equals sum of in-distribution
+                \end{itemize}
             \item Detailed Balance
 
                 Definition:
@@ -854,11 +858,15 @@
                     \item $\frac{d p P(t)}{dt} = p \frac{d P(t)}{dt} = pR P(t) = 0$
                     \item $p$ is the eigenvector of eigenvalue 0 of $R$, then $p$ is the eigenvector of eigenvalue 1 of $e^{Rt} \rightarrow$ the distribution would not change, if start with $p$
                 \end{itemize}
-                Trick:
+                Property
                 \begin{itemize}
-                    \item cluster states such that every state in the cluster share the same $R_{ij}$ to calculate the stationary distribution of the cluster
-                    \item assume distribution is independent of the cluster and check $p R = 0$ after the calculation
+                    \item $\pi_i \sum_{j \not = i} R_{ij} = \sum_{j \not = i} \pi_j R_{ji}$: sum of out-distribution equals sum of in-distribution
                 \end{itemize}
+                Trick:
+                \begin{enumerate}
+                    \item cluster states such that every state in the cluster share the same $R_{ij}$ to use property 1
+                    \item assume distribution is independent of the cluster and check $p R = 0$ after the calculation
+                \end{enumerate}
             \item Poisson process is a special case of Continuous Markov Chain
                 \begin{itemize}
                     \item $v_i = \lambda, \forall i$
@@ -867,6 +875,17 @@
             \item Exploding process: only if $v_i \rightarrow \infty$
                 \begin{itemize}
                     \item exploding process: traverse infinite states in finite time
+                \end{itemize}
+        \end{itemize}
+    \item Example
+        \begin{itemize}
+            \item Queue
+            \begin{figure} [H]
+                \includegraphics[width=0.3\linewidth, center]{image/queue.png}
+            \end{figure}
+                \begin{itemize}
+                    \item Stationary Distribution $\pi: \pi_i = (1-\frac{\lambda}{\mu})(\frac{\lambda}{\mu})^i$
+                    \item For queue with feedback: find the stationary increment frequency $\lambda$ and process frequency $\mu$ then stationary distribution is $\pi: \pi_i = (1-\frac{\lambda}{\mu})(\frac{\lambda}{\mu})^i$
                 \end{itemize}
         \end{itemize}
 \end{itemize}
