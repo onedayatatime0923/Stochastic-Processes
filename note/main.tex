@@ -22,6 +22,7 @@
 \usepackage{subcaption}
 
 \usepackage{tikz}
+\usetikzlibrary{arrows}
 \tikzset{
     vertex/.style={circle,draw,minimum size=1.5em},
     edge/.style={->,> = latex'}
@@ -290,8 +291,15 @@
 
 \section{Stochastic Processes}
 \begin{itemize}
-    \item Stochastic Process: a collection of random variable
+    \item Stochastic Process: a collection of random variable $X(t)$
 
+        General Stochastic Process
+        \begin{itemize}
+            \item Central Limit Theorem
+                \begin{itemize}
+                    \item Sum of i.i.d. stochastic process converge to Gaussian Process
+                \end{itemize}
+        \end{itemize}
         Arrival Process: a sequence of arriving event in continuous time
 \begin{figure} [H]
     \includegraphics[width=0.5\linewidth, center]{image/arrival_process.png}
@@ -1403,5 +1411,133 @@
 \end{itemize}
 
 \section{Ornstein-Uhlenbeck Process}
+\begin{itemize}
+    \item Miscellany
+        \begin{itemize}
+            \item Given a continuous function $f(x)$ and a standard Brownian motion $B(t)$
+            \item $\int_0^t f(x) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+            \item Property
+                \begin{itemize}
+                    \item $\int_0^t f(x) dB(x)$ exists (limit converges)
+                    \item The integral is normally distributed
+
+                        Proof: the integral is the sum of independent Gaussian random variable
+                    \item $\mathbb{E}[\int_0^t f(x) dB(x)] = 0$
+                    \item $\mathit{Var}[\int_0^t f(x) dB(x)] = \int_0^t f(x)^2 dx$
+
+                        Proof: 
+                        \begin{itemize}
+                            \item $\mathit{Var}(\int_0^t f(t) dB(t)) = \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Var}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+
+                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)^2 t = \int_0^t f(x)^2 dx$
+                        \end{itemize}
+                    \item $\int_0^t f(x) dB(x)$ and $\int_0^t g(x) dB(x)$ are jointly normal and
+
+                        $\mathit{Cov}(\int_0^t f(x) dB(x), \int_0^t g(x) dB(x) = \int_0^t f(x)g(x) dx$
+
+                        Proof: 
+                        \begin{itemize}
+                            \item $\mathit{Cov}(\int_0^t f(t) dB(t), \int_0^t g(t) dB(t))$
+
+                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Cov}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)), g(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+
+                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)g(\frac{i}{n}t) t = \int_0^t f(x)g(x) dx$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+    \item Stationary Ornstein-Uhlenbeck Process $V_s(t)$
+        \begin{itemize}
+            \item Interpretation
+                \begin{itemize}
+                    \item Given a Continuous Markov Chain
+                        \begin{tikzpicture}
+                        % vertices
+                            \node[vertex] (1) at (0,0) {$X(t) = 1$};
+                            \node[vertex] (2) at (3,0) {$X(t) = -1$};
+                        %edges
+                        \draw[edge] (1.337) -- (2.200) node[midway, below] {$\lambda$};
+                        \draw[edge] (2.160) -- (1.23) node[midway, above] {$\lambda$};
+                        \end{tikzpicture}
+                    \item $P[X(t_2) = k | X(t_1) = k] = P[\text{even \# of transitions in } (t_1, t_2]] = e^{-\lambda (t_2 - t_1)} \sum_{i = 0}^\infty \frac{(\lambda (t_2 - t_1))^{2j}}{(2j)!}$
+
+                        $= e^{-\lambda (t_2 - t_1)}\frac{e^{\lambda (t_2 - t_1)} + e^{-\lambda (t_2 - t_1)}}{2} = \frac{1 + e^{-2\lambda (t_2 - t_1)}}{2}$
+                    \item $\mathit{Cov}(X(t_1), X(t_2)) = \mathbb{E}[X(t_1)X(t_2)] = P[X(t_2) == X(t_1)] - P[X(t_2) \not = X(t_1)] = e^{-2\lambda (t_2 - t_1)}$
+                    \item $N(t) = \lim_{n \rightarrow \infty} \frac{1}{\sqrt{n}} \sum_{i=1}^n X_i(t)$
+                    \item By Central limit Theorem for stochastic process $\rightarrow N(t)$ is a Gaussian Process
+                        \begin{itemize}
+                            \item $\mathbb{E}[N(t)] = 0$
+                            \item $\mathit{Cov}(N(t_1), N(t_2)) = \lim_{n \rightarrow \infty} \frac{1}{n} \mathit{Cov}(\sum_{i=1}^n X_i(t_1), \sum_{i=1}^n X_i(t_2)) = e^{-2\lambda (t_2 - t_1)}$
+                        \end{itemize}
+                    \item $N(t)$ is a Stationary Ornstein-Uhlenbeck Process with $\beta = 2 \lambda$ and $\sigma^2 = 2 \beta$
+                \end{itemize}
+            \item Definition
+                \begin{itemize}
+                    \item $V_s(t) = \frac{\sigma e^{-\beta t}}{\sqrt{2\beta }} B(e^{2\beta t})$, where $B(t)$ is a Brownian motion
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item Expectation and Covariance
+                        \begin{itemize}
+                            \item $\mathbb{E}[V_s(t)] = 0$
+                            \item $\mathit{Cov}(V_s(t_1), V_s(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)}$
+
+                                Proof: $\mathit{Cov}(V_s(t_1), V_s(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_1 + t_2)} e^{2\beta t_1}$
+                                $= \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)}$
+                            \item $\mathit{Var}(V_s(t)) = \frac{\sigma^2}{2\beta}$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+    \item Ornstein-Uhlenbeck Process $V(t)$
+        \begin{itemize}
+            \item Interpretation
+            \item Definition
+                \begin{enumerate}
+                    \item $V(t) = V(0) e^{-\beta t} + \frac{\sigma e^{-\beta t}}{\sqrt{2\beta }} B(e^{2\beta t} - 1)$, where $B(t)$ is a Brownian motion
+                    \item $V(t) = V(0) e^{-\beta t} + \sigma \int_{u=0}^t e^{-\beta (t-u)} d B(u)$, where $B(t)$ is a Brownian motion
+                    \item $dV(t) = -\beta V(t) dt + \sigma d B(t)$, where $B(t)$ is a Brownian motion
+                \end{enumerate}
+            \item Property
+                \begin{itemize}
+                    \item Stationary and Markovian: $V(t_1 + t_2) = V(t_1) e^{-\beta t_2} + \frac{\sigma e^{-\beta t_2}}{\sqrt{2\beta }} B(e^{2\beta t_2} - 1)$
+
+                        Proof
+                        \begin{itemize}
+                            \item $V(t_1 + t_2)$
+                                $= V(0) e^{-\beta (t_1 + t_2)} + \frac{\sigma e^{-\beta (t_1 + t_2)}}{\sqrt{2\beta }} B(e^{2\beta (t_1 + t_2)} - 1)$
+
+                                $= V(t_1) e^{-\beta t_2} + \frac{\sigma e^{-\beta (t_1 + t_2)}}{\sqrt{2\beta }} [B(e^{2\beta (t_1+t_2)} - 1) - B(e^{2\beta t_1} - 1)]$
+
+                                $= V(t_1) e^{-\beta t_2} + \frac{\sigma e^{-\beta t_2}}{\sqrt{2\beta }} B(e^{2\beta (t_2)} - 1)$
+                        \end{itemize}
+                    \item Increment
+                        \begin{itemize}
+                            \item $\mathbb{E}[V(t_2) - V(t_1)|V(t_1)] = V(t_1) (e^{-\beta (t_2 - t_1)} - 1)$
+
+                                Proof: $\mathbb{E}[V(t_2) - V(t_1)|V(t_1)]$
+
+                                $= \mathbb{E}[V(t_1) e^{-\beta (t_2 - t_1)} + \frac{\sigma e^{-\beta (t_2 - t_1)}}{\sqrt{2\beta }} B(e^{2\beta ((t_2 - t_1))} - 1) - V(t_1) | V(t_1)]$
+                                $= V(t_1) (e^{-\beta (t_2 - t_1)} - 1)$
+                            \item $\mathit{Var}(V(t_2) - V(t_1)|V(t_1)) = \frac{\sigma^2}{2\beta} (1 - e^{-2\beta (t_2 - t_1)})$
+
+                                Proof: $\mathit{Var}(V(t_2) - V(t_1)|V(t_1))$
+
+                                $= \mathit{Var}(V(t_1) e^{-\beta (t_2 - t_1)} + \frac{\sigma e^{-\beta (t_2 - t_1)}}{\sqrt{2\beta }} B(e^{2\beta (t_2 - t_1)} - 1) - V(t_1) | V(t_1))$
+
+                                $= \frac{\sigma^2 e^{-2\beta (t_2 - t_1)}}{2\beta} (e^{2\beta (t_2 - t_1)} - 1)$
+                                $= \frac{\sigma^2}{2\beta} (1 - e^{-2\beta (t_2 - t_1)})$
+                        \end{itemize}
+                    \item Expectation and Covariance
+                        \begin{itemize}
+                            \item $\mathbb{E}[V(t)] = V(0)e^{-\beta t}$
+                            \item $\mathit{Cov}(V(t_1), V(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
+
+                                Proof: $\mathit{Cov}(V(t_1), V(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_1 + t_2)} (e^{2\beta t_1} - 1)$
+
+                                $= \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
+                            \item $\mathit{Var}(V(t)) = \frac{\sigma^2}{2\beta} (1 - e^{-2\beta t})$
+                        \end{itemize}
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
 
 \end{document}
