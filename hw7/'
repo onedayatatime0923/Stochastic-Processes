@@ -120,58 +120,7 @@
     \begin{figure} [H]
         \includegraphics[width=1\linewidth]{image/4.png}
     \end{figure}
-    \item (a)
-        \begin{itemize}
-            \item $\int_0^t B(u) du = \lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i}{n}t) \frac{1}{n}$
-            \item $\mathbb{E}[\int_0^t B(u) du] = \mathbb{E}[\lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i}{n}t) \frac{1}{n}] = 0$
-            \item $\mathit{Cov}(X(u), X(t))$
-                \begin{itemize}
-                    \item $\mathit{Var}(X(t)) = \mathit{Var}(\lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i}{n}t) \frac{1}{n}) = \lim_{n \rightarrow \infty} \frac{1}{n^2} \sum_{i=1}^n (2n + 1 -2i)\frac{it}{n}$
-
-                        $= \lim_{n \rightarrow \infty} \frac{1}{n^2} \frac{(2n+1)(n+1)t}{2} - \frac{(n+1)(2n+1)t}{3}$
-
-                        $= \lim_{n \rightarrow \infty} \frac{1}{n^2} \frac{(2n+1)(n+1)t}{6}$
-                        $= \frac{t}{3}$
-                    \item $\mathit{Cov}(\int_0^u B(s) ds, B(u)) = \mathit{Cov}(\lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i}{n}t) \frac{1}{n}, B(u))$
-
-                        $= \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i=1}^n \frac{it}{n} = \frac{t}{2}$
-                    \item Suppose $u \leq t$
-                    \item $\mathit{Cov}(X(u), X(t)) = \mathit{Cov}(\int_0^u B(s) ds, \int_0^t B(s) ds)$
-
-                        $= \mathit{Cov}(\int_0^u B(s) ds, \int_0^u B(s) ds) + \mathit{Cov}(\int_0^u B(s) ds, \int_u^t (B(s)-B(u)) ds$
-
-                        $+ \mathit{Cov}(\int_0^u B(s) ds, (t-u)B(u))$
-
-                        $= \frac{u}{3} + (t-u)\frac{u}{2}$
-                    \item $\mathit{Cov}(X(u), X(t)) = \frac{\min\{u, t\}}{3} + |t - u|\frac{\min\{u, t\}}{2}$
-                \end{itemize}
-        \end{itemize}
-    \item (b)
-        \begin{itemize}
-            \item $\int_0^t uB(u) du = \lim_{n \rightarrow \infty} \sum_{i=1}^n \frac{i}{n}t B(\frac{i}{n}t) \frac{1}{n}$
-            \item $\mathbb{E}[\int_0^t uB(u) du] = 0$
-            \item $\mathit{Cov}(X(u), X(t))$
-                \begin{itemize}
-                    \item $\mathit{Var}(X(t)) = \mathit{Var}(\lim_{n \rightarrow \infty} \sum_{i=1}^n \frac{i}{n}t B(\frac{i}{n}t) \frac{1}{n})$
-                        % $= \lim_{n \rightarrow \infty} \frac{1}{n^2} \sum_{i=1}^n (2n + 1 -2i)\frac{it}{n}$
-                        %
-                        % $= \lim_{n \rightarrow \infty} \frac{1}{n^2} \frac{(2n+1)(n+1)t}{2} - \frac{(n+1)(2n+1)t}{3}$
-                        %
-                        % $= \lim_{n \rightarrow \infty} \frac{1}{n^2} \frac{(2n+1)(n+1)t}{6}$
-                        % $= \frac{t}{3}$
-                    \item $\mathit{Cov}(\int_0^u sB(s) ds, B(u))$
-                        % $= \mathit{Cov}(\lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i}{n}t) \frac{1}{n}, B(u))$
-                        %
-                        % $= \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i=1}^n \frac{it}{n} = \frac{t}{2}$
-                    \item $\mathit{Cov}(X(u), X(t)) = \mathit{Cov}(\int_0^u sB(s) ds, \int_0^t sB(s) ds)$
-
-                        $= \mathit{Cov}(\int_0^u sB(s) ds, \int_0^u sB(s) ds) + \mathit{Cov}(\int_0^u sB(s) ds, \int_u^t s(B(s)-B(u)) ds$
-
-                        $+ \mathit{Cov}(\int_0^u sB(s) ds, \frac{t^2-u^2}{2}B(u))$
-
-                        % $= \frac{u}{3} + (t-u)\frac{u}{2}$
-                \end{itemize}
-        \end{itemize}
+    \item 
 \end{itemize}
 
 \end{document}
