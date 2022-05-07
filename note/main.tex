@@ -1410,41 +1410,262 @@
         \end{itemize}
 \end{itemize}
 
-\section{Ornstein-Uhlenbeck Process}
+\section{Stochastic Calculus}
 \begin{itemize}
-    \item Miscellany
+    \item Mischellany
         \begin{itemize}
-            \item Given a continuous function $f(x)$ and a standard Brownian motion $B(t)$
-            \item $\int_0^t f(x) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+            \item $\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2$ converge to $t$ in mean square
+
+                Proof
+                \begin{itemize}
+                    \item $\mathbb{E}[\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2] = t$
+                    \item $\mathit{Var}(\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2) = 0$
+
+                    $\mathit{Var}(\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2)$
+                    $= \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Var}((B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2)$
+
+                    $= \lim_{n \rightarrow \infty} \sum_{i=1}^n 2 \frac{t}{n}^2 = \frac{t^2}{n} = 0$
+                \end{itemize}
+        \end{itemize}
+    \item Given a continuous function $f(x)$, $g(x, B(x))$, and a standard Brownian motion $B(x)$
+    \item $\int_{x=0}^t f(x) dB(x)$
+
+        Definition
+        \begin{itemize}
+            \item $\int_{x=0}^t f(x) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+        \end{itemize}
+        Property
+        \begin{itemize}
+            \item $\int_{x=0}^t f(x) dB(x)$ exists (limit converges)
+            \item The integral is normally distributed
+
+                Proof:
+                \begin{itemize}
+                    \item the integral is the sum of independent Gaussian random variable
+                \end{itemize}
+            \item $\mathbb{E}[\int_{x=0}^t f(x) dB(x)] = 0$
+            \item $\mathit{Var}[\int_{x=0}^t f(x) dB(x)] = \int_0^t f(x)^2 dx$
+
+                Proof:
+                \begin{itemize}
+                    \item $\mathit{Var}(\int_{x=0}^t f(t) dB(t)) = \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Var}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+
+                        $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)^2 \frac{i}{n} = \int_0^t f(x)^2 dx$
+                \end{itemize}
+            \item $\int_{x=0}^{t_1} f(x) dB(x)$ and $\int_{x=0}^{t_2} g(x) dB(x)$ are jointly normal and
+
+                $\mathit{Cov}(\int_{x=0}^{t_1} f(x) dB(x), \int_{x=0}^{t_2} g(x) dB(x) = \int_0^{\min\{t_1, t_2\}} f(x)g(x) dx$
+
+                Proof:
+                \begin{itemize}
+                    \item Suppose $t = \min\{t_1, t_2\}$
+                    \item $\mathit{Cov}(\int_{x=0}^{t_1} f(x) dB(x), \int_{x=0}^{t_2} g(x) dB(x))$
+
+                        $= \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Cov}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)), g(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+
+                        $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)g(\frac{i}{n}t) \frac{i}{n} = \int_0^t f(x)g(x) dx$
+                \end{itemize}
+        \end{itemize}
+    \item $\int_{x=0}^t f'(x) B(x) dx$
+
+        Definition
+        \begin{itemize}
+            \item $\int_{x = 0}^t f'(x) B(x) dx = [f(x) B(x)]_{x=0}^t - \int_{x = 0}^t f(x) dB(x)$
+
+                Proof:
+                \begin{itemize}
+                    \item Use integration by part to integrate over $B(x)$
+                    \item $[f(x) B(x)]_{x=0}^t = \int_{x = 0}^t f(x) dB(x) + \int_{x = 0}^t B(x) df(x)$
+                \end{itemize}
+        \end{itemize}
+        Example
+        \begin{itemize}
+            \item $\int_{x = 0}^t B(x) dx = B(t)t - \int_{x=0}^t x dB(x) = \int_{x=0}^t (t-x) dB(x)$
+        \end{itemize}
+    \item $\int_{x=0}^t g(x, B(x)) dB(x)$
+
+        Definition
+        \begin{itemize}
+            \item $\tau_j \in [ \frac{i-1}{n}t, \frac{i}{n}t]$
+            \item $\int_{x=0}^t g(x, B(x)) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n g(\tau_j, B(\tau_j))(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+            \item Choice of $\tau_j$ will not converge unlike Riemann integral
+
+                check by simulation
+        \end{itemize}
+        It\^{o} Integral: left endpoint integral
+        \begin{itemize}
+            \item Definition
+                \begin{itemize}
+                    \item Condition: $\int_0^t \mathbb{E}[g(x, B(x))]^2 dx < \infty$
+                    \item $\tau_j = \frac{i-1}{n}t$
+                    \item $\int_{x=0}^t g(x, B(x)) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n g(\tau_j, B(\tau_j))(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+                \end{itemize}
+            \item Calculus
+                \begin{enumerate}
+                    \item By Definition
+                    \item By It\^{o}'s Lemma
+
+                        Concept
+                        \begin{itemize}
+                            \item $(d B(x))^2 = d x$
+                                \begin{itemize}
+                                    \item By $\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2$ converge to $t$ in mean square
+                                \end{itemize}
+                        \end{itemize}
+                        Equation
+                        \begin{enumerate}
+                            \item $d g(B(x)) = g'(B(x)) d B(x) + \frac{1}{2} g''(B(x)) dx$
+                                \begin{itemize}
+                                    \item $g(B(x + \delta_x)) - g(B(x)) = g'(B(x)) (B(x+\delta_x) - B(x)) + \frac{1}{2} g''(B(x)) (B(x+\delta_x) - B(x))^2$ (by Taylor series)
+                                    \item $g(B(x + \delta_x)) - g(B(x)) = g'(B(x)) (B(x+\delta_x) - B(x)) + \frac{1}{2} g''(B(x)) \delta_x$ (by $(B(x+\delta_x) - B(x))^2$ converges to $\delta_t$)
+                                \end{itemize}
+                            \item $d g(x, B(x)) = \frac{\partial g(x, B(x))}{\partial B(x)} d B(x) + \frac{\partial g(x, B(x))}{\partial x} d x + \frac{1}{2} \frac{\partial^2 g(x, B(x))}{\partial B(x)^2} d x$
+                                \begin{itemize}
+                                    \item $g(x + \delta_x, B(x + \delta_x)) - g(x, B(x)) = \frac{\partial g(x, B(x))}{\partial x} d x + \frac{\partial g(x, B(x))}{\partial B(x)} d B(x) + \frac{1}{2} \frac{\partial^2 g(x, B(x))}{\partial x^2} (d x)^2 + \frac{1}{2} \frac{\partial^2 g(x, B(x))}{\partial B(x)^2} (d B(x))^2 + \frac{\partial^2 g(x, B(x))}{\partial x \partial B(x)} d x d B(x)$ (by Taylor series)
+                                    \item $g(x + \delta_x, B(x + \delta_x)) - g(x, B(x)) = \frac{\partial g(x, B(x))}{\partial x} d x + \frac{\partial g(x, B(x))}{\partial B(x)} d B(x) + \frac{1}{2} \frac{\partial^2 g(x, B(x))}{\partial B(x)^2} d x$ (by $(B(x+\delta_x) - B(x))^2$ converges to $\delta_t$)
+                                \end{itemize}
+                            \item $d g(x_1+ \delta_{x_1}, \dots, x_n + \delta_{x_n}) = \sum_{i=1}^n \frac{\partial g(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i} d x_i$
+
+                                $+ \frac{1}{2} \sum_{i=1}^n \frac{\partial g(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i^2} (d x_i)^2 + \sum_{i < j} \frac{\partial g(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i \partial x_j} d x_i d x_j$ (by Taylor series for chain rule)
+                        \end{enumerate}
+                \end{enumerate}
             \item Property
                 \begin{itemize}
-                    \item $\int_0^t f(x) dB(x)$ exists (limit converges)
-                    \item The integral is normally distributed
+                    \item Margingale random variable
 
-                        Proof: the integral is the sum of independent Gaussian random variable
-                    \item $\mathbb{E}[\int_0^t f(x) dB(x)] = 0$
-                    \item $\mathit{Var}[\int_0^t f(x) dB(x)] = \int_0^t f(x)^2 dx$
-
-                        Proof: 
+                        $\int_{x=0}^t g(x, B(x)) dB(x)$ is a martingale random variable
                         \begin{itemize}
-                            \item $\mathit{Var}(\int_0^t f(t) dB(t)) = \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Var}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+                            \item $\mathbb{E}[g(\frac{i-1}{n}t, B(\frac{i-1}{n}t)) (B(\frac{i}{n}t) - B(\frac{i-1}{n}t))] = 0$ (by independence of $B(\frac{i-1}{n}t)$ and $B(\frac{i}{n}t) - B(\frac{i-1}{n}t)$)
+                            \item $\mathbb{E}[\int_{x=0}^{t_2} g(x, B(x)) dB(x)|\int_{x=0}^{t_1} g(x, B(x)) dB(x)]$
 
-                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)^2 t = \int_0^t f(x)^2 dx$
+                            $= \mathbb{E}[\int_{x=0}^{t_1} g(x, B(x)) dB(x) + \int_{x=t_1}^{t_2} g(x, B(x)) dB(x)|\int_{x=0}^{t_1} g(x, B(x)) dB(x)]$
+
+                            $= \int_{x=0}^{t_1} g(x, B(x)) dB(x) + \mathbb{E}[\int_{x=t_1}^{t_2} g(x, B(x)) dB(x)|\int_{x=0}^{t_1} g(x, B(x)) dB(x)]$
+
+                            $= \int_{x=0}^{t_1} g(x, B(x)) dB(x) + \mathbb{E}[\lim_{n \rightarrow \infty} \sum_{i=1}^n g(\frac{i-1}{n}(t_2-t_1), B(\frac{i-1}{n}(t_2-t_1))) (B(\frac{i}{n}(t_2 - t_1)) - B(\frac{i-1}{n}(t_2 - t_1)))$
+
+                            $= \int_{x=0}^{t_1} g(x, B(x)) dB(x)$
                         \end{itemize}
-                    \item $\int_0^t f(x) dB(x)$ and $\int_0^t g(x) dB(x)$ are jointly normal and
+                        $\mathbb{E}[\int_{x=0}^t g(x, B(x)) dB(x)] = 0$
 
-                        $\mathit{Cov}(\int_0^t f(x) dB(x), \int_0^t g(x) dB(x) = \int_0^t f(x)g(x) dx$
-
-                        Proof: 
+                        Since Martingales property is more important $\rightarrow$ It\^{o} integral is generally used
+                    \item Linear
                         \begin{itemize}
-                            \item $\mathit{Cov}(\int_0^t f(t) dB(t), \int_0^t g(t) dB(t))$
+                            \item $\int_{x=0}^t (\alpha g_1(x, B(x)) + \beta g_2(x, B(x)) ) dB(x)$
 
-                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n \mathit{Cov}(f(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)), g(\frac{i}{n}t)(B(\frac{i}{n}t) - B(\frac{i-1}{n}t)))$
+                                $= \alpha \int_{x=0}^t g_1(x, B(x)) dB(x) + \beta \int_{x=0}^t g_2(x, B(x)) dB(x)$
+                        \end{itemize}
+                    \item Isometry
+                        \begin{itemize}
+                            \item $\mathbb{E}[(\int_{x=0}^t g(x, B(x)) dB(x))^2] = \int_0^t \mathbb{E}[(g(x, B(x)) )^2] dx$
 
-                                $= \lim_{n \rightarrow \infty} \sum_{i=1}^n f(\frac{i}{n}t)g(\frac{i}{n}t) t = \int_0^t f(x)g(x) dx$
+                                Proof: $\mathbb{E}[(\int_{x=0}^t g(x, B(x)) dB(x))^2] = \sum_{i=1}^n \mathbb{E}[ g(\frac{i-1}{n}t, B(\frac{i-1}{n}t))^2 (B(\frac{i}{n}t) - B(\frac{i-1}{n}t))^2]$
+                        \end{itemize}
+                \end{itemize}
+            \item Example
+                \begin{itemize}
+                    \item $\int_0^t B(x) d B(x)$
+                        \begin{itemize}
+                            \item $\int_{x=0}^t B(x) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i-1}{n}t) (B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$ (By Definition)
+
+                            $= \lim_{n \rightarrow \infty} \sum_{i=1}^n B(\frac{i-1}{n}t) B(\frac{i}{n}t) - B(\frac{i-1}{n}t)^2$
+
+                            $= \frac{-1}{2} \lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2 + \frac{B(t)^2}{2}$
+
+                            $= \frac{-1}{2} t + \frac{B(t)^2}{2}$ (By convergence of $\lim_{n \rightarrow \infty} \sum_{i=1}^n (B(\frac{i-1}{n}t) - B(\frac{i}{n}t))^2$)
+                        \end{itemize}
+                    \item $\int_0^t e^{B(x) - \frac{x}{2}} d B(x)$
+                        \begin{itemize}
+                            \item $d e^{B(x) - \frac{x}{2}} = e^{B(x) - \frac{x}{2}} d B(x) + \frac{-1}{2} e^{B(x) - \frac{x}{2}} d x + \frac{1}{2} e^{B(x) - \frac{x}{2}} d x = e^{B(x) - \frac{x}{2}} d B(x)$
+                            \item $\int_0^t e^{B(x) - \frac{x}{2}} d B(x) = [e^{B(x) - \frac{x}{2}}]|_{x=0}^t$
                         \end{itemize}
                 \end{itemize}
         \end{itemize}
+        Stratonovich Integral: mid endpoint integral
+        \begin{itemize}
+            \item Definition
+                \begin{itemize}
+                    \item $\tau_j = \frac{2i-1}{2n}t$
+                    \item $\int_{x=0}^t g(x, B(x)) dB(x) = \lim_{n \rightarrow \infty} \sum_{i=1}^n g(\tau_j, B(\tau_j))(B(\frac{i}{n}t) - B(\frac{i-1}{n}t))$
+                \end{itemize}
+            \item Property
+                \begin{itemize}
+                    \item Chain Rule in Riemann Integral
+                    \item Integration by Part in Riemann Integral
+                \end{itemize}
+            \item Calculus
+                \begin{enumerate}
+                    \item By Definition
+                \end{enumerate}
+            \item Example
+                \begin{itemize}
+                    \item $\int_0^t B(x) d B(x) = \frac{B(t)^2}{2}$ (By definition)
+                \end{itemize}
+        \end{itemize}
+    \item Stochastic Differential Equation
+
+        Interpretation
+        \begin{itemize}
+            \item Given a diffusion process $f(x, B(x))$ such that $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$ , the following three properties are satisfied
+                \begin{enumerate}
+                    \item Continuity: $\forall \epsilon > 0, P[|f(x+h, B(x+h)) - f(x, B(x))| > \epsilon] = O(h)$
+                    \item $\mathbb{E}[f(x+h, B(x+h)) - f(x, B(x))| f(x, B(x))] = \mu(x, B(x)) h + O(h^2)$
+
+                        By $\mathbb{E}[d f(x, B(x))] = \mathbb{E}[\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)]$
+                    \item $\mathbb{E}[(f(x+h, B(x+h)) - f(x, B(x)))^2| f(x, B(x))] = \sigma^2(x, B(x)) h + O(h^2)$
+
+                        By $\mathbb{E}[(d f(x, B(x)))^2] = \mathbb{E}[(\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x))^2]$
+                \end{enumerate}
+        \end{itemize}
+        Definition
+        \begin{itemize}
+            \item $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$
+                \begin{itemize}
+                    \item $\mu(x, B(x))$: drift term
+                    \item $\sigma(x, B(x))$: variance term
+                \end{itemize}
+            \item $f(t, B(t)) - f(0, B(0)) = \int_0^t \mu(x, B(x)) dx + \int_{x=0}^t \sigma(x, B(x)) d B(x)$
+                \begin{itemize}
+                    \item $\int_0^t \mu(x, B(x)) dx$: normal integral
+                    \item $\int_0^t \sigma(x, B(x)) d B(x)$: It\^{o} integral
+                \end{itemize}
+        \end{itemize}
+        Property
+        \begin{itemize}
+            \item Chain Rule
+                \begin{itemize}
+                    \item Given $f(g)$ and $g(x, B(x))$
+                    \item Extend $f$ as $d f(x_1+ \delta_{x_1}, \dots, x_n + \delta_{x_n}) = \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i} d x_i$
+
+                                $+ \frac{1}{2} \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i^2} (d x_i)^2 + \sum_{i < j} \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i \partial x_j} d x_i d x_j$
+                \end{itemize}
+            \item Product Rule
+                \begin{itemize}
+                    \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
+                    \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
+                    \item $df_1(x, B(x)) f_2(x, B(x)) = f_2(x, B(x)) df_1(x, B(x)) + f_1(x, B(x)) df_2(x, B(x))$
+
+                        $+ d f_1(x, B(x)) df_2(x, B(x))$
+                    \item $df_1(x, B(x)) f_2(x, B(x))$
+
+                        $= f_2(x, B(x)) (\mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x))$
+
+                        $+ f_1(x, B(x)) (\mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x))$
+
+                        $+ \sigma_1(x, B(x))\sigma_2(x, B(x))dx$
+                \end{itemize}
+            \item Quotient Rule
+                \begin{itemize}
+                    \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
+                    \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
+                    \item $d\frac{1}{f_1(x, B(x))} = - \frac{1}{f_1^2(x, B(x))} df_1(x, B(x)) + \frac{1}{f_1^3(x, B(x))} (df_1(x, B(x)))^2$
+                    \item $df_1(x, B(x)) f_2(x, B(x))$ by combining the above three equations
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\section{Ornstein-Uhlenbeck Process}
+\begin{itemize}
     \item Stationary Ornstein-Uhlenbeck Process $V_s(t)$
         \begin{itemize}
             \item Interpretation
@@ -1489,12 +1710,55 @@
         \end{itemize}
     \item Ornstein-Uhlenbeck Process $V(t)$
         \begin{itemize}
-            \item Interpretation
             \item Definition
                 \begin{enumerate}
                     \item $V(t) = V(0) e^{-\beta t} + \frac{\sigma e^{-\beta t}}{\sqrt{2\beta }} B(e^{2\beta t} - 1)$, where $B(t)$ is a Brownian motion
+
+                        Interpretation
+                        \begin{enumerate}
+                            \item A stationary Ornstein-Uhlenbeck Process with bias
+                            \item Ornstein-Uhlenbeck Position Process is approximately a Brownian motion $\rightarrow$ Ornstein-Uhlenbeck Process is approximately the velocity of a Brownian motion
+
+                                Proof
+                                \begin{itemize}
+                                    \item $P(t) = \int_0^t V(x) dx$
+
+                                        $= \int_0^t V(0) e^{-\beta x} + \sigma \int_{u=0}^x e^{-\beta (x-u)} d B(u) dx$
+
+                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \sigma \int_{u=0}^t \int_u^t e^{-\beta (x-u)} d x d B(u)$
+
+                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} \int_{u=0}^t (1 - e^{-\beta (t-u)}) d B(u)$
+                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} B(t) - \frac{\sigma}{\beta} \int_{u=0}^t e^{-\beta (t-u)} d B(u)$
+                                    \item When $t \rightarrow \infty$, $P(t) \rightarrow \frac{\sigma}{\beta} B(t) - \frac{1}{\beta}V(t) = \frac{\sigma}{\beta} B(t)$
+                                \end{itemize}
+                        \end{enumerate}
                     \item $V(t) = V(0) e^{-\beta t} + \sigma \int_{u=0}^t e^{-\beta (t-u)} d B(u)$, where $B(t)$ is a Brownian motion
+
+                        Equivalance with Definition 1
+                        \begin{itemize}
+                            \item $\mathbb{E}[V(t)] = V(0) e^{-\beta t}$
+                            \item $\mathit{Cov}(V(t_1), V(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
+
+                                Proof
+                                \begin{itemize}
+                                    \item $\mathit{Cov}(V(t_1), V(t_2))$
+                                        $= \sigma^2 \int_{u=0}^{t_1} e^{-\beta(t_1 - u)} e^{-\beta(t_2 - u)} du$
+                                        $= \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
+                                \end{itemize}
+                            \item Same Definition:
+                                \begin{itemize}
+                                    \item Gaussian Process is determined by its expectation and covariance
+                                \end{itemize}
+                            \item Different random variable 
+                                \begin{itemize}
+                                    \item definition use different simulation point of $B(t) \rightarrow$ $e^{2 \beta t} - 1$ and $t$
+                                \end{itemize}
+                        \end{itemize}
                     \item $dV(t) = -\beta V(t) dt + \sigma d B(t)$, where $B(t)$ is a Brownian motion
+                        Interpretation
+                        \begin{itemize}
+                            \item Derived from Definition 2
+                        \end{itemize}
                 \end{enumerate}
             \item Property
                 \begin{itemize}
@@ -1537,6 +1801,16 @@
                             \item $\mathit{Var}(V(t)) = \frac{\sigma^2}{2\beta} (1 - e^{-2\beta t})$
                         \end{itemize}
                 \end{itemize}
+        \end{itemize}
+    \item Ornstein-Uhlenbeck Position Process $P(t)$
+
+        Definition
+        \begin{itemize}
+            \item $P(t) = \int_0^t V(x) dx$
+        \end{itemize}
+        Interpretation
+        \begin{itemize}
+            \item the integral of Ornstein-Uhlenbeck Process
         \end{itemize}
 \end{itemize}
 
