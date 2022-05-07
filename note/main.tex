@@ -1561,6 +1561,35 @@
 
                                 Proof: $\mathbb{E}[(\int_{x=0}^t g(x, B(x)) dB(x))^2] = \sum_{i=1}^n \mathbb{E}[ g(\frac{i-1}{n}t, B(\frac{i-1}{n}t))^2 (B(\frac{i}{n}t) - B(\frac{i-1}{n}t))^2]$
                         \end{itemize}
+                    \item Chain Rule
+                        \begin{itemize}
+                            \item Given $f(g)$ and $g(x, B(x))$
+                            \item Extend $f$ as $d f(x_1+ \delta_{x_1}, \dots, x_n + \delta_{x_n}) = \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i} d x_i$
+
+                                        $+ \frac{1}{2} \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i^2} (d x_i)^2 + \sum_{i < j} \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i \partial x_j} d x_i d x_j$
+                        \end{itemize}
+                    \item Product Rule
+                        \begin{itemize}
+                            \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
+                            \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
+                            \item $df_1(x, B(x)) f_2(x, B(x)) = f_2(x, B(x)) df_1(x, B(x)) + f_1(x, B(x)) df_2(x, B(x))$
+
+                                $+ d f_1(x, B(x)) df_2(x, B(x))$
+                            \item $df_1(x, B(x)) f_2(x, B(x))$
+
+                                $= f_2(x, B(x)) (\mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x))$
+
+                                $+ f_1(x, B(x)) (\mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x))$
+
+                                $+ \sigma_1(x, B(x))\sigma_2(x, B(x))dx$
+                        \end{itemize}
+                    \item Quotient Rule
+                        \begin{itemize}
+                            \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
+                            \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
+                            \item $d\frac{1}{f_1(x, B(x))} = - \frac{1}{f_1^2(x, B(x))} df_1(x, B(x)) + \frac{1}{f_1^3(x, B(x))} (df_1(x, B(x)))^2$
+                            \item $df_1(x, B(x)) f_2(x, B(x))$ by combining the above three equations
+                        \end{itemize}
                 \end{itemize}
             \item Example
                 \begin{itemize}
@@ -1600,66 +1629,6 @@
             \item Example
                 \begin{itemize}
                     \item $\int_0^t B(x) d B(x) = \frac{B(t)^2}{2}$ (By definition)
-                \end{itemize}
-        \end{itemize}
-    \item Stochastic Differential Equation
-
-        Interpretation
-        \begin{itemize}
-            \item Given a diffusion process $f(x, B(x))$ such that $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$ , the following three properties are satisfied
-                \begin{enumerate}
-                    \item Continuity: $\forall \epsilon > 0, P[|f(x+h, B(x+h)) - f(x, B(x))| > \epsilon] = O(h)$
-                    \item $\mathbb{E}[f(x+h, B(x+h)) - f(x, B(x))| f(x, B(x))] = \mu(x, B(x)) h + O(h^2)$
-
-                        By $\mathbb{E}[d f(x, B(x))] = \mathbb{E}[\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)]$
-                    \item $\mathbb{E}[(f(x+h, B(x+h)) - f(x, B(x)))^2| f(x, B(x))] = \sigma^2(x, B(x)) h + O(h^2)$
-
-                        By $\mathbb{E}[(d f(x, B(x)))^2] = \mathbb{E}[(\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x))^2]$
-                \end{enumerate}
-        \end{itemize}
-        Definition
-        \begin{itemize}
-            \item $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$
-                \begin{itemize}
-                    \item $\mu(x, B(x))$: drift term
-                    \item $\sigma(x, B(x))$: variance term
-                \end{itemize}
-            \item $f(t, B(t)) - f(0, B(0)) = \int_0^t \mu(x, B(x)) dx + \int_{x=0}^t \sigma(x, B(x)) d B(x)$
-                \begin{itemize}
-                    \item $\int_0^t \mu(x, B(x)) dx$: normal integral
-                    \item $\int_0^t \sigma(x, B(x)) d B(x)$: It\^{o} integral
-                \end{itemize}
-        \end{itemize}
-        Property
-        \begin{itemize}
-            \item Chain Rule
-                \begin{itemize}
-                    \item Given $f(g)$ and $g(x, B(x))$
-                    \item Extend $f$ as $d f(x_1+ \delta_{x_1}, \dots, x_n + \delta_{x_n}) = \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i} d x_i$
-
-                                $+ \frac{1}{2} \sum_{i=1}^n \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i^2} (d x_i)^2 + \sum_{i < j} \frac{\partial f(x_1 + \delta_{x_1}, \dots, x_n + \delta_{x_n})}{\partial x_i \partial x_j} d x_i d x_j$
-                \end{itemize}
-            \item Product Rule
-                \begin{itemize}
-                    \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
-                    \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
-                    \item $df_1(x, B(x)) f_2(x, B(x)) = f_2(x, B(x)) df_1(x, B(x)) + f_1(x, B(x)) df_2(x, B(x))$
-
-                        $+ d f_1(x, B(x)) df_2(x, B(x))$
-                    \item $df_1(x, B(x)) f_2(x, B(x))$
-
-                        $= f_2(x, B(x)) (\mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x))$
-
-                        $+ f_1(x, B(x)) (\mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x))$
-
-                        $+ \sigma_1(x, B(x))\sigma_2(x, B(x))dx$
-                \end{itemize}
-            \item Quotient Rule
-                \begin{itemize}
-                    \item $d f_1(x, B(x)) = \mu_1(x, B(x)) dx + \sigma_1(x, B(x)) d B(x)$
-                    \item $d f_2(x, B(x)) = \mu_2(x, B(x)) dx + \sigma_2(x, B(x)) d B(x)$
-                    \item $d\frac{1}{f_1(x, B(x))} = - \frac{1}{f_1^2(x, B(x))} df_1(x, B(x)) + \frac{1}{f_1^3(x, B(x))} (df_1(x, B(x)))^2$
-                    \item $df_1(x, B(x)) f_2(x, B(x))$ by combining the above three equations
                 \end{itemize}
         \end{itemize}
 \end{itemize}
@@ -1710,34 +1679,36 @@
         \end{itemize}
     \item Ornstein-Uhlenbeck Process $V(t)$
         \begin{itemize}
+            \item Interpretation
+                \begin{enumerate}
+                    \item A stationary Ornstein-Uhlenbeck Process with bias
+                    \item Ornstein-Uhlenbeck Position Process is approximately a Brownian motion $\rightarrow$ Ornstein-Uhlenbeck Process is approximately the velocity of a Brownian motion
+
+                        Proof
+                        \begin{itemize}
+                            \item $P(t) = \int_0^t V(x) dx$
+
+                                $= \int_0^t V(0) e^{-\beta x} + \sigma \int_{u=0}^x e^{-\beta (x-u)} d B(u) dx$
+
+                                $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \sigma \int_{u=0}^t \int_u^t e^{-\beta (x-u)} d x d B(u)$
+
+                                $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} \int_{u=0}^t (1 - e^{-\beta (t-u)}) d B(u)$
+                                $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} B(t) - \frac{\sigma}{\beta} \int_{u=0}^t e^{-\beta (t-u)} d B(u)$
+                            \item When $t \rightarrow \infty$, $P(t) \rightarrow \frac{\sigma}{\beta} B(t) - \frac{1}{\beta}V(t) = \frac{\sigma}{\beta} B(t)$
+                        \end{itemize}
+                \end{enumerate}
             \item Definition
                 \begin{enumerate}
                     \item $V(t) = V(0) e^{-\beta t} + \frac{\sigma e^{-\beta t}}{\sqrt{2\beta }} B(e^{2\beta t} - 1)$, where $B(t)$ is a Brownian motion
-
-                        Interpretation
-                        \begin{enumerate}
-                            \item A stationary Ornstein-Uhlenbeck Process with bias
-                            \item Ornstein-Uhlenbeck Position Process is approximately a Brownian motion $\rightarrow$ Ornstein-Uhlenbeck Process is approximately the velocity of a Brownian motion
-
-                                Proof
-                                \begin{itemize}
-                                    \item $P(t) = \int_0^t V(x) dx$
-
-                                        $= \int_0^t V(0) e^{-\beta x} + \sigma \int_{u=0}^x e^{-\beta (x-u)} d B(u) dx$
-
-                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \sigma \int_{u=0}^t \int_u^t e^{-\beta (x-u)} d x d B(u)$
-
-                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} \int_{u=0}^t (1 - e^{-\beta (t-u)}) d B(u)$
-                                        $= V(0) \frac{1 - e^{-\beta t}}{\beta} + \frac{\sigma}{\beta} B(t) - \frac{\sigma}{\beta} \int_{u=0}^t e^{-\beta (t-u)} d B(u)$
-                                    \item When $t \rightarrow \infty$, $P(t) \rightarrow \frac{\sigma}{\beta} B(t) - \frac{1}{\beta}V(t) = \frac{\sigma}{\beta} B(t)$
-                                \end{itemize}
-                        \end{enumerate}
                     \item $V(t) = V(0) e^{-\beta t} + \sigma \int_{u=0}^t e^{-\beta (t-u)} d B(u)$, where $B(t)$ is a Brownian motion
-
-                        Equivalance with Definition 1
-                        \begin{itemize}
-                            \item $\mathbb{E}[V(t)] = V(0) e^{-\beta t}$
-                            \item $\mathit{Cov}(V(t_1), V(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
+                    \item $dV(t) = -\beta V(t) dt + \sigma d B(t)$, where $B(t)$ is a Brownian motion
+                \end{enumerate}
+                Equivalance
+                \begin{itemize}
+                    \item between Definition 1 and 2
+                        \begin{enumerate}
+                            \item by definition 2: $\mathbb{E}[V(t)] = V(0) e^{-\beta t}$
+                            \item by definition 2: $\mathit{Cov}(V(t_1), V(t_2)) = \frac{\sigma^2}{2\beta} e^{-\beta(t_2 - t_1)} (1 - e^{-2\beta t_1})$
 
                                 Proof
                                 \begin{itemize}
@@ -1753,13 +1724,20 @@
                                 \begin{itemize}
                                     \item definition use different simulation point of $B(t) \rightarrow$ $e^{2 \beta t} - 1$ and $t$
                                 \end{itemize}
-                        \end{itemize}
-                    \item $dV(t) = -\beta V(t) dt + \sigma d B(t)$, where $B(t)$ is a Brownian motion
-                        Interpretation
+                        \end{enumerate}
+                    \item from Definition 2 to 3
                         \begin{itemize}
-                            \item Derived from Definition 2
+                            \item derived by It\^{o} Lemma
                         \end{itemize}
-                \end{enumerate}
+                    \item from Definition 3 to 2
+                        \begin{itemize}
+                            \item Suppose $E(t) = e^{\beta t}V(t)$
+                            \item $dE(t) = \beta E(t) dt + e^{\beta t}d V(t)$
+                            $= \sigma e^{\beta t} d B(t)$
+                            \item $E(t) = E(0) + \sigma \int_{x=0}^te^{\beta x} dB(x)$
+                            \item $V(t) = V(0) e^{-\beta t} + \sigma \int_{x=0}^te^{-\beta (t-x)} dB(x)$
+                        \end{itemize}
+                \end{itemize}
             \item Property
                 \begin{itemize}
                     \item Stationary and Markovian: $V(t_1 + t_2) = V(t_1) e^{-\beta t_2} + \frac{\sigma e^{-\beta t_2}}{\sqrt{2\beta }} B(e^{2\beta t_2} - 1)$
@@ -1811,6 +1789,102 @@
         Interpretation
         \begin{itemize}
             \item the integral of Ornstein-Uhlenbeck Process
+        \end{itemize}
+\end{itemize}
+
+\section{Stochastic Differential Equation (SDE)}
+\begin{itemize}
+    \item Interpretation
+        \begin{itemize}
+            \item Given a diffusion process $f(x, B(x))$ such that $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$ , iff the following three properties are satisfied
+                \begin{enumerate}
+                    \item Continuity: $\forall \epsilon > 0, P[|f(x+h, B(x+h)) - f(x, B(x))| > \epsilon] = o(h)$
+                    \item $\mathbb{E}[f(x+h, B(x+h)) - f(x, B(x))| f(x, B(x))] = \mu(x, B(x)) h + o(h)$
+
+                        By $\mathbb{E}[d f(x, B(x))] = \mathbb{E}[\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)]$
+                    \item $\mathbb{E}[(f(x+h, B(x+h)) - f(x, B(x)))^2| f(x, B(x))] = \sigma^2(x, B(x)) h + o(h)$
+
+                        By $\mathbb{E}[(d f(x, B(x)))^2] = \mathbb{E}[(\mu(x, B(x)) dx + \sigma(x, B(x)) d B(x))^2]$
+                \end{enumerate}
+        \end{itemize}
+    \item Definition
+        \begin{itemize}
+            \item $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$
+                \begin{itemize}
+                    \item $\mu(x, B(x))$: drift term
+                    \item $\sigma(x, B(x))$: variance term
+                \end{itemize}
+            \item $f(t, B(t)) - f(0, B(0)) = \int_0^t \mu(x, B(x)) dx + \int_{x=0}^t \sigma(x, B(x)) d B(x)$
+                \begin{itemize}
+                    \item $\int_0^t \mu(x, B(x)) dx$: normal integral
+                    \item $\int_0^t \sigma(x, B(x)) d B(x)$: It\^{o} integral
+                \end{itemize}
+        \end{itemize}
+    \item Property:
+
+        Martingale Representation Theorem: Martingale diffusion process has drift term of 0
+        \begin{itemize}
+            \item Since $\mathbb{E}[f(x+h, B(x+h)) - f(x, B(x))| f(x, B(x))] = 0$
+        \end{itemize}
+    \item Solve SDE
+
+        Strong Solution: closed form of $f(x, B(x))$
+        \begin{itemize}
+            \item General Linear SDE: $d f(x, B(x)) = (\mu_1(t) f(x, B(x)) + \mu_2(t))dx + (\sigma_1(t) f(x, B(x)) + \sigma_2(t)) d B(x)$
+            \item Steps
+                \begin{enumerate}
+                    \item solve $f_1(x, B(x))$ such that $d f_1(x, B(x)) = \mu_1(t) f_1(x, B(x)) dx + \sigma_1(t) f_1(x, B(x)) d B(x)$
+                        \begin{itemize}
+                            \item Suppose $f_2(x, B(x)) = \ln f_1(x, B(x))$
+                            \item $d f_2(x, B(x)) = (\mu_1(x) - \frac{1}{2}\sigma_1^2(x)) dx + \sigma_1 d B(x)$
+                            \item $f_2(t, B(t)) = \int_0^t (\mu_1(x) - \frac{1}{2}\sigma_1^2(x)) dx + \int_{x=0}^t \sigma_1(x) d B(x)$
+                            \item $f_1(t, B(t)) = e^{\int_0^t (\mu_1(x) - \frac{1}{2}\sigma_1^2(x)) dx + \int_{x=0}^t \sigma_1(x) d B(x)}$
+                        \end{itemize}
+                    \item solve $f_3(x, B(x))$ such that $f_3(x, B(x)) = \frac{f(x, B(x))}{f_1(x, B(x))}$
+                        \begin{itemize}
+                            \item $d f_3(x, B(x)) = d(\frac{f(x, B(x))}{f_1(x, B(x))}) = \frac{\mu_2(x) - \sigma_1(x) \sigma_2(x)}{f_1(x, B(x))} dx + \frac{\sigma_2(x)}{f_1(x, B(x))} d B(x)$
+                            \item $f_3(t, B(t)) = \int_0^t \frac{\mu_2(x) - \sigma_1(x) \sigma_2(x)}{f_1(x, B(x))} dx + \int_{x=0}^t \frac{\sigma_2(x)}{f_1(x, B(x))} d B(x)$
+                        \end{itemize}
+                    \item $f(x, B(x)) = f_1(x, B(x)) f_3(x, B(x))$
+                \end{enumerate}
+        \end{itemize}
+        Weak Solution: distribution of $f(x, B(x))$ at specific $x$
+        \begin{itemize}
+            \item Given $f(x, B(x))$ such that $d f(x, B(x)) = \mu(x, B(x)) dx + \sigma(x, B(x)) d B(x)$
+            \item Kolmogorov forward diffusion:
+                \begin{itemize}
+                    \item Suppose $F(x, B(x))$ is the PDF of $f(x, B(x))$
+                    \item $F(x, B(x))$ satisfy $\frac{\partial F}{\partial x} = -\frac{\partial \mu(x, B(x)) F}{\partial B(x)} + \frac{1}{2} \frac{\partial^2 \sigma^2(x, B(x)) F}{\partial B^2(x)}$
+                \end{itemize}
+        \end{itemize}
+        Simulation
+    \item Example
+
+        Bessel
+        \begin{itemize}
+            \item $R(t) = ||(B_1(t), B_2(t)|| = \sqrt{B_1^2(t) + B_2^2(t)}$
+            \item $d R(t) = \frac{B_1(t)}{R(t)} dB_1(t) + \frac{B_2(t)}{R(t)} dB_2(t) + \frac{1}{2 R(t)} dt$
+                \begin{itemize}
+                    \item $d R(t) = \frac{B_1(t)}{R(t)} dB_1(t) + \frac{B_2(t)}{R(t)} dB_2(t) + \frac{B_2^2(t)}{2 R^3(t)} (dB_1(t))^2 + \frac{B_1^2(t)}{2 R^3(t)} (dB_2(t))^2 + \frac{-B_1(t)B_2(t)}{R^3(t)} dB_1(t) dB_2(t)$
+                    \item $dB_1(t) dB_2(t)$ converge to $0$ in mean square
+                \end{itemize}
+            \item $\mathbb{E}[d R(t)] = \frac{1}{2 R(t)} dt$
+            \item $\mathbb{E}[(d R(t))^2] = dt$
+            \item $d R(t) = \frac{1}{2 R(t)} dt + d B(t)$
+        \end{itemize}
+        Brownian motion with drift
+        \begin{itemize}
+            \item $d R(t) = \mu dt + \sigma d B(t)$
+            \item $R(t) = \mu t + \sigma B(t)$
+        \end{itemize}
+        Geometric Brownian motion
+        \begin{itemize}
+            \item $d R(t) = \mu R(t) dt + \sigma R(t) d B(t)$
+            \item Suppose $Y(t) = \ln R(t)$
+            \item $d Y(t) = \frac{1}{R(t)} d R(t) + \frac{-1}{R^2(t)} (dR(t))^2$
+            \item $d Y(t) = \mu dt - \frac{\sigma^2}{2} dt + \sigma dB(t)$
+            \item $Y(t) = Y(0) + (\mu - \frac{\sigma^2}{2})t + \sigma B(t)$
+            \item $R(t) = R(0)e^{(\mu - \frac{\sigma^2}{2})t + \sigma B(t)}$
         \end{itemize}
 \end{itemize}
 
